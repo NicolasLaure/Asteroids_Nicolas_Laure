@@ -26,6 +26,7 @@ namespace game
 	{
 		InitWindow(1280, 720, "Asteroids");
 		SetExitKey(NULL);
+		sceneManager.prevScene = Scenes::GameQuit;
 		SetRandomSeed(time(0));
 	}
 
@@ -33,19 +34,15 @@ namespace game
 	{
 		do
 		{
-			sceneManager.enteredNewScene = sceneManager.scene != sceneManager.prevScene;
-			sceneManager.prevScene = sceneManager.scene;
+			sceneManager.enteredNewScene = sceneManager.currentScene != sceneManager.prevScene;
+			sceneManager.prevScene = sceneManager.currentScene;
 
-			switch (sceneManager.scene)
+			switch (sceneManager.currentScene)
 			{
 			case Scenes::GameQuit:
 				break;
 			case Scenes::Menu:
-				if (sceneManager.enteredNewScene)
-					MenuStart();
-
-				MenuUpdate(sceneManager.scene);
-				MenuDraw();
+				MenuScene(sceneManager.enteredNewScene, sceneManager.currentScene);
 				break;
 			case Scenes::Game:
 
@@ -53,6 +50,6 @@ namespace game
 			default:
 				break;
 			}
-		} while (sceneManager.scene != Scenes::GameQuit && !WindowShouldClose());
+		} while (sceneManager.currentScene != Scenes::GameQuit && !WindowShouldClose());
 	}
 };

@@ -5,7 +5,7 @@ namespace game
 {
 	struct SceneManager
 	{
-		Scenes scene;
+		Scenes currentScene;
 		Scenes prevScene;
 		bool enteredNewScene;
 

@@ -4,9 +4,20 @@
 
 namespace game
 {
-	MenuData menuData;
+	static MenuData menuData;
 
+	void MenuStart();
+	void MenuUpdate(Scenes& scene);
+	void MenuDraw();
 
+	void MenuScene(bool isNewScene, Scenes& actualScene)
+	{
+		if (isNewScene)
+			MenuStart();
+
+		MenuUpdate(actualScene);
+		MenuDraw();
+	}
 	void MenuStart()
 	{
 		Vector2 textSize = { 0,0 };

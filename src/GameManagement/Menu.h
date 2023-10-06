@@ -4,13 +4,11 @@
 
 namespace game
 {
-	void MenuStart();
-	void MenuUpdate(Scenes& scene);
-	void MenuDraw();
-
+	void MenuScene(bool isNewScene, Scenes& actualScene);
+	
 	struct MenuData
 	{
-		const char* title = "SpaceOut";
+		const char* title = "Asteroids";
 		int titleSize = 80;
 		int titleLimitSpacing = 70;
 
