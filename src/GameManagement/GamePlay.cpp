@@ -48,8 +48,8 @@ namespace Asteroids
 	{
 		ResetGameStats();
 
-		int buttonLimitSpacing = 50;
-		int buttonsSpacing = 100;
+		//int buttonLimitSpacing = 50;
+		//int buttonsSpacing = 100;
 		//Vector2 textSize = { static_cast<float>(slGetTextWidth(gd.menuButton.text)), static_cast<float>(slGetTextHeight(gd.menuButton.text)) };
 		//gd.menuButton.buttonRect = { { static_cast<float>(GetScreenWidth() / 2) - textSize.x / 2, 0.0f + buttonLimitSpacing }, textSize.x, textSize.y };
 
@@ -108,8 +108,8 @@ namespace Asteroids
 
 			DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight(), panelColor);
 
-			int titleWindowLimitSpacing = 120;
-			int pressKeyWindowLimitSpacing = 120;
+			//int titleWindowLimitSpacing = 120;
+			//int pressKeyWindowLimitSpacing = 120;
 
 			if (gd.areRulesBeingShown)
 			{
@@ -175,11 +175,11 @@ namespace Asteroids
 			}
 			else
 			{
-				const char* pauseTitle = "Game is Paused";
+				/*const char* pauseTitle = "Game is Paused";
 				int titleSize = 80;
 
 				const char* backToMenuText = "Press Right click to go Unpause";
-				int backToMenuSize = 40;
+				int backToMenuSize = 40;*/
 
 				/*slSetForeColor(colorsData.WHITE.r, colorsData.WHITE.g, colorsData.WHITE.b, 1);
 				slSetFontSize(titleSize);

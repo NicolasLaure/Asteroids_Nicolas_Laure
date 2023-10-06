@@ -27,7 +27,7 @@ namespace Asteroids
 		InitWindow(1280, 720, "Asteroids");
 		SetExitKey(NULL);
 		sceneManager.prevScene = Scenes::GameQuit;
-		SetRandomSeed(time(0));
+		SetRandomSeed(static_cast<unsigned int>(time(nullptr)));
 	}
 
 	void GameLoop()

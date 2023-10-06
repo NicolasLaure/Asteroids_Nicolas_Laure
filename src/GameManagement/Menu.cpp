@@ -23,12 +23,12 @@ namespace Asteroids
 		Vector2 textSize = { 0,0 };
 
 		float windowLimitSpacing = 20;
-		textSize = MeasureTextEx(GetFontDefault(), menuData.creditsButton.text, menuData.creditsButton.fontSize, menuData.creditsButton.fontSize * 0.1f);
+		textSize = MeasureTextEx(GetFontDefault(), menuData.creditsButton.text, static_cast<float>(menuData.creditsButton.fontSize), menuData.creditsButton.fontSize * 0.1f);
 		menuData.creditsButton.buttonRect = { {static_cast<float>(GetScreenWidth()) - MeasureText(menuData.credits, menuData.creditsSize) - 20, static_cast<float>(GetScreenHeight()) - menuData.creditsSize - 20}, textSize.y, textSize.x };
 
 		for (int i = 0; i < menuData.buttonsQty; i++)
 		{
-			textSize = MeasureTextEx(GetFontDefault(), menuData.scenesButtons[i].text, menuData.scenesButtons[i].fontSize, menuData.scenesButtons[i].fontSize * 0.1f);
+			textSize = MeasureTextEx(GetFontDefault(), menuData.scenesButtons[i].text, static_cast<float>(menuData.scenesButtons[i].fontSize), menuData.scenesButtons[i].fontSize * 0.1f);
 			menuData.scenesButtons[i].buttonRect = { {windowLimitSpacing, static_cast<float>(GetScreenHeight()) / 3 + i * menuData.scenesButtons[i].fontSize * 1.6f}, textSize.y, textSize.x };
 		}
 	}
@@ -52,7 +52,7 @@ namespace Asteroids
 		for (Button& button : menuData.scenesButtons)
 		{
 			//DrawRectangle(button.buttonRect.position.x, button.buttonRect.position.y, button.buttonRect.width, button.buttonRect.height, BLACK);
-			DrawText(button.text, button.buttonRect.position.x, button.buttonRect.position.y, button.fontSize, button.currentTextColor);
+			DrawText(button.text, static_cast<int>(button.buttonRect.position.x), static_cast<int>(button.buttonRect.position.y), button.fontSize, button.currentTextColor);
 		}
 		EndDrawing();
 	}
