@@ -1,4 +1,6 @@
 #pragma once
 
-
-void RunGame();
+namespace game
+{
+	void RunGame();
+};
