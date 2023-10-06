@@ -1,14 +1,7 @@
-#include "raylib.h"
+#include "GameManagement/GameLoop.h"
 
 
 void main()
 {
-	InitWindow(1280, 720, "Asteroids");
-
-	while (!WindowShouldClose())
-	{
-
-	}
-
-	CloseWindow();
+	RunGame();
 }
