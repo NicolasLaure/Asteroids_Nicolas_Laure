@@ -5,11 +5,11 @@ namespace Asteroids
 {
 	struct SceneManager
 	{
-		Scenes currentScene;
-		Scenes prevScene;
-		bool enteredNewScene;
+		Scenes currentScene{};
+		Scenes prevScene{};
+		bool enteredNewScene{};
 
-		bool isSinglePlayer;
+		bool isSinglePlayer{};
 		bool isPaused = false;
 	};
 };
