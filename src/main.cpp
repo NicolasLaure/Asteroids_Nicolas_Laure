@@ -1,7 +1,8 @@
 #include "GameManagement/GameLoop.h"
 
 
-void main()
+int main()
 {
 	Asteroids::RunGame();
+	return 0;
 }
