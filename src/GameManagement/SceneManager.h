@@ -1,7 +1,7 @@
 #pragma once
 #include "GameManagement/Scenes.h"
 
-namespace game
+namespace Asteroids
 {
 	struct SceneManager
 	{

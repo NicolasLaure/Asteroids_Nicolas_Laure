@@ -1,6 +1,6 @@
 #include "Button.h"
 
-namespace game
+namespace Asteroids
 {
 
 	void ButtonCollisionCheck(Button& button, Scenes& scene)
@@ -13,12 +13,12 @@ namespace game
 			&& mousePos.y < button.buttonRect.position.y + button.buttonRect.height)
 		{
 			button.currentTextColor = GRAY;
-			if (IsMouseButtonDown(0))
+			if (IsMouseButtonPressed(0))
 			{
 				button.currentTextColor = DARKGRAY;
 			}
 
-			if (IsMouseButtonUp(0))
+			if (IsMouseButtonReleased(0))
 			{
 				scene = button.sceneTo;
 			}
@@ -39,12 +39,12 @@ namespace game
 			button.currentTextColor = GRAY;
 
 			//mouse down
-			if (IsMouseButtonDown(0))
+			if (IsMouseButtonPressed(0))
 			{
 				button.currentTextColor = DARKGRAY;
 			}
 			//mouse release 
-			if (IsMouseButtonUp(0))
+			if (IsMouseButtonReleased(0))
 			{
 				OpenURL("https://nico-drake.itch.io/");
 			}
@@ -65,12 +65,12 @@ namespace game
 			button.currentTextColor = GRAY;
 
 			//mouse down
-			if (IsMouseButtonDown(0))
+			if (IsMouseButtonPressed(0))
 			{
 				button.currentTextColor = DARKGRAY;
 			}
 			//mouse release 
-			if (IsMouseButtonUp(0))
+			if (IsMouseButtonReleased(0))
 			{
 				restartGame = true;
 			}

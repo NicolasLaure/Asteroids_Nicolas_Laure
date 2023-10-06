@@ -2,7 +2,7 @@
 #include "Objects/Button.h"
 #include "GameManagement/Scenes.h"
 
-namespace game
+namespace Asteroids
 {
 	void MenuScene(bool isNewScene, Scenes& actualScene);
 	

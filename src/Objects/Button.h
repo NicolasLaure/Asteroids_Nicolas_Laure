@@ -2,7 +2,7 @@
 #include "GameManagement/Utilities.h"
 #include "GameManagement/Scenes.h"
 
-namespace game
+namespace Asteroids
 {
 	struct Button
 	{

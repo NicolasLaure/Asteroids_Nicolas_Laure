@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace game
+namespace Asteroids
 {
 	static MenuData menuData;
 

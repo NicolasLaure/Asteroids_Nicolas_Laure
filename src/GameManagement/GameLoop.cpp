@@ -8,7 +8,7 @@
 
 
 using namespace std;
-namespace game
+namespace Asteroids
 {
 	static SceneManager sceneManager;
 

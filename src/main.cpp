@@ -3,5 +3,5 @@
 
 void main()
 {
-	game::RunGame();
+	Asteroids::RunGame();
 }
