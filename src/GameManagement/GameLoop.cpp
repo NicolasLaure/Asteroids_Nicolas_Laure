@@ -3,9 +3,9 @@
 #include <iostream>
 #include "raylib.h"
 
-#include "GameManagement/Menu.h"
 #include "GameManagement/SceneManager.h"
-
+#include "GameManagement/Menu.h"
+#include "GameManagement/GamePlay.h"
 
 using namespace std;
 namespace Asteroids
@@ -45,7 +45,7 @@ namespace Asteroids
 				MenuScene(sceneManager.enteredNewScene, sceneManager.currentScene);
 				break;
 			case Scenes::Game:
-
+				GameScene(sceneManager.enteredNewScene, sceneManager.currentScene);
 				break;
 			default:
 				break;

@@ -11,6 +11,9 @@
     <ClCompile Include="src\Objects\Button.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManagement\GamePlay.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -38,6 +41,12 @@
     </ClInclude>
     <ClInclude Include="src\Objects\Button.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\GamePlay.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\GameData.h">
+      <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
