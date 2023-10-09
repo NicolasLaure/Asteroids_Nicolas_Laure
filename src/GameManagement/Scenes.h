@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Asteroids
+namespace asteroids
 {
 	enum class Scenes
 	{

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameManagement/Scenes.h"
 
-namespace Asteroids
+namespace asteroids
 {
 	void GameScene(bool enteredNewScene, Scenes& scene);
 };

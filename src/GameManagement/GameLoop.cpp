@@ -6,9 +6,10 @@
 #include "GameManagement/SceneManager.h"
 #include "GameManagement/Menu.h"
 #include "GameManagement/GamePlay.h"
+#include "GameManagement/TexturesManager.h"
 
 using namespace std;
-namespace Asteroids
+namespace asteroids
 {
 	static SceneManager sceneManager;
 
@@ -27,6 +28,7 @@ namespace Asteroids
 		InitWindow(1280, 720, "Asteroids");
 		SetExitKey(NULL);
 		sceneManager.prevScene = Scenes::GameQuit;
+		SetTextures();
 		SetRandomSeed(static_cast<unsigned int>(time(nullptr)));
 	}
 

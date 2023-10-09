@@ -1,9 +1,13 @@
 #pragma once
 #include "raylib.h"
+#include "raymath.h"
 
-struct Rect
+namespace asteroids
 {
-	Vector2 position{};
-	float height{};
-	float width{};
-};
+	struct Rect
+	{
+		Vector2 position{};
+		float height{};
+		float width{};
+	};
+}

@@ -14,6 +14,12 @@
     <ClCompile Include="src\GameManagement\GamePlay.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Player.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GameManagement\TexturesManager.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -46,6 +52,12 @@
       <Filter>GameManagement</Filter>
     </ClInclude>
     <ClInclude Include="src\GameManagement\GameData.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Player.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\TexturesManager.h">
       <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>

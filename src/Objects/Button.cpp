@@ -1,6 +1,6 @@
 #include "Button.h"
 
-namespace Asteroids
+namespace asteroids
 {
 
 	void ButtonCollisionCheck(Button& button, Scenes& scene)

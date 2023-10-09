@@ -1,12 +1,13 @@
 #pragma once
+#include "Objects/Player.h"
 
-namespace Asteroids
+namespace asteroids
 {
 	struct GameData
 	{
 		bool areRulesBeingShown = false;
 		bool isPaused = false;
-		//Paddle player{};
+		Player player{};
 
 		bool isGameOver = false;
 		bool justRestarted = false;
