@@ -14,13 +14,13 @@ namespace asteroids
 
 	void PlayerDraw(Player& player)
 	{
-		DrawTextureEx(GetTexture(TextureIdentifier::Player), player.position, player.angle, 1, WHITE);
+		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0,40,40 }, { player.position.x, player.position.y,40,40 }, {20,20}, player.angle, WHITE);
 	}
 
 	void RotatePlayer(Player& player, Vector2 mousePos)
 	{
 		player.angle = static_cast<float>(atan2(player.dir.y, player.dir.x)) * RAD2DEG + 90.0f;
-		player.dir = Vector2Normalize(Vector2Subtract(mousePos, { player.position.x + player.size / 2,  player.position.y + player.size / 2 }));
+		player.dir = Vector2Normalize(Vector2Subtract(mousePos, { player.position.x,  player.position.y}));
 	}
 
 	void ResetPlayer(Player& player)
