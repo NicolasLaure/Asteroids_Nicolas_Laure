@@ -7,9 +7,13 @@ namespace asteroids
 	{
 		Vector2 position{};
 		Vector2 dir{};
+		Vector2 velocity{};
 
-		float healthPoints{ 20 };
-		float speed{ 500 };
+		float maxVelocity{1500.0f};
+		float friction{20.0f};
+
+		float healthPoints{ 20.0f };
+		float acceleration{ 500.0f };
 		float angle{};
 
 		int size{ 40 };
