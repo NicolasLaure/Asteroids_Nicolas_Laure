@@ -4,6 +4,8 @@
 
 namespace asteroids
 {
+	static const float BASE_SCREEN_WIDTH = 1280.0f;
+
 	void PlayerUpdate(Player& player)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
@@ -13,7 +15,7 @@ namespace asteroids
 		player.position = Vector2Add(player.position, Vector2Scale(player.velocity, GetFrameTime()));
 
 		if (IsMouseButtonDown(1))
-			player.velocity = Vector2Clamp(Vector2Add(player.velocity, Vector2Scale(player.dir, player.acceleration * (screenWidth / 1280.0f) * GetFrameTime())),
+			player.velocity = Vector2Clamp(Vector2Add(player.velocity, Vector2Scale(player.dir, player.acceleration * (screenWidth / BASE_SCREEN_WIDTH) * GetFrameTime())),
 			{ -player.maxVelocity, -player.maxVelocity },
 			{ player.maxVelocity, player.maxVelocity });
 
