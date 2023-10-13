@@ -1,6 +1,7 @@
 #include "Objects/Player.h"
-#include "GameManagement/TexturesManager.h"
 
+#include "GameManagement/TexturesManager.h"
+#include "GameManagement/ScreenManager.h"
 
 namespace asteroids
 {
@@ -15,14 +16,15 @@ namespace asteroids
 		float screenHeight = static_cast<float>(GetScreenHeight());
 		RotatePlayer(player, GetMousePosition());
 
-		player.position = Vector2Add(player.position, Vector2Scale(player.velocity, GetFrameTime()));
+		player.position = Vector2Add(player.position, Vector2Scale(player.velocity, GetScreenScale() * GetFrameTime()));
 
 		if (IsMouseButtonDown(1))
-			player.velocity = Vector2Clamp(Vector2Add(player.velocity, Vector2Scale(player.dir, player.acceleration * (screenWidth / BASE_SCREEN_WIDTH) * GetFrameTime())),
+			player.velocity = Vector2Clamp(Vector2Add(player.velocity, Vector2Scale(player.dir, player.acceleration * GetFrameTime())),
 				{ -player.maxVelocity, -player.maxVelocity },
 				{ player.maxVelocity, player.maxVelocity });
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
+
 	}
 
 	void PlayerDraw(Player& player)

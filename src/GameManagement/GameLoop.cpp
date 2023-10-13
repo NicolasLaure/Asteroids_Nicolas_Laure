@@ -7,6 +7,7 @@
 #include "GameManagement/Menu.h"
 #include "GameManagement/GamePlay.h"
 #include "GameManagement/TexturesManager.h"
+#include "GameManagement/ScreenManager.h"
 
 using namespace std;
 namespace asteroids
@@ -25,7 +26,10 @@ namespace asteroids
 
 	void Initialize()
 	{
-		InitWindow(1280, 720, "Asteroids");
+		InitWindow(640, 360, "Asteroids");
+		OnScreenSizeChange();
+
+		
 		SetExitKey(NULL);
 		sceneManager.prevScene = Scenes::GameQuit;
 		SetTextures();

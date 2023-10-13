@@ -20,6 +20,9 @@
     <ClCompile Include="src\GameManagement\TexturesManager.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManagement\ScreenManager.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -58,6 +61,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\GameManagement\TexturesManager.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\ScreenManager.h">
       <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>
