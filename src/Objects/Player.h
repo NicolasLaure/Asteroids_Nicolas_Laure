@@ -3,6 +3,9 @@
 
 namespace asteroids
 {
+
+	const float PLAYER_TEXTURE_WIDTH = 28;
+	const float PLAYER_TEXTURE_HEIGHT = 30;
 	struct Player
 	{
 		Vector2 position{};
@@ -16,9 +19,13 @@ namespace asteroids
 		float acceleration{ 500.0f };
 		float angle{};
 
-		int size{ 40 };
+		float size{ 35 };
+		float colliderRadius{};
+
+		
 	};
 
+	void PlayerStart(Player& player);
 
 	void PlayerUpdate(Player& player);
 	void PlayerDraw(Player& player);

@@ -48,6 +48,8 @@ namespace asteroids
 	{
 		ResetGameStats();
 
+		PlayerStart(gd.player);
+
 		//int buttonLimitSpacing = 50;
 		//int buttonsSpacing = 100;
 		//Vector2 textSize = { static_cast<float>(slGetTextWidth(gd.menuButton.text)), static_cast<float>(slGetTextHeight(gd.menuButton.text)) };

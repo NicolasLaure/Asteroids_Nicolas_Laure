@@ -10,6 +10,13 @@ namespace asteroids
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight);
 
 
+	void PlayerStart(Player& player)
+	{
+		player.size *= GetScreenScale();
+		player.colliderRadius = player.size / 2 * 0.75f;
+	}
+
+
 	void PlayerUpdate(Player& player)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
@@ -29,7 +36,9 @@ namespace asteroids
 
 	void PlayerDraw(Player& player)
 	{
-		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0,40,40 }, { player.position.x, player.position.y,40,40 }, { 20,20 }, player.angle, WHITE);
+		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
+
+		DrawCircleLines(static_cast<int>(player.position.x), static_cast<int>(player.position.y), player.colliderRadius, GREEN);
 	}
 
 	void RotatePlayer(Player& player, Vector2 mousePos)
