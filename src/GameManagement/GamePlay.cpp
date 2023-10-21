@@ -50,6 +50,8 @@ namespace asteroids
 
 		PlayerStart(gd.player);
 
+		BulletsStart(gd.player.bullets, gd.player.BULLETS_QTY);
+
 		//int buttonLimitSpacing = 50;
 		//int buttonsSpacing = 100;
 		//Vector2 textSize = { static_cast<float>(slGetTextWidth(gd.menuButton.text)), static_cast<float>(slGetTextHeight(gd.menuButton.text)) };
@@ -67,6 +69,15 @@ namespace asteroids
 		}
 
 		PlayerUpdate(gd.player);
+		int activeBullets = 0;
+		for (Bullet& bullet : gd.player.bullets)
+		{
+			if (bullet.isActive)
+			{
+				BulletUpdate(bullet);
+				activeBullets++;
+			}
+		}
 	}
 
 	void GameDraw()
@@ -75,15 +86,23 @@ namespace asteroids
 		ClearBackground(BLACK);
 		PlayerDraw(gd.player);
 
-		VirusesDraw(gd.viruses);
-		BloodCellsDraw(gd.bloodCells);
-		BulletsDraw(gd.player.bullets);
+		//VirusesDraw(gd.viruses);
+		//BloodCellsDraw(gd.bloodCells);
+		for (Bullet& bullet : gd.player.bullets)
+		{
+			if (bullet.isActive)
+				BulletDraw(bullet);
+		}
 
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);
-		VirusesColliderDraw(gd.viruses);
-		BloodCellsColliderDraw(gd.bloodCells);
-		BulletsColliderDraw(gd.player.bullets);
+		//VirusesColliderDraw(gd.viruses);
+		//BloodCellsColliderDraw(gd.bloodCells);
+		for (Bullet& bullet : gd.player.bullets)
+		{
+			if (bullet.isActive)
+				BulletColliderDraw(bullet);
+		}
 #endif // _DEBUG
 
 		EndDrawing();

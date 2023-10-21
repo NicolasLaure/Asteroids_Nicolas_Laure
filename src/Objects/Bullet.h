@@ -6,16 +6,19 @@ namespace asteroids
 {
 	struct Bullet
 	{
-		float speed;
-		Vector2 dir;
+		Vector2 position;
+		Vector2 direction;
+		const float speed = 500;
 
 		bool isActive;
 
+		float angle{};
+		const float size = 10;
 	};
 
 
-	void BulletsStart(Bullet bullets[]);
-	void BulletsUpdate(Bullet bullets[]);
-	void BulletsDraw(Bullet bullets[]);
-	void BulletsColliderDraw(Bullet bullets[]);
+	void BulletsStart(Bullet bullets[], int bulletsQty);
+	void BulletUpdate(Bullet& bullet);
+	void BulletDraw(Bullet& bullet);
+	void BulletColliderDraw(Bullet& bullet);
 }

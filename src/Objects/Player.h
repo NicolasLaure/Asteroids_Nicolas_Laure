@@ -1,5 +1,6 @@
 #pragma once
 #include "GameManagement/Utilities.h"
+#include "Objects/Bullet.h"
 
 namespace asteroids
 {

@@ -8,6 +8,7 @@ namespace asteroids
 	static const float BASE_SCREEN_WIDTH = 1280.0f;
 
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight);
+	void Shoot(Player& player);
 
 
 	void PlayerStart(Player& player)
@@ -32,6 +33,10 @@ namespace asteroids
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
 
+		if (IsMouseButtonPressed(0))
+		{
+			Shoot(player);
+		}
 	}
 
 	void PlayerDraw(Player& player)
@@ -113,6 +118,21 @@ namespace asteroids
 			{
 				if (player.position.x < screenWidth / 2)
 					player.position.x = screenWidth - player.position.x;
+			}
+		}
+	}
+
+	void Shoot(Player& player)
+	{
+		for (int i = 0; i < player.BULLETS_QTY; i++)
+		{
+			if (!player.bullets[i].isActive)
+			{
+				player.bullets[i].isActive = true;
+				player.bullets[i].position = player.position;
+				player.bullets[i].direction = player.dir;
+				player.bullets[i].angle = player.angle;
+				break;
 			}
 		}
 	}
