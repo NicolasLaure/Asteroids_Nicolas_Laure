@@ -26,6 +26,12 @@
     <ClCompile Include="src\Objects\BloodCell.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\Virus.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Bullet.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -70,6 +76,12 @@
       <Filter>GameManagement</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\BloodCell.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Virus.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Bullet.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

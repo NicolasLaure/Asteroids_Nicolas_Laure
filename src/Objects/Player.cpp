@@ -37,7 +37,10 @@ namespace asteroids
 	void PlayerDraw(Player& player)
 	{
 		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
+	}
 
+	void PlayerDrawCollider(Player& player)
+	{
 		DrawCircleLines(static_cast<int>(player.position.x), static_cast<int>(player.position.y), player.colliderRadius, GREEN);
 	}
 

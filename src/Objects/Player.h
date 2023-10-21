@@ -22,13 +22,15 @@ namespace asteroids
 		float size{ 35 };
 		float colliderRadius{};
 
-		
+		static const int BULLETS_QTY = 50;
+		Bullet bullets[BULLETS_QTY] = {};
 	};
 
 	void PlayerStart(Player& player);
 
 	void PlayerUpdate(Player& player);
 	void PlayerDraw(Player& player);
+	void PlayerDrawCollider(Player& player);
 
 	void RotatePlayer(Player& player, Vector2 mousePos);
 	void ResetPlayer(Player& player);

@@ -75,6 +75,17 @@ namespace asteroids
 		ClearBackground(BLACK);
 		PlayerDraw(gd.player);
 
+		VirusesDraw(gd.viruses);
+		BloodCellsDraw(gd.bloodCells);
+		BulletsDraw(gd.player.bullets);
+
+#ifdef _DEBUG
+		PlayerDrawCollider(gd.player);
+		VirusesColliderDraw(gd.viruses);
+		BloodCellsColliderDraw(gd.bloodCells);
+		BulletsColliderDraw(gd.player.bullets);
+#endif // _DEBUG
+
 		EndDrawing();
 	}
 
@@ -105,7 +116,7 @@ namespace asteroids
 	void PauseDraw()
 	{
 		BeginDrawing();
-		
+
 		ClearBackground(BLACK);
 		Color panelColor = BLACK;
 
