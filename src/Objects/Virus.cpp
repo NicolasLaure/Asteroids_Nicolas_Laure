@@ -30,18 +30,20 @@ namespace asteroids
 				if (!viruses[i].isActive)
 				{
 					viruses[i].isActive = true;
+					viruses[i].phase = 1;
+					viruses[i].currentSize = viruses[i].normalSize;
 					float posX;
 					float posY;
 					if (GetRandomValue(0, 1) == 0)
 					{
 						if (GetRandomValue(0, 1) == 0)
 						{
-							posX = 0 - viruses->size;
+							posX = 0 - viruses->currentSize;
 							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
 						}
 						else
 						{
-							posX = screenHeight + viruses->size;
+							posX = screenHeight + viruses->currentSize;
 							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
 						}
 					}
@@ -50,12 +52,12 @@ namespace asteroids
 						if (GetRandomValue(0, 1) == 0)
 						{
 							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
-							posY = 0 - viruses->size;
+							posY = 0 - viruses->currentSize;
 						}
 						else
 						{
 							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
-							posY = screenHeight + viruses->size;
+							posY = screenHeight + viruses->currentSize;
 						}
 					}
 					viruses[i].position = { posX, posY };
@@ -97,7 +99,7 @@ namespace asteroids
 		for (int i = 0; i < virusesQty; i++)
 		{
 			if (viruses[i].isActive)
-				DrawCircle(static_cast<int>(viruses[i].position.x), static_cast<int>(viruses[i].position.y), viruses[i].size, DARKGREEN);
+				DrawCircle(static_cast<int>(viruses[i].position.x), static_cast<int>(viruses[i].position.y), viruses[i].currentSize, DARKGREEN);
 		}
 	}
 
@@ -106,7 +108,7 @@ namespace asteroids
 		for (int i = 0; i < virusesQty; i++)
 		{
 			if (viruses[i].isActive)
-				DrawCircleLines(static_cast<int>(viruses[i].position.x), static_cast<int>(viruses[i].position.y), viruses[i].size, GREEN);
+				DrawCircleLines(static_cast<int>(viruses[i].position.x), static_cast<int>(viruses[i].position.y), viruses[i].currentSize, GREEN);
 		}
 	}
 

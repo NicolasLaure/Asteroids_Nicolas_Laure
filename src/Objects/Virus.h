@@ -12,7 +12,11 @@ namespace asteroids
 		Vector2 dir;
 		float speed{ 100 };
 
-		float size{ 20 };
+		int phase{ 1 };
+		float currentSize{ 20 };
+		float normalSize{ 20 };
+		float smallSize{ 12.5f };
+		float miniSize{ 7.5f };
 	};
 
 	void VirusesStart(Virus viruses[], int virusesQty);
