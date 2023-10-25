@@ -19,7 +19,6 @@ namespace asteroids
 	void PauseUpdate(Scenes& scene);
 	void PauseDraw();
 
-
 	void CollisionUpdate();
 	void ResetGameStats();
 
@@ -78,6 +77,7 @@ namespace asteroids
 				activeBullets++;
 			}
 		}
+		BloodCellsUpdate(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 	}
 
 	void GameDraw()
@@ -87,7 +87,7 @@ namespace asteroids
 		PlayerDraw(gd.player);
 
 		//VirusesDraw(gd.viruses);
-		//BloodCellsDraw(gd.bloodCells);
+		BloodCellsDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 		for (Bullet& bullet : gd.player.bullets)
 		{
 			if (bullet.isActive)
@@ -97,7 +97,7 @@ namespace asteroids
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);
 		//VirusesColliderDraw(gd.viruses);
-		//BloodCellsColliderDraw(gd.bloodCells);
+		BloodCellsColliderDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 		for (Bullet& bullet : gd.player.bullets)
 		{
 			if (bullet.isActive)

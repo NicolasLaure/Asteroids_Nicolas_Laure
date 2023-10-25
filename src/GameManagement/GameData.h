@@ -15,8 +15,6 @@ namespace asteroids
 		static const int VIRUSES_QTY = 80;
 		Virus viruses[VIRUSES_QTY] = {};
 
-		
-
 		static const int BLOOD_CELLS_QTY = 40;
 		BloodCell bloodCells[BLOOD_CELLS_QTY] = {};
 
