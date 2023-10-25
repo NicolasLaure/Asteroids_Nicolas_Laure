@@ -26,7 +26,7 @@ namespace asteroids
 
 	void Initialize()
 	{
-		InitWindow(1280, 720, "Asteroids");
+		InitWindow(1024, 768, "Asteroids");
 		OnScreenSizeChange();
 
 		

@@ -5,6 +5,8 @@
 #include "Objects/Button.h"
 #include "GameManagement/Utilities.h"
 #include "GameManagement/GameData.h"
+#include "GameManagement/ScreenManager.h"
+#include "GameManagement/CollisionManager.h"
 
 using namespace std;
 
@@ -19,7 +21,6 @@ namespace asteroids
 	void PauseUpdate(Scenes& scene);
 	void PauseDraw();
 
-	void CollisionUpdate();
 	void ResetGameStats();
 
 	void GameScene(bool enteredNewScene, Scenes& scene)
@@ -78,6 +79,9 @@ namespace asteroids
 			}
 		}
 		BloodCellsUpdate(gd.bloodCells, gd.BLOOD_CELLS_QTY);
+		VirusesUpdate(gd.viruses, gd.VIRUSES_QTY);
+
+		CheckCollisions(gd);
 	}
 
 	void GameDraw()
@@ -86,7 +90,7 @@ namespace asteroids
 		ClearBackground(BLACK);
 		PlayerDraw(gd.player);
 
-		//VirusesDraw(gd.viruses);
+		VirusesDraw(gd.viruses, gd.VIRUSES_QTY);
 		BloodCellsDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 		for (Bullet& bullet : gd.player.bullets)
 		{
@@ -96,7 +100,7 @@ namespace asteroids
 
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);
-		//VirusesColliderDraw(gd.viruses);
+		VirusesColliderDraw(gd.viruses, gd.VIRUSES_QTY);
 		BloodCellsColliderDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 		for (Bullet& bullet : gd.player.bullets)
 		{
@@ -122,6 +126,10 @@ namespace asteroids
 		{
 			ButtonCollisionCheck(gd.menuButton, scene);
 			ResetButtonCollisionCheck(gd.restartButton, gd.justRestarted);
+			if (IsMouseButtonPressed(2))
+			{
+				scene = Scenes::Menu;
+			}
 		}
 		else
 		{
@@ -144,98 +152,53 @@ namespace asteroids
 
 		DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight(), panelColor);
 
-		//int titleWindowLimitSpacing = 120;
-		//int pressKeyWindowLimitSpacing = 120;
+		int titleWindowLimitSpacing = 120;
+		int pressKeyWindowLimitSpacing = 120;
+		int wordsSpacing = 40;
 
 		if (gd.areRulesBeingShown)
 		{
-			/*const char* rulesTitle = "Rules";
-			int titleSize = 150;
-			int rulesSize = 40;
-			const char* winConditionText = "Destroy all bricks to win";
-			const char* controlsText = "Left Click to shoot / Right Click to pause";
+			const char* rulesTitle = "Rules";
+			int titleSize = static_cast<int>(150 * GetScreenScale());
+			int rulesSize = static_cast<int>(40 * GetScreenScale());
+			const char* winConditionText = "Destroy as many viruses as you can to set a new HighScore";
+			const char* bloodCellsText = "But be careful, shooting at BloodCells might hurt the patient";
+			const char* controlsTextLClick = "Left Click to Shoot";
+			const char* controlsTextMClick = "Middle Click to Pause";
+			const char* controlsTextRClick = "Right Click to Thrust";
 			const char* pressAnyKeyText = "Click anywhere to start the game";
 
-			int rulesPositionY = GetScreenHeight() / 2 + 75;
-			slSetForeColor(colorsData.WHITE.r, colorsData.WHITE.g, colorsData.WHITE.b, 1);
-			slSetFontSize(titleSize);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(rulesTitle) / 2, GetScreenHeight() - titleWindowLimitSpacing, rulesTitle);
-			slSetFontSize(rulesSize);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(winConditionText) / 2, rulesPositionY, winConditionText);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(controlsText) / 2, GetScreenHeight() / 2, controlsText);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(pressAnyKeyText) / 2, 0 + pressKeyWindowLimitSpacing, pressAnyKeyText);*/
+			DrawText(rulesTitle, GetScreenWidth() / 2 - MeasureText(rulesTitle, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
+
+			DrawText(winConditionText, GetScreenWidth() / 2 - MeasureText(winConditionText, rulesSize) / 2, GetScreenHeight() / 2 - wordsSpacing, rulesSize, WHITE);
+			DrawText(bloodCellsText, GetScreenWidth() / 2 - MeasureText(bloodCellsText, rulesSize) / 2, GetScreenHeight(), rulesSize, WHITE);
+			DrawText(controlsTextLClick, GetScreenWidth() / 2 - MeasureText(controlsTextLClick, rulesSize) / 2, GetScreenHeight() / 2 + wordsSpacing, rulesSize, WHITE);
+			DrawText(controlsTextMClick, GetScreenWidth() / 2 - MeasureText(controlsTextMClick, rulesSize) / 2, GetScreenHeight() / 2 + wordsSpacing * 2, rulesSize, WHITE);
+			DrawText(controlsTextRClick, GetScreenWidth() / 2 - MeasureText(controlsTextRClick, rulesSize) / 2, GetScreenHeight() / 2 + wordsSpacing * 3, rulesSize, WHITE);
+
+			DrawText(pressAnyKeyText, GetScreenWidth() / 2 - MeasureText(pressAnyKeyText, rulesSize) / 2, GetScreenHeight() - pressKeyWindowLimitSpacing, rulesSize, WHITE);
 		}
 		else if (gd.isGameOver)
 		{
-			/*const char* gameOverTitle = "Game Over";
-			int titleSize = 130;
+			const char* gameOverTitle = "Game Over";
+			const char* backToMenuText = "Back to menu with Right Click";
+			int titleSize = static_cast<int>(130 * GetScreenScale());
+			int backToMenuSize = static_cast<int>(60 * GetScreenScale());
 
-			int rulesPositionY = GetScreenHeight() / 2 + 50;
-			slSetForeColor(colorsData.WHITE.r, colorsData.WHITE.g, colorsData.WHITE.b, 1);
-			slSetFontSize(titleSize);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(gameOverTitle) / 2, GetScreenHeight() - titleWindowLimitSpacing, gameOverTitle);
-
-			slSetFontSize(gd.buttonsFontSize);
-			slSetForeColor(gd.menuButton.currentTextColor.r, gd.menuButton.currentTextColor.g, gd.menuButton.currentTextColor.b, 1);
-			slText(gd.menuButton.buttonRect.position.x, gd.menuButton.buttonRect.position.y, gd.menuButton.text);
-
-			slSetForeColor(gd.restartButton.currentTextColor.r, gd.restartButton.currentTextColor.g, gd.restartButton.currentTextColor.b, 1);
-			slText(gd.restartButton.buttonRect.position.x, gd.restartButton.buttonRect.position.y, gd.restartButton.text);*/
-		}
-		else if (gd.hasWon)
-		{
-			/*const char* gameOverTitle = "You Win!";
-			int titleSize = 130;
-
-			int gameOverSize = 40;
-
-			string scoreText = "Score: " + to_string(gd.score);
-			string highScore = "High Score: " + to_string(gd.highScore);
-
-			int rulesPositionY = GetScreenHeight() / 2 + 50;
-			slSetForeColor(colorsData.WHITE.r, colorsData.WHITE.g, colorsData.WHITE.b, 1);
-			slSetFontSize(titleSize);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(gameOverTitle) / 2, GetScreenHeight() - titleWindowLimitSpacing, gameOverTitle);
-			slSetFontSize(gameOverSize);
-
-			int scoresOffset = 40;
-			slText(GetScreenWidth() / 2 - slGetTextWidth(scoreText.c_str()) / 2, GetScreenHeight() / 2 - scoresOffset, scoreText.c_str());
-			slText(GetScreenWidth() / 2 - slGetTextWidth(highScore.c_str()) / 2, GetScreenHeight() / 2 + scoresOffset, highScore.c_str());
-
-			slSetFontSize(gd.buttonsFontSize);
-			slSetForeColor(gd.menuButton.currentTextColor.r, gd.menuButton.currentTextColor.g, gd.menuButton.currentTextColor.b, 1);
-			slText(gd.menuButton.buttonRect.position.x, gd.menuButton.buttonRect.position.y, gd.menuButton.text);
-
-			slSetForeColor(gd.restartButton.currentTextColor.r, gd.restartButton.currentTextColor.g, gd.restartButton.currentTextColor.b, 1);
-			slText(gd.restartButton.buttonRect.position.x, gd.restartButton.buttonRect.position.y, gd.restartButton.text);*/
+			DrawText(gameOverTitle, GetScreenWidth() / 2 - MeasureText(gameOverTitle, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
+			DrawText(backToMenuText, GetScreenWidth() / 2 - MeasureText(backToMenuText, backToMenuSize) / 2, GetScreenHeight() / 2, backToMenuSize, WHITE);
 		}
 		else
 		{
-			/*const char* pauseTitle = "Game is Paused";
-			int titleSize = 80;
+			const char* pauseTitle = "Game is Paused";
+			int titleSize = static_cast<int>(120 * GetScreenScale());
 
-			const char* backToMenuText = "Press Right click to go Unpause";
-			int backToMenuSize = 40;*/
-
-			/*slSetForeColor(colorsData.WHITE.r, colorsData.WHITE.g, colorsData.WHITE.b, 1);
-			slSetFontSize(titleSize);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(pauseTitle) / 2, GetScreenHeight() - titleWindowLimitSpacing - slGetTextHeight(pauseTitle) / 2, pauseTitle);
-			slSetFontSize(backToMenuSize);
-			slText(GetScreenWidth() / 2 - slGetTextWidth(backToMenuText) / 2, GetScreenHeight() / 2, backToMenuText);
-
-			slSetFontSize(gd.buttonsFontSize);
-			slSetForeColor(gd.menuButton.currentTextColor.r, gd.menuButton.currentTextColor.g, gd.menuButton.currentTextColor.b, 1);
-			slText(gd.menuButton.buttonRect.position.x, gd.menuButton.buttonRect.position.y, gd.menuButton.text);
-
-			slSetForeColor(gd.restartButton.currentTextColor.r, gd.restartButton.currentTextColor.g, gd.restartButton.currentTextColor.b, 1);
-			slText(gd.restartButton.buttonRect.position.x, gd.restartButton.buttonRect.position.y, gd.restartButton.text);*/
+			const char* backToMenuText = "Press Middle Click to go Continue Playing";
+			int backToMenuSize = static_cast <int>(60 * GetScreenScale());
+			DrawText(pauseTitle, GetScreenWidth() / 2 - MeasureText(pauseTitle, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
+			DrawText(backToMenuText, GetScreenWidth() / 2 - MeasureText(backToMenuText, backToMenuSize) / 2, GetScreenHeight() / 2, backToMenuSize, WHITE);
 		}
 		EndDrawing();
-	}
-
-	void CollisionUpdate()
-	{
-
 	}
 
 	void ResetGameStats()

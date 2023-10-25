@@ -13,14 +13,13 @@ namespace asteroids
 		}
 	}
 
-	static const float BLOODCELLS_SPAWN_RATE = 2.5f;
+	static const float BLOODCELLS_SPAWN_RATE = 5.0f;
 	static float timer;
 	int activeBloodCells = 0;
 
 
 	void BloodCellsUpdate(BloodCell bloodCells[], int bloodCellsQty)
 	{
-
 		float screenWidth = static_cast<float>(GetScreenWidth());
 		float screenHeight = static_cast<float>(GetScreenHeight());
 
@@ -32,11 +31,51 @@ namespace asteroids
 				if (!bloodCells[i].isActive)
 				{
 					bloodCells[i].isActive = true;
-					bloodCells[i].position = { static_cast<float>(GetRandomValue(0, GetScreenWidth())), static_cast<float>(GetRandomValue(0, GetScreenHeight())) };
+					float posX;
+					float posY;
+					if (GetRandomValue(0, 1) == 0)
+					{
+						if (GetRandomValue(0, 1) == 0)
+						{
+							posX = 0 - bloodCells->size;
+							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
+						}
+						else
+						{
+							posX = screenHeight + bloodCells->size;
+							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
+						}
+					}
+					else
+					{
+						if (GetRandomValue(0, 1) == 0)
+						{
+							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
+							posY = 0 - bloodCells->size;
+						}
+						else
+						{
+							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
+							posY = screenHeight + bloodCells->size;
+						}
+					}
+					bloodCells[i].position = { posX, posY };
 
-					float dirX = GetRandomValue(-9, 9) * 0.1f;
-					float dirY = GetRandomValue(-9, 9) * 0.1f;
-					bloodCells[i].dir = { dirX < -3 || dirX > 3 ? dirX : dirX * 2, dirY < -3 || dirY > 3 ? dirY : dirY * 2 };
+					float dirX;
+					float dirY;
+					do
+					{
+						dirX = static_cast<float>(GetRandomValue(-9, 9));
+					} while (dirX < 3  && dirX > -3);
+					do
+					{
+						dirY = static_cast<float>(GetRandomValue(-9, 9));
+					} while (dirY < 3 && dirY > -3);
+					dirX *= 0.1f;
+					dirY *= 0.1f;
+
+					bloodCells[i].dir = { dirX, dirY };
+					Vector2Normalize(bloodCells[i].dir);
 					break;
 				}
 			}
@@ -74,7 +113,7 @@ namespace asteroids
 
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight)
 	{
-		if (bloodCell.position.x + bloodCell.speed * GetFrameTime() > screenWidth)
+		if (bloodCell.position.x + bloodCell.dir.x * bloodCell.speed * GetFrameTime() > screenWidth)
 		{
 			bloodCell.position.x = 0;
 			if (bloodCell.dir.y > 0)
@@ -88,7 +127,7 @@ namespace asteroids
 					bloodCell.position.y = screenHeight - bloodCell.position.y;
 			}
 		}
-		else if (bloodCell.position.x + bloodCell.speed * GetFrameTime() < 0)
+		else if (bloodCell.position.x + bloodCell.dir.x * bloodCell.speed * GetFrameTime() < 0)
 		{
 			bloodCell.position.x = screenWidth;
 			if (bloodCell.dir.y > 0)
@@ -103,7 +142,7 @@ namespace asteroids
 			}
 		}
 
-		if (bloodCell.position.y + bloodCell.speed * GetFrameTime() > screenHeight)
+		if (bloodCell.position.y + bloodCell.dir.y * bloodCell.speed * GetFrameTime() > screenHeight)
 		{
 			bloodCell.position.y = 0;
 			if (bloodCell.dir.x > 0)
@@ -117,7 +156,7 @@ namespace asteroids
 					bloodCell.position.x = screenWidth - bloodCell.position.x;
 			}
 		}
-		else if (bloodCell.position.y + bloodCell.speed * GetFrameTime() < 0)
+		else if (bloodCell.position.y + bloodCell.dir.y * bloodCell.speed * GetFrameTime() < 0)
 		{
 			bloodCell.position.y = screenHeight;
 			if (bloodCell.dir.x > 0)

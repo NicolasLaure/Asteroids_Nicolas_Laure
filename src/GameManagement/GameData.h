@@ -1,9 +1,12 @@
 #pragma once
+
 #include "Objects/Player.h"
 #include "Objects/BloodCell.h"
 #include "Objects/Virus.h"
-#include "Objects/BloodCell.h"
 #include "Objects/Bullet.h"
+#include "Objects/Button.h"
+#include "GameManagement/Scenes.h"
+
 namespace asteroids
 {
 	struct GameData
@@ -15,7 +18,7 @@ namespace asteroids
 		static const int VIRUSES_QTY = 80;
 		Virus viruses[VIRUSES_QTY] = {};
 
-		static const int BLOOD_CELLS_QTY = 40;
+		static const int BLOOD_CELLS_QTY = 20;
 		BloodCell bloodCells[BLOOD_CELLS_QTY] = {};
 
 		bool isGameOver = false;

@@ -10,9 +10,9 @@ namespace asteroids
 
 		Vector2 position;
 		Vector2 dir;
-		float speed{200};
+		float speed{100};
 
-		float size{ 50 };
+		float size{ 20 };
 	};
 
 	void BloodCellsStart(BloodCell bloodCells[], int bloodCellsQty);

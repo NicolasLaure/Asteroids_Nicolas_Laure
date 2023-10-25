@@ -162,6 +162,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\GameManagement\CollisionManager.cpp" />
     <ClCompile Include="src\GameManagement\GameLoop.cpp" />
     <ClCompile Include="src\GameManagement\GamePlay.cpp" />
     <ClCompile Include="src\GameManagement\Menu.cpp" />
@@ -175,6 +176,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     <ClCompile Include="src\Objects\Virus.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameManagement\CollisionManager.h" />
     <ClInclude Include="src\GameManagement\GameData.h" />
     <ClInclude Include="src\GameManagement\GameLoop.h" />
     <ClInclude Include="src\GameManagement\GamePlay.h" />
