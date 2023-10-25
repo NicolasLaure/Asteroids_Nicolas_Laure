@@ -17,7 +17,6 @@ namespace asteroids
 		player.colliderRadius = player.size / 2 * 0.75f;
 	}
 
-
 	void PlayerUpdate(Player& player)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
@@ -30,6 +29,18 @@ namespace asteroids
 			player.velocity = Vector2Clamp(Vector2Add(player.velocity, Vector2Scale(player.dir, player.acceleration * GetFrameTime())),
 				{ -player.maxVelocity, -player.maxVelocity },
 				{ player.maxVelocity, player.maxVelocity });
+		else
+		{
+			if (player.velocity.x < 0)
+				player.velocity.x += player.deceleration * GetFrameTime();
+			else if(player.velocity.x > 0)
+				player.velocity.x -= player.deceleration * GetFrameTime();
+
+			if (player.velocity.y < 0)
+				player.velocity.y += player.deceleration * GetFrameTime();
+			else if (player.velocity.y > 0)
+				player.velocity.y -= player.deceleration * GetFrameTime();
+		}
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
 
@@ -59,7 +70,6 @@ namespace asteroids
 	{
 		player.position = { static_cast<float>(GetScreenWidth()) / 2 - player.size / 2, static_cast<float>(GetScreenHeight()) / 2 - player.size / 2 };
 	}
-
 
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight)
 	{

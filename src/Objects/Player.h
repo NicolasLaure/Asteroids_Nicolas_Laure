@@ -18,6 +18,7 @@ namespace asteroids
 
 		float healthPoints{ 20.0f };
 		float acceleration{ 500.0f };
+		float deceleration{ 100.0f };
 		float angle{};
 
 		float size{ 35 };
