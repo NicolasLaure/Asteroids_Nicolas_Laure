@@ -88,7 +88,7 @@ namespace asteroids
 				if (distanceBetweenCircles <= gd.player.colliderRadius + gd.viruses[i].currentSize)
 				{
 					gd.viruses[i].isActive = false;
-					TakeDamage(gd.player);
+					TakeDamage(gd.player, gd.isGameOver);
 				}
 			}
 		}

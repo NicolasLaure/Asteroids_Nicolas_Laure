@@ -37,5 +37,5 @@ namespace asteroids
 	void RotatePlayer(Player& player, Vector2 mousePos);
 	void ResetPlayer(Player& player);
 
-	void TakeDamage(Player& player);
+	void TakeDamage(Player& player, bool& isGameOver);
 }

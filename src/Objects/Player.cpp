@@ -10,7 +10,6 @@ namespace asteroids
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight);
 	void Shoot(Player& player);
 
-
 	void PlayerStart(Player& player)
 	{
 		player.size *= GetScreenScale();
@@ -147,9 +146,11 @@ namespace asteroids
 		}
 	}
 
-	void TakeDamage(Player& player)
+	void TakeDamage(Player& player, bool& isGameOver)
 	{
 		player.lives--;
+		if (player.lives <= 0)
+			isGameOver = true;
 	}
 
 }

@@ -33,6 +33,8 @@ namespace asteroids
 			gd.justRestarted = false;
 		}
 
+		if (gd.isGameOver)
+			gd.isPaused = true;
 		if (!gd.isPaused)
 		{
 			GameUpdate();
@@ -52,14 +54,6 @@ namespace asteroids
 		PlayerStart(gd.player);
 
 		BulletsStart(gd.player.bullets, gd.player.BULLETS_QTY);
-
-		//int buttonLimitSpacing = 50;
-		//int buttonsSpacing = 100;
-		//Vector2 textSize = { static_cast<float>(slGetTextWidth(gd.menuButton.text)), static_cast<float>(slGetTextHeight(gd.menuButton.text)) };
-		//gd.menuButton.buttonRect = { { static_cast<float>(GetScreenWidth() / 2) - textSize.x / 2, 0.0f + buttonLimitSpacing }, textSize.x, textSize.y };
-
-		//textSize = { static_cast<float>(slGetTextWidth(gd.restartButton.text)),static_cast<float>(slGetTextHeight(gd.restartButton.text)) };
-		//gd.restartButton.buttonRect = { { static_cast<float>(GetScreenWidth() / 2) - textSize.x / 2, 0.0f + buttonLimitSpacing + buttonsSpacing }, textSize.x, textSize.y };
 	}
 
 	void GameUpdate()
@@ -129,7 +123,7 @@ namespace asteroids
 		{
 			ButtonCollisionCheck(gd.menuButton, scene);
 			ResetButtonCollisionCheck(gd.restartButton, gd.justRestarted);
-			if (IsMouseButtonPressed(2))
+			if (IsMouseButtonPressed(1))
 			{
 				scene = Scenes::Menu;
 			}
