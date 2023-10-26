@@ -27,7 +27,7 @@ namespace asteroids
 				{
 					if (gd.viruses[j].isActive)
 					{
-						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.viruses[j].position.x + gd.viruses[j].currentSize / 2 - bulletPosition.x), 2) + pow(static_cast<double>(gd.viruses[j].position.y - bulletPosition.y), 2)));
+						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.viruses[j].position.x) + gd.viruses[j].currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(gd.viruses[j].position.y) - bulletPosition.y, 2)));
 
 						if (distanceBetweenCircles <= gd.viruses[j].currentSize + gd.player.bullets[i].size)
 						{
@@ -36,6 +36,7 @@ namespace asteroids
 							if (gd.viruses[j].phase == 1)
 							{
 								gd.viruses[j].phase = 2;
+								gd.viruses[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
 								gd.viruses[j].currentSize = gd.viruses[j].smallSize;
 								for (int k = 0; k < gd.VIRUSES_QTY; k++)
 								{
@@ -43,7 +44,7 @@ namespace asteroids
 									{
 										gd.viruses[k].isActive = true;
 										gd.viruses[k].position = gd.viruses[j].position;
-										gd.viruses[k].dir = Vector2Scale(gd.viruses[j].dir, -1);
+										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1};
 										gd.viruses[k].currentSize = gd.viruses[j].currentSize;
 										gd.viruses[k].phase = 2;
 										break;
@@ -60,7 +61,7 @@ namespace asteroids
 									{
 										gd.viruses[k].isActive = true;
 										gd.viruses[k].position = gd.viruses[j].position;
-										gd.viruses[k].dir = Vector2Scale(gd.viruses[j].dir, -1);
+										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1};
 										gd.viruses[k].currentSize = gd.viruses[j].currentSize;
 										gd.viruses[k].phase = 3;
 										break;
