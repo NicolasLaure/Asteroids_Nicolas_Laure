@@ -44,7 +44,7 @@ namespace asteroids
 									{
 										gd.viruses[k].isActive = true;
 										gd.viruses[k].position = gd.viruses[j].position;
-										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1};
+										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
 										gd.viruses[k].currentSize = gd.viruses[j].currentSize;
 										gd.viruses[k].phase = 2;
 										break;
@@ -61,7 +61,7 @@ namespace asteroids
 									{
 										gd.viruses[k].isActive = true;
 										gd.viruses[k].position = gd.viruses[j].position;
-										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1};
+										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
 										gd.viruses[k].currentSize = gd.viruses[j].currentSize;
 										gd.viruses[k].phase = 3;
 										break;
@@ -74,6 +74,21 @@ namespace asteroids
 							break;
 						}
 					}
+				}
+			}
+		}
+
+		for (int i = 0; i < gd.VIRUSES_QTY; i++)
+		{
+			if (gd.viruses[i].isActive)
+			{
+
+				float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.viruses[i].position.x) + gd.viruses[i].currentSize / 2 - gd.player.position.x, 2) + pow(static_cast<double>(gd.viruses[i].position.y) - gd.player.position.y, 2)));
+
+				if (distanceBetweenCircles <= gd.player.colliderRadius + gd.viruses[i].currentSize)
+				{
+					gd.viruses[i].isActive = false;
+					TakeDamage(gd.player);
 				}
 			}
 		}
