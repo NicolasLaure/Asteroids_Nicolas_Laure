@@ -35,6 +35,9 @@
     <ClCompile Include="src\GameManagement\CollisionManager.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
+    <ClCompile Include="src\Objects\UI.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -89,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="src\GameManagement\CollisionManager.h">
       <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\UI.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

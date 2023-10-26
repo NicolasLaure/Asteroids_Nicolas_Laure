@@ -4,11 +4,11 @@
 
 namespace asteroids
 {
-
 	const float PLAYER_TEXTURE_WIDTH = 28;
 	const float PLAYER_TEXTURE_HEIGHT = 30;
 	struct Player
 	{
+		int lives{ 3 };
 		Vector2 position{};
 		Vector2 dir{};
 		Vector2 velocity{};
@@ -36,4 +36,6 @@ namespace asteroids
 
 	void RotatePlayer(Player& player, Vector2 mousePos);
 	void ResetPlayer(Player& player);
+
+	void TakeDamage(Player& player);
 }

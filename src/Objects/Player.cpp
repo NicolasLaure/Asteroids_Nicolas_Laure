@@ -146,4 +146,10 @@ namespace asteroids
 			}
 		}
 	}
+
+	void TakeDamage(Player& player)
+	{
+		player.lives--;
+	}
+
 }

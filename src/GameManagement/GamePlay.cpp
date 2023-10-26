@@ -7,6 +7,7 @@
 #include "GameManagement/GameData.h"
 #include "GameManagement/ScreenManager.h"
 #include "GameManagement/CollisionManager.h"
+#include "Objects/UI.h"
 
 using namespace std;
 
@@ -89,6 +90,8 @@ namespace asteroids
 		BeginDrawing();
 		ClearBackground(BLACK);
 		PlayerDraw(gd.player);
+
+		UIDraw(gd.player.lives);
 
 		VirusesDraw(gd.viruses, gd.VIRUSES_QTY);
 		BloodCellsDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);

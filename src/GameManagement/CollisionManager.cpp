@@ -14,7 +14,7 @@ namespace asteroids
 					if (gd.bloodCells[j].isActive)
 					{
 
-						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.bloodCells[j].position.x - bulletPosition.x), 2) + pow(static_cast<double>(gd.bloodCells[j].position.y - bulletPosition.y), 2)));
+						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.bloodCells[j].position.x) - bulletPosition.x, 2) + pow(static_cast<double>(gd.bloodCells[j].position.y) - bulletPosition.y, 2)));
 
 						if (distanceBetweenCircles <= gd.player.bullets[i].size + gd.bloodCells[j].size)
 						{
