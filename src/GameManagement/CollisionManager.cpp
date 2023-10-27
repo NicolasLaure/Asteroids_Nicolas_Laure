@@ -18,12 +18,48 @@ namespace asteroids
 
 						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.bloodCells[j].position.x) - bulletPosition.x, 2) + pow(static_cast<double>(gd.bloodCells[j].position.y) - bulletPosition.y, 2)));
 
-						if (distanceBetweenCircles <= gd.player.bullets[i].size + gd.bloodCells[j].size)
+						if (distanceBetweenCircles <= gd.player.bullets[i].size + gd.bloodCells[j].currentSize)
 						{
 							gd.player.bullets[i].isActive = false;
-							BloodCellDestroy(gd.bloodCells[j]);
 							PatientTakeDamage(gd.patient, gd.isGameOver);
 							
+							if (gd.bloodCells[j].phase == 1)
+							{
+								gd.bloodCells[j].phase = 2;
+								gd.bloodCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
+								gd.bloodCells[j].currentSize = gd.bloodCells[j].smallSize;
+								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+								{
+									if (!gd.bloodCells[k].isActive)
+									{
+										gd.bloodCells[k].isActive = true;
+										gd.bloodCells[k].position = gd.bloodCells[j].position;
+										gd.bloodCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+										gd.bloodCells[k].currentSize = gd.bloodCells[j].currentSize;
+										gd.bloodCells[k].phase = 2;
+										break;
+									}
+								}
+							}
+							else if (gd.bloodCells[j].phase == 2)
+							{
+								gd.bloodCells[j].phase = 3;
+								gd.bloodCells[j].currentSize = gd.bloodCells[j].miniSize;
+								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+								{
+									if (!gd.bloodCells[k].isActive)
+									{
+										gd.bloodCells[k].isActive = true;
+										gd.bloodCells[k].position = gd.bloodCells[j].position;
+										gd.bloodCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+										gd.bloodCells[k].currentSize = gd.bloodCells[j].currentSize;
+										gd.bloodCells[k].phase = 3;
+										break;
+									}
+								}
+							}
+							else
+								BloodCellDestroy(gd.bloodCells[j]);
 						}
 					}
 				}

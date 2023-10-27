@@ -22,7 +22,7 @@ namespace asteroids
 		float screenWidth = static_cast<float>(GetScreenWidth());
 		float screenHeight = static_cast<float>(GetScreenHeight());
 
-		if (timer > BLOODCELLS_SPAWN_RATE && activeBloodCells < bloodCellsQty)
+		if (timer > BLOODCELLS_SPAWN_RATE && activeBloodCells < bloodCellsQty / 4)
 		{
 			timer = 0;
 			for (int i = 0; i < bloodCellsQty; i++)
@@ -36,12 +36,12 @@ namespace asteroids
 					{
 						if (GetRandomValue(0, 1) == 0)
 						{
-							posX = 0 - bloodCells->size;
+							posX = 0 - bloodCells->currentSize;
 							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
 						}
 						else
 						{
-							posX = screenHeight + bloodCells->size;
+							posX = screenHeight + bloodCells->currentSize;
 							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
 						}
 					}
@@ -50,12 +50,12 @@ namespace asteroids
 						if (GetRandomValue(0, 1) == 0)
 						{
 							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
-							posY = 0 - bloodCells->size;
+							posY = 0 - bloodCells->currentSize;
 						}
 						else
 						{
 							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
-							posY = screenHeight + bloodCells->size;
+							posY = screenHeight + bloodCells->currentSize;
 						}
 					}
 					bloodCells[i].position = { posX, posY };
@@ -97,7 +97,7 @@ namespace asteroids
 		for (int i = 0; i < bloodCellsQty; i++)
 		{
 			if (bloodCells[i].isActive)
-				DrawCircle(static_cast<int>(bloodCells[i].position.x), static_cast<int>(bloodCells[i].position.y), bloodCells[i].size, RED);
+				DrawCircle(static_cast<int>(bloodCells[i].position.x), static_cast<int>(bloodCells[i].position.y), bloodCells[i].currentSize, RED);
 		}
 	}
 
@@ -106,7 +106,7 @@ namespace asteroids
 		for (int i = 0; i < bloodCellsQty; i++)
 		{
 			if (bloodCells[i].isActive)
-				DrawCircleLines(static_cast<int>(bloodCells[i].position.x), static_cast<int>(bloodCells[i].position.y), bloodCells[i].size, GREEN);
+				DrawCircleLines(static_cast<int>(bloodCells[i].position.x), static_cast<int>(bloodCells[i].position.y), bloodCells[i].currentSize, GREEN);
 		}
 	}
 

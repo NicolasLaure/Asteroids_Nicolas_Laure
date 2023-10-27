@@ -21,7 +21,7 @@ namespace asteroids
 		static const int WHITECELLS_QTY = 80;
 		WhiteCell whiteCells[WHITECELLS_QTY] = {};
 		
-		static const int BLOOD_CELLS_QTY = 50;
+		static const int BLOOD_CELLS_QTY = 80;
 		BloodCell bloodCells[BLOOD_CELLS_QTY] = {};
 
 		bool isGameOver = false;
