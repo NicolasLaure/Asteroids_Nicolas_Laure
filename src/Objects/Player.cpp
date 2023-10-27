@@ -60,6 +60,7 @@ namespace asteroids
 	void ResetPlayer(Player& player)
 	{
 		player.position = { static_cast<float>(GetScreenWidth()) / 2 - player.size / 2, static_cast<float>(GetScreenHeight()) / 2 - player.size / 2 };
+		player.lives = player.maxLives;
 	}
 
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight)

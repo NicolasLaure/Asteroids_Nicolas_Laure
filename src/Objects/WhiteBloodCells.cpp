@@ -2,22 +2,18 @@
 
 namespace asteroids
 {
-
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight);
-
-	void WhiteCellsStart(WhiteCell whiteCells[], int whiteCellsQty)
-	{
-		for (int i = 0; i < whiteCellsQty; i++)
-		{
-			whiteCells[i].isActive = false;
-		}
-	}
 
 	static const float WHITECELL_SPAWN_RATE = 5.0f;
 	static float timer;
 	int activeWhiteCells = 0;
 
-	void WhiteCellsUpdate(WhiteCell whiteCells[], int whiteCellsQty)
+	void WhiteCellStart(WhiteCell& whiteCell)
+	{
+		whiteCell.isActive = false;
+	}
+
+	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
 		float screenHeight = static_cast<float>(GetScreenHeight());
@@ -84,32 +80,30 @@ namespace asteroids
 		else
 			timer += GetFrameTime();
 
-		for (int i = 0; i < whiteCellsQty; i++)
+
+	}
+
+	void WhiteCellUpdate(WhiteCell& whiteCell)
+	{
+		float screenWidth = static_cast<float>(GetScreenWidth());
+		float screenHeight = static_cast<float>(GetScreenHeight());
+		if (whiteCell.isActive)
 		{
-			if (whiteCells[i].isActive)
-			{
-				whiteCells[i].position = Vector2Add(whiteCells[i].position, Vector2Scale(whiteCells[i].dir, whiteCells[i].speed * GetFrameTime()));
-				VirusScreenBoundsCollision(whiteCells[i], screenWidth, screenHeight);
-			}
+			whiteCell.position = Vector2Add(whiteCell.position, Vector2Scale(whiteCell.dir, whiteCell.speed * GetFrameTime()));
+			VirusScreenBoundsCollision(whiteCell, screenWidth, screenHeight);
 		}
 	}
 
-	void WhiteCellsDraw(WhiteCell whiteCells[], int whiteCellsQty)
+	void WhiteCellDraw(WhiteCell& whiteCell)
 	{
-		for (int i = 0; i < whiteCellsQty; i++)
-		{
-			if (whiteCells[i].isActive)
-				DrawCircle(static_cast<int>(whiteCells[i].position.x), static_cast<int>(whiteCells[i].position.y), whiteCells[i].currentSize, WHITE);
-		}
+		if (whiteCell.isActive)
+			DrawCircle(static_cast<int>(whiteCell.position.x), static_cast<int>(whiteCell.position.y), whiteCell.currentSize, WHITE);
 	}
 
-	void WhiteCellsColliderDraw(WhiteCell whiteCells[], int whiteCellsQty)
+	void WhiteCellColliderDraw(WhiteCell& whiteCell)
 	{
-		for (int i = 0; i < whiteCellsQty; i++)
-		{
-			if (whiteCells[i].isActive)
-				DrawCircleLines(static_cast<int>(whiteCells[i].position.x), static_cast<int>(whiteCells[i].position.y), whiteCells[i].currentSize, GREEN);
-		}
+		if (whiteCell.isActive)
+			DrawCircleLines(static_cast<int>(whiteCell.position.x), static_cast<int>(whiteCell.position.y), whiteCell.currentSize, GREEN);
 	}
 
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight)

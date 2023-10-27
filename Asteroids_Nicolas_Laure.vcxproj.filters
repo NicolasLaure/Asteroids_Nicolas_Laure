@@ -41,6 +41,9 @@
     <ClCompile Include="src\Objects\Patient.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManagement\AsteroidsHandler.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="src\Objects\Patient.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\AsteroidsHandler.h">
+      <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

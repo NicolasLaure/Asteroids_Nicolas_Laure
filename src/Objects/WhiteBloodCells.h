@@ -19,8 +19,9 @@ namespace asteroids
 		float miniSize{ 7.5f };
 	};
 
-	void WhiteCellsStart(WhiteCell whiteCells[], int whiteCellsQty);
-	void WhiteCellsUpdate(WhiteCell whiteCells[], int whiteCellsQty);
-	void WhiteCellsDraw(WhiteCell whiteCells[], int whiteCellsQty);
-	void WhiteCellsColliderDraw(WhiteCell whiteCells[], int whiteCellsQty);
+	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty);
+	void WhiteCellStart(WhiteCell& whiteCell);
+	void WhiteCellUpdate(WhiteCell& whiteCell);
+	void WhiteCellDraw(WhiteCell& whiteCell);
+	void WhiteCellColliderDraw(WhiteCell& whiteCell);
 }

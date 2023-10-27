@@ -29,8 +29,6 @@ namespace asteroids
 
 		int score = 0;
 
-		int lives = 3;
-		int maxLives = 3;
 		bool hasWon = false;
 
 		int windowUpperLimit = 80;

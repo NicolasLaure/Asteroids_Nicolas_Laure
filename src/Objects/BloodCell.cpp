@@ -5,19 +5,16 @@ namespace asteroids
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight);
 
 
-	void BloodCellsStart(BloodCell bloodCells[], int bloodCellsQty)
+	void BloodCellStart(BloodCell& bloodCell)
 	{
-		for (int i = 0; i < bloodCellsQty; i++)
-		{
-			bloodCells[i].isActive = false;
-		}
+		bloodCell.isActive = false;
 	}
 
 	static const float BLOODCELLS_SPAWN_RATE = 3.0f;
 	static float timer;
 	int activeBloodCells = 0;
 
-	void BloodCellsUpdate(BloodCell bloodCells[], int bloodCellsQty)
+	void BloodCellsSpawner(BloodCell bloodCells[], int bloodCellsQty)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
 		float screenHeight = static_cast<float>(GetScreenHeight());
@@ -65,7 +62,7 @@ namespace asteroids
 					do
 					{
 						dirX = static_cast<float>(GetRandomValue(-9, 9));
-					} while (dirX < 3  && dirX > -3);
+					} while (dirX < 3 && dirX > -3);
 					do
 					{
 						dirY = static_cast<float>(GetRandomValue(-9, 9));
@@ -81,33 +78,29 @@ namespace asteroids
 		}
 		else
 			timer += GetFrameTime();
+	}
 
-		for (int i = 0; i < bloodCellsQty; i++)
+	void BloodCellUpdate(BloodCell& bloodCell)
+	{
+		float screenWidth = static_cast<float>(GetScreenWidth());
+		float screenHeight = static_cast<float>(GetScreenHeight());
+		if (bloodCell.isActive)
 		{
-			if (bloodCells[i].isActive)
-			{
-				bloodCells[i].position = Vector2Add(bloodCells[i].position, Vector2Scale(bloodCells[i].dir, bloodCells[i].speed * GetFrameTime()));
-				BloodCellCheckScreenBoundsCollision(bloodCells[i], screenWidth, screenHeight);
-			}
+			bloodCell.position = Vector2Add(bloodCell.position, Vector2Scale(bloodCell.dir, bloodCell.speed * GetFrameTime()));
+			BloodCellCheckScreenBoundsCollision(bloodCell, screenWidth, screenHeight);
 		}
 	}
 
-	void BloodCellsDraw(BloodCell bloodCells[], int bloodCellsQty)
+	void BloodCellDraw(BloodCell& bloodCell)
 	{
-		for (int i = 0; i < bloodCellsQty; i++)
-		{
-			if (bloodCells[i].isActive)
-				DrawCircle(static_cast<int>(bloodCells[i].position.x), static_cast<int>(bloodCells[i].position.y), bloodCells[i].currentSize, RED);
-		}
+		if (bloodCell.isActive)
+			DrawCircle(static_cast<int>(bloodCell.position.x), static_cast<int>(bloodCell.position.y), bloodCell.currentSize, RED);
 	}
 
-	void BloodCellsColliderDraw(BloodCell bloodCells[], int bloodCellsQty)
+	void BloodCellColliderDraw(BloodCell& bloodCell)
 	{
-		for (int i = 0; i < bloodCellsQty; i++)
-		{
-			if (bloodCells[i].isActive)
-				DrawCircleLines(static_cast<int>(bloodCells[i].position.x), static_cast<int>(bloodCells[i].position.y), bloodCells[i].currentSize, GREEN);
-		}
+		if (bloodCell.isActive)
+			DrawCircleLines(static_cast<int>(bloodCell.position.x), static_cast<int>(bloodCell.position.y), bloodCell.currentSize, GREEN);
 	}
 
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight)

@@ -7,6 +7,7 @@
 #include "GameManagement/GameData.h"
 #include "GameManagement/ScreenManager.h"
 #include "GameManagement/CollisionManager.h"
+#include "GameManagement/AsteroidsHandler.h"
 #include "Objects/UI.h"
 
 using namespace std;
@@ -33,7 +34,7 @@ namespace asteroids
 			gd.justRestarted = false;
 		}
 
-		if (gd.isGameOver)
+		if (gd.isGameOver || gd.hasWon)
 			gd.isPaused = true;
 		if (!gd.isPaused)
 		{
@@ -54,6 +55,7 @@ namespace asteroids
 		PlayerStart(gd.player);
 
 		BulletsStart(gd.player.bullets, gd.player.BULLETS_QTY);
+		AsteroidsStart(gd);
 	}
 
 	void GameUpdate()
@@ -73,8 +75,7 @@ namespace asteroids
 				activeBullets++;
 			}
 		}
-		BloodCellsUpdate(gd.bloodCells, gd.BLOOD_CELLS_QTY);
-		WhiteCellsUpdate(gd.whiteCells, gd.WHITECELLS_QTY);
+		AsteroidsUpdate(gd);
 
 		CheckCollisions(gd);
 	}
@@ -87,8 +88,7 @@ namespace asteroids
 
 		UIDraw(gd);
 
-		WhiteCellsDraw(gd.whiteCells, gd.WHITECELLS_QTY);
-		BloodCellsDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
+		AsteroidsDraw(gd);
 		for (Bullet& bullet : gd.player.bullets)
 		{
 			if (bullet.isActive)
@@ -97,8 +97,7 @@ namespace asteroids
 
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);
-		WhiteCellsColliderDraw(gd.whiteCells, gd.WHITECELLS_QTY);
-		BloodCellsColliderDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
+		AsteroidsDebugDraw(gd);
 		for (Bullet& bullet : gd.player.bullets)
 		{
 			if (bullet.isActive)
@@ -202,7 +201,6 @@ namespace asteroids
 	{
 		gd.score = 0;
 		gd.isGameOver = false;
-		gd.lives = gd.maxLives;
 		gd.hasWon = false;
 		gd.isPaused = true;
 		gd.areRulesBeingShown = true;

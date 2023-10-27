@@ -9,6 +9,7 @@ namespace asteroids
 	struct Player
 	{
 		int lives{ 3 };
+		int maxLives{ 3 };
 		Vector2 position{};
 		Vector2 dir{};
 		Vector2 velocity{};

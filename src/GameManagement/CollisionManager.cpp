@@ -21,7 +21,7 @@ namespace asteroids
 						if (distanceBetweenCircles <= gd.player.bullets[i].size + gd.bloodCells[j].currentSize)
 						{
 							gd.player.bullets[i].isActive = false;
-							PatientTakeDamage(gd.patient, gd.isGameOver);
+							PatientTakeDamage(gd.patient, gd.hasWon);
 							
 							if (gd.bloodCells[j].phase == 1)
 							{
