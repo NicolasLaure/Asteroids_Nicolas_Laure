@@ -2,10 +2,11 @@
 
 #include "Objects/Player.h"
 #include "Objects/BloodCell.h"
-#include "Objects/Virus.h"
+#include "Objects/WhiteBloodCells.h"
 #include "Objects/Bullet.h"
 #include "Objects/Button.h"
 #include "GameManagement/Scenes.h"
+#include "Objects/Patient.h"
 
 namespace asteroids
 {
@@ -15,10 +16,12 @@ namespace asteroids
 		bool isPaused = false;
 		Player player{};
 
-		static const int VIRUSES_QTY = 80;
-		Virus viruses[VIRUSES_QTY] = {};
+		Patient patient{};
 
-		static const int BLOOD_CELLS_QTY = 20;
+		static const int WHITECELLS_QTY = 80;
+		WhiteCell whiteCells[WHITECELLS_QTY] = {};
+		
+		static const int BLOOD_CELLS_QTY = 50;
 		BloodCell bloodCells[BLOOD_CELLS_QTY] = {};
 
 		bool isGameOver = false;

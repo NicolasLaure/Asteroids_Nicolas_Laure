@@ -19,4 +19,5 @@ namespace asteroids
 	void BloodCellsUpdate(BloodCell bloodCells[], int bloodCellsQty);
 	void BloodCellsDraw(BloodCell bloodCells[], int bloodCellsQty);
 	void BloodCellsColliderDraw(BloodCell bloodCells[], int bloodCellsQty);
+	void BloodCellDestroy(BloodCell& bloodCell);
 }

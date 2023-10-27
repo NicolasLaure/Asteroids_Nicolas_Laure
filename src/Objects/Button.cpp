@@ -13,7 +13,7 @@ namespace asteroids
 			&& mousePos.y < button.buttonRect.position.y + button.buttonRect.height)
 		{
 			button.currentTextColor = GRAY;
-			if (IsMouseButtonPressed(0))
+			if (IsMouseButtonDown(0))
 			{
 				button.currentTextColor = DARKGRAY;
 			}
@@ -39,7 +39,7 @@ namespace asteroids
 			button.currentTextColor = GRAY;
 
 			//mouse down
-			if (IsMouseButtonPressed(0))
+			if (IsMouseButtonDown(0))
 			{
 				button.currentTextColor = DARKGRAY;
 			}

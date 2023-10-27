@@ -1,6 +1,10 @@
 #pragma once
 #include "GameManagement/Utilities.h"
 
+#include "GameManagement/GameData.h"
 
-void UIDraw(int playerLives);
+namespace asteroids
+{
+	void UIDraw(GameData& gd);
+}
 

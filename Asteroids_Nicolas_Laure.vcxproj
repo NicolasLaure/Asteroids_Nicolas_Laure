@@ -172,9 +172,10 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     <ClCompile Include="src\Objects\BloodCell.cpp" />
     <ClCompile Include="src\Objects\Bullet.cpp" />
     <ClCompile Include="src\Objects\Button.cpp" />
+    <ClCompile Include="src\Objects\Patient.cpp" />
     <ClCompile Include="src\Objects\Player.cpp" />
     <ClCompile Include="src\Objects\UI.cpp" />
-    <ClCompile Include="src\Objects\Virus.cpp" />
+    <ClCompile Include="src\Objects\WhiteBloodCells.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameManagement\CollisionManager.h" />
@@ -190,9 +191,10 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     <ClInclude Include="src\Objects\BloodCell.h" />
     <ClInclude Include="src\Objects\Bullet.h" />
     <ClInclude Include="src\Objects\Button.h" />
+    <ClInclude Include="src\Objects\Patient.h" />
     <ClInclude Include="src\Objects\Player.h" />
     <ClInclude Include="src\Objects\UI.h" />
-    <ClInclude Include="src\Objects\Virus.h" />
+    <ClInclude Include="src\Objects\WhiteBloodCells.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

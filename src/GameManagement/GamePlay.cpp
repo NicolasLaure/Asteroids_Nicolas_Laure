@@ -74,7 +74,7 @@ namespace asteroids
 			}
 		}
 		BloodCellsUpdate(gd.bloodCells, gd.BLOOD_CELLS_QTY);
-		VirusesUpdate(gd.viruses, gd.VIRUSES_QTY);
+		WhiteCellsUpdate(gd.whiteCells, gd.WHITECELLS_QTY);
 
 		CheckCollisions(gd);
 	}
@@ -85,9 +85,9 @@ namespace asteroids
 		ClearBackground(BLACK);
 		PlayerDraw(gd.player);
 
-		UIDraw(gd.player.lives);
+		UIDraw(gd);
 
-		VirusesDraw(gd.viruses, gd.VIRUSES_QTY);
+		WhiteCellsDraw(gd.whiteCells, gd.WHITECELLS_QTY);
 		BloodCellsDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 		for (Bullet& bullet : gd.player.bullets)
 		{
@@ -97,7 +97,7 @@ namespace asteroids
 
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);
-		VirusesColliderDraw(gd.viruses, gd.VIRUSES_QTY);
+		WhiteCellsColliderDraw(gd.whiteCells, gd.WHITECELLS_QTY);
 		BloodCellsColliderDraw(gd.bloodCells, gd.BLOOD_CELLS_QTY);
 		for (Bullet& bullet : gd.player.bullets)
 		{
@@ -206,8 +206,7 @@ namespace asteroids
 		gd.hasWon = false;
 		gd.isPaused = true;
 		gd.areRulesBeingShown = true;
-
+		gd.patient.patientHealth = 100;
 		ResetPlayer(gd.player);
 	}
-
 };

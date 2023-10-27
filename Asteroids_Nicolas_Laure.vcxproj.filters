@@ -26,7 +26,7 @@
     <ClCompile Include="src\Objects\BloodCell.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\Objects\Virus.cpp">
+    <ClCompile Include="src\Objects\WhiteBloodCells.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\Bullet.cpp">
@@ -36,6 +36,9 @@
       <Filter>GameManagement</Filter>
     </ClCompile>
     <ClCompile Include="src\Objects\UI.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Objects\Patient.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,7 +87,7 @@
     <ClInclude Include="src\Objects\BloodCell.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\Objects\Virus.h">
+    <ClInclude Include="src\Objects\WhiteBloodCells.h">
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\Bullet.h">
@@ -94,6 +97,9 @@
       <Filter>GameManagement</Filter>
     </ClInclude>
     <ClInclude Include="src\Objects\UI.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Objects\Patient.h">
       <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>

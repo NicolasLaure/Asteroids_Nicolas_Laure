@@ -13,17 +13,16 @@ namespace asteroids
 		}
 	}
 
-	static const float BLOODCELLS_SPAWN_RATE = 5.0f;
+	static const float BLOODCELLS_SPAWN_RATE = 3.0f;
 	static float timer;
 	int activeBloodCells = 0;
-
 
 	void BloodCellsUpdate(BloodCell bloodCells[], int bloodCellsQty)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
 		float screenHeight = static_cast<float>(GetScreenHeight());
 
-		if (timer > BLOODCELLS_SPAWN_RATE && activeBloodCells < bloodCellsQty / 2)
+		if (timer > BLOODCELLS_SPAWN_RATE && activeBloodCells < bloodCellsQty)
 		{
 			timer = 0;
 			for (int i = 0; i < bloodCellsQty; i++)
@@ -170,5 +169,13 @@ namespace asteroids
 					bloodCell.position.x = screenWidth - bloodCell.position.x;
 			}
 		}
+	}
+
+	void BloodCellDestroy(BloodCell& bloodCell)
+	{
+		if (bloodCell.isActive)
+			bloodCell.isActive = false;
+
+		activeBloodCells--;
 	}
 }

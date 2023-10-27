@@ -28,7 +28,6 @@ namespace asteroids
 	{
 		InitWindow(1024, 768, "Asteroids");
 		OnScreenSizeChange();
-
 		
 		SetExitKey(NULL);
 		sceneManager.prevScene = Scenes::GameQuit;

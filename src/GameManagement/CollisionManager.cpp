@@ -1,5 +1,7 @@
 #include "CollisionManager.h"
 
+#include "Objects/Patient.h"
+
 namespace asteroids
 {
 	void CheckCollisions(GameData& gd)
@@ -19,57 +21,59 @@ namespace asteroids
 						if (distanceBetweenCircles <= gd.player.bullets[i].size + gd.bloodCells[j].size)
 						{
 							gd.player.bullets[i].isActive = false;
-							gd.bloodCells[j].isActive = false;
+							BloodCellDestroy(gd.bloodCells[j]);
+							PatientTakeDamage(gd.patient, gd.isGameOver);
+							
 						}
 					}
 				}
-				for (int j = 0; j < gd.VIRUSES_QTY; j++)
+				for (int j = 0; j < gd.WHITECELLS_QTY; j++)
 				{
-					if (gd.viruses[j].isActive)
+					if (gd.whiteCells[j].isActive)
 					{
-						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.viruses[j].position.x) + gd.viruses[j].currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(gd.viruses[j].position.y) - bulletPosition.y, 2)));
+						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.whiteCells[j].position.x) + gd.whiteCells[j].currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(gd.whiteCells[j].position.y) - bulletPosition.y, 2)));
 
-						if (distanceBetweenCircles <= gd.viruses[j].currentSize + gd.player.bullets[i].size)
+						if (distanceBetweenCircles <= gd.whiteCells[j].currentSize + gd.player.bullets[i].size)
 						{
 							gd.player.bullets[i].isActive = false;
 
-							if (gd.viruses[j].phase == 1)
+							if (gd.whiteCells[j].phase == 1)
 							{
-								gd.viruses[j].phase = 2;
-								gd.viruses[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
-								gd.viruses[j].currentSize = gd.viruses[j].smallSize;
-								for (int k = 0; k < gd.VIRUSES_QTY; k++)
+								gd.whiteCells[j].phase = 2;
+								gd.whiteCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
+								gd.whiteCells[j].currentSize = gd.whiteCells[j].smallSize;
+								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
 								{
-									if (!gd.viruses[k].isActive)
+									if (!gd.whiteCells[k].isActive)
 									{
-										gd.viruses[k].isActive = true;
-										gd.viruses[k].position = gd.viruses[j].position;
-										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-										gd.viruses[k].currentSize = gd.viruses[j].currentSize;
-										gd.viruses[k].phase = 2;
+										gd.whiteCells[k].isActive = true;
+										gd.whiteCells[k].position = gd.whiteCells[j].position;
+										gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+										gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
+										gd.whiteCells[k].phase = 2;
 										break;
 									}
 								}
 							}
-							else if (gd.viruses[j].phase == 2)
+							else if (gd.whiteCells[j].phase == 2)
 							{
-								gd.viruses[j].phase = 3;
-								gd.viruses[j].currentSize = gd.viruses[j].miniSize;
-								for (int k = 0; k < gd.VIRUSES_QTY; k++)
+								gd.whiteCells[j].phase = 3;
+								gd.whiteCells[j].currentSize = gd.whiteCells[j].miniSize;
+								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
 								{
-									if (!gd.viruses[k].isActive)
+									if (!gd.whiteCells[k].isActive)
 									{
-										gd.viruses[k].isActive = true;
-										gd.viruses[k].position = gd.viruses[j].position;
-										gd.viruses[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-										gd.viruses[k].currentSize = gd.viruses[j].currentSize;
-										gd.viruses[k].phase = 3;
+										gd.whiteCells[k].isActive = true;
+										gd.whiteCells[k].position = gd.whiteCells[j].position;
+										gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+										gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
+										gd.whiteCells[k].phase = 3;
 										break;
 									}
 								}
 							}
 							else
-								gd.viruses[j].isActive = false;
+								gd.whiteCells[j].isActive = false;
 
 							break;
 						}
@@ -78,16 +82,16 @@ namespace asteroids
 			}
 		}
 
-		for (int i = 0; i < gd.VIRUSES_QTY; i++)
+		for (int i = 0; i < gd.WHITECELLS_QTY; i++)
 		{
-			if (gd.viruses[i].isActive)
+			if (gd.whiteCells[i].isActive)
 			{
 
-				float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.viruses[i].position.x) + gd.viruses[i].currentSize / 2 - gd.player.position.x, 2) + pow(static_cast<double>(gd.viruses[i].position.y) - gd.player.position.y, 2)));
+				float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.whiteCells[i].position.x) + gd.whiteCells[i].currentSize / 2 - gd.player.position.x, 2) + pow(static_cast<double>(gd.whiteCells[i].position.y) - gd.player.position.y, 2)));
 
-				if (distanceBetweenCircles <= gd.player.colliderRadius + gd.viruses[i].currentSize)
+				if (distanceBetweenCircles <= gd.player.colliderRadius + gd.whiteCells[i].currentSize)
 				{
-					gd.viruses[i].isActive = false;
+					gd.whiteCells[i].isActive = false;
 					TakeDamage(gd.player, gd.isGameOver);
 				}
 			}

@@ -23,7 +23,7 @@ void asteroids::BulletUpdate(Bullet& bullet)
 
 void asteroids::BulletDraw(Bullet& bullet)
 {
-	DrawCircle(static_cast<int>(bullet.position.x), static_cast<int>(bullet.position.y), bullet.size, WHITE);
+	DrawCircle(static_cast<int>(bullet.position.x), static_cast<int>(bullet.position.y), bullet.size, DARKGREEN);
 		//DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
 }
 
