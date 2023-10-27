@@ -30,15 +30,7 @@ namespace asteroids
 				{ player.maxVelocity, player.maxVelocity });
 		else
 		{
-			if (player.velocity.x < 0)
-				player.velocity.x += player.deceleration * GetFrameTime();
-			else if(player.velocity.x > 0)
-				player.velocity.x -= player.deceleration * GetFrameTime();
-
-			if (player.velocity.y < 0)
-				player.velocity.y += player.deceleration * GetFrameTime();
-			else if (player.velocity.y > 0)
-				player.velocity.y -= player.deceleration * GetFrameTime();
+			player.velocity = Vector2Add(player.velocity, Vector2Scale(Vector2Normalize(player.velocity) ,-1 * player.deceleration * GetFrameTime()));
 		}
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
