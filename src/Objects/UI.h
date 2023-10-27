@@ -2,9 +2,13 @@
 #include "GameManagement/Utilities.h"
 
 #include "GameManagement/GameData.h"
-
+#include "Objects/Button.h"
 namespace asteroids
 {
-	void UIDraw(GameData& gd);
+	void HudDraw(GameData& gd);
+
+	void RulesDraw();
+	void PausePanelDraw();
+	void GameOverPanelDraw();
 }
 

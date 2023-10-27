@@ -22,7 +22,7 @@ namespace asteroids
 						{
 							gd.player.bullets[i].isActive = false;
 							PatientTakeDamage(gd.patient, gd.hasWon);
-							
+
 							if (gd.bloodCells[j].phase == 1)
 							{
 								gd.bloodCells[j].phase = 2;
@@ -72,44 +72,77 @@ namespace asteroids
 						if (distanceBetweenCircles <= gd.whiteCells[j].currentSize + gd.player.bullets[i].size)
 						{
 							gd.player.bullets[i].isActive = false;
+							Vector2 newDir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
+							Vector2 newDirInverted = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
 
-							if (gd.whiteCells[j].phase == 1)
+							for (int k = 0; k < gd.WHITECELLS_QTY; k++)
 							{
-								gd.whiteCells[j].phase = 2;
-								gd.whiteCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
-								gd.whiteCells[j].currentSize = gd.whiteCells[j].smallSize;
-								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+								if (!gd.whiteCells[k].isActive)
 								{
-									if (!gd.whiteCells[k].isActive)
-									{
-										gd.whiteCells[k].isActive = true;
-										gd.whiteCells[k].position = gd.whiteCells[j].position;
-										gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-										gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
-										gd.whiteCells[k].phase = 2;
-										break;
-									}
+									gd.whiteCells[k].smallSize = gd.whiteCells[j].smallSize;
+									gd.whiteCells[k].miniSize = gd.whiteCells[j].miniSize;
+									gd.whiteCells[k].phase = gd.whiteCells[j].phase;
+									WhiteCellDivision(gd.whiteCells[j], gd.whiteCells[j].position, newDir);
+									WhiteCellDivision(gd.whiteCells[k], gd.whiteCells[j].position, newDirInverted);
+									/*gd.whiteCells[k].isActive = true;
+									gd.whiteCells[k].position = gd.whiteCells[j].position;
+									gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+									gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
+									gd.whiteCells[k].speed = gd.whiteCells[k].baseSpeed * (gd.whiteCells[k].baseSpeed / gd.whiteCells[k].currentSize);
+									gd.whiteCells[k].phase = 2;*/
+									break;
 								}
 							}
-							else if (gd.whiteCells[j].phase == 2)
-							{
-								gd.whiteCells[j].phase = 3;
-								gd.whiteCells[j].currentSize = gd.whiteCells[j].miniSize;
-								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-								{
-									if (!gd.whiteCells[k].isActive)
-									{
-										gd.whiteCells[k].isActive = true;
-										gd.whiteCells[k].position = gd.whiteCells[j].position;
-										gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-										gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
-										gd.whiteCells[k].phase = 3;
-										break;
-									}
-								}
-							}
-							else
-								gd.whiteCells[j].isActive = false;
+							//if (gd.whiteCells[j].phase == 1)
+							//{
+							//	WhiteCellDivision(gd.whiteCells[j], gd.whiteCells[j].position, newDir);
+
+							//	/*gd.whiteCells[j].phase = 2;
+							//	gd.whiteCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
+							//	gd.whiteCells[j].currentSize = gd.whiteCells[j].smallSize;
+							//	gd.whiteCells[j].speed = gd.whiteCells[j].baseSpeed * (gd.whiteCells[j].baseSpeed / gd.whiteCells[j].currentSize);*/
+							//	for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+							//	{
+							//		if (!gd.whiteCells[k].isActive)
+							//		{
+							//			WhiteCellDivision(gd.whiteCells[k], gd.whiteCells[j].position, newDirInverted);
+							//			/*gd.whiteCells[k].isActive = true;
+							//			gd.whiteCells[k].position = gd.whiteCells[j].position;
+							//			gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+							//			gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
+							//			gd.whiteCells[k].speed = gd.whiteCells[k].baseSpeed * (gd.whiteCells[k].baseSpeed / gd.whiteCells[k].currentSize);
+							//			gd.whiteCells[k].phase = 2;*/
+							//			break;
+							//		}
+							//	}
+							//}
+							//else if (gd.whiteCells[j].phase == 2)
+							//{
+							//	WhiteCellDivision(gd.whiteCells[j], gd.whiteCells[j].position, newDir);
+
+							//	/*gd.whiteCells[j].phase = 3;
+							//	gd.whiteCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
+							//	gd.whiteCells[j].currentSize = gd.whiteCells[j].miniSize;
+							//	gd.whiteCells[j].speed = gd.whiteCells[j].baseSpeed * (gd.whiteCells[j].baseSpeed / gd.whiteCells[j].currentSize);*/
+							//	for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+							//	{
+							//		if (!gd.whiteCells[k].isActive)
+							//		{
+							//			WhiteCellDivision(gd.whiteCells[k], gd.whiteCells[j].position, newDirInverted);
+
+							//			/*gd.whiteCells[k].isActive = true;
+							//			gd.whiteCells[k].position = gd.whiteCells[j].position;
+							//			gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
+							//			gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
+							//			gd.whiteCells[i].speed = -1.25f * gd.whiteCells[i].currentSize + gd.whiteCells[i].baseSpeed;
+
+							//			gd.whiteCells[k].phase = 3;*/
+							//			break;
+							//		}
+							//	}
+							//}
+							//else
+							//	gd.whiteCells[j].isActive = false;
 
 							break;
 						}

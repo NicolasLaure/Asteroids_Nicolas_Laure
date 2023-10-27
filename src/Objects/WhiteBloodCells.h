@@ -11,6 +11,7 @@ namespace asteroids
 		Vector2 position;
 		Vector2 dir;
 		float speed{ 100 };
+		float baseSpeed{ 100 };
 
 		int phase{ 1 };
 		float currentSize{ 20 };
@@ -24,4 +25,5 @@ namespace asteroids
 	void WhiteCellUpdate(WhiteCell& whiteCell);
 	void WhiteCellDraw(WhiteCell& whiteCell);
 	void WhiteCellColliderDraw(WhiteCell& whiteCell);
+	void WhiteCellDivision(WhiteCell& whiteCell, Vector2 position, Vector2 dir);
 }

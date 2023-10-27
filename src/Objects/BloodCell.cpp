@@ -8,6 +8,8 @@ namespace asteroids
 	void BloodCellStart(BloodCell& bloodCell)
 	{
 		bloodCell.isActive = false;
+		bloodCell.normalSize = 60;
+		bloodCell.currentSize = bloodCell.normalSize;
 	}
 
 	static const float BLOODCELLS_SPAWN_RATE = 3.0f;

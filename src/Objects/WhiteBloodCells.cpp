@@ -3,6 +3,7 @@
 namespace asteroids
 {
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight);
+	void WhiteCellDestroy(WhiteCell& whiteCell);
 
 	static const float WHITECELL_SPAWN_RATE = 5.0f;
 	static float timer;
@@ -27,7 +28,13 @@ namespace asteroids
 				{
 					whiteCells[i].isActive = true;
 					whiteCells[i].phase = 1;
+
+					whiteCells[i].normalSize = static_cast<float>(GetRandomValue(15, 70));
+					whiteCells[i].smallSize = whiteCells[i].normalSize / 1.5f;
+					whiteCells[i].miniSize = whiteCells[i].normalSize / 3.0f;
 					whiteCells[i].currentSize = whiteCells[i].normalSize;
+					whiteCells[i].speed = -1.25f * whiteCells[i].currentSize + whiteCells[i].baseSpeed;
+
 					float posX;
 					float posY;
 					if (GetRandomValue(0, 1) == 0)
@@ -165,5 +172,34 @@ namespace asteroids
 					whiteCell.position.x = screenWidth - whiteCell.position.x;
 			}
 		}
+	}
+
+	void WhiteCellDivision(WhiteCell& whiteCell, Vector2 position, Vector2 dir)
+	{
+		if (whiteCell.phase == 1)
+		{
+			whiteCell.phase = 2;
+			whiteCell.currentSize = whiteCell.smallSize;
+		}
+		else if (whiteCell.phase == 2)
+		{
+			whiteCell.phase = 3;
+			whiteCell.currentSize = whiteCell.miniSize;
+		}
+		else
+			WhiteCellDestroy(whiteCell);
+
+		whiteCell.isActive = true;
+		whiteCell.position = position;
+		whiteCell.dir = dir;
+		whiteCell.speed = -1.25f * whiteCell.currentSize + whiteCell.baseSpeed;
+	}
+
+	void WhiteCellDestroy(WhiteCell& whiteCell)
+	{
+		if (whiteCell.isActive)
+			whiteCell.isActive = false;
+
+		activeWhiteCells--;
 	}
 }
