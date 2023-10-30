@@ -2,6 +2,7 @@
 
 #include "GameManagement/TexturesManager.h"
 #include "GameManagement/ScreenManager.h"
+#include "GameManagement/AudioManager.h"
 
 namespace asteroids
 {
@@ -15,6 +16,7 @@ namespace asteroids
 		player.size = 36;
 		player.size *= GetScreenScale();
 		player.colliderRadius = player.size / 2 * 0.7f;
+		player.isImmortal = false;
 	}
 
 	void PlayerUpdate(Player& player)
@@ -31,7 +33,7 @@ namespace asteroids
 				{ player.maxVelocity, player.maxVelocity });
 		else
 		{
-			player.velocity = Vector2Add(player.velocity, Vector2Scale(Vector2Normalize(player.velocity) ,-1 * player.deceleration * GetFrameTime()));
+			player.velocity = Vector2Add(player.velocity, Vector2Scale(Vector2Normalize(player.velocity), -1 * player.deceleration * GetFrameTime()));
 		}
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
@@ -40,10 +42,24 @@ namespace asteroids
 		{
 			Shoot(player);
 		}
+
+		if (player.isImmortal)
+			player.immortalityTimer += GetFrameTime();
+
+		if (player.immortalityTimer >= player.immortalityDuration)
+		{
+			player.isImmortal = false;
+			player.immortalityTimer = 0;
+		}
 	}
 
 	void PlayerDraw(Player& player)
 	{
+		if (player.isImmortal)
+		{
+			if (static_cast<int>((player.immortalityTimer * 10)) % 2 == 0)
+				return;
+		}
 		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
 	}
 
@@ -62,6 +78,7 @@ namespace asteroids
 	{
 		player.position = { static_cast<float>(GetScreenWidth()) / 2 - player.size / 2, static_cast<float>(GetScreenHeight()) / 2 - player.size / 2 };
 		player.lives = player.maxLives;
+		player.velocity = { 0,0 };
 	}
 
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight)
@@ -145,6 +162,10 @@ namespace asteroids
 		player.lives--;
 		if (player.lives <= 0)
 			isGameOver = true;
+
+		PlaySound(GetSound(SoundIdentifier::PlayerReceiveDamage));
+
+		player.isImmortal = true;
 	}
 
 }

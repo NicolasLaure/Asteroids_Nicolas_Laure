@@ -17,6 +17,10 @@ namespace asteroids
 		float maxVelocity{1500.0f};
 		float friction{20.0f};
 
+		bool isImmortal{ false };
+		float immortalityDuration{1.0f};
+		float immortalityTimer;
+
 		float acceleration{ 500.0f };
 		float deceleration{ 100.0f };
 		float angle{};

@@ -3,7 +3,6 @@
 namespace asteroids
 {
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight);
-	void WhiteCellDestroy(WhiteCell& whiteCell);
 
 	static const float WHITECELL_SPAWN_RATE = 5.0f;
 	static float timer;

@@ -90,7 +90,6 @@ namespace asteroids
 	{
 		BeginDrawing();
 		ClearBackground(BLACK);
-		PlayerDraw(gd.player);
 
 
 		AsteroidsDraw(gd);
@@ -99,6 +98,7 @@ namespace asteroids
 			if (bullet.isActive)
 				BulletDraw(bullet);
 		}
+		PlayerDraw(gd.player);
 
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);
@@ -176,6 +176,7 @@ namespace asteroids
 		gd.isPaused = true;
 		gd.areRulesBeingShown = true;
 		gd.patient.patientHealth = 100;
+		AsteroidsStart(gd);
 		ResetPlayer(gd.player);
 	}
 };

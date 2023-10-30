@@ -108,8 +108,11 @@ namespace asteroids
 
 		if (distanceBetweenCircles <= player.colliderRadius + whiteCell.currentSize)
 		{
-			whiteCell.isActive = false;
-			TakeDamage(player, isGameOver);
+			if (!player.isImmortal)
+			{
+				WhiteCellDestroy(whiteCell);
+				TakeDamage(player, isGameOver);
+			}
 		}
 	}
 
@@ -119,9 +122,12 @@ namespace asteroids
 
 		if (distanceBetweenCircles <= gd.player.colliderRadius + bloodCell.currentSize)
 		{
-			bloodCell.isActive = false;
-			TakeDamage(gd.player, gd.isGameOver);
-			PatientTakeDamage(gd.patient, gd.hasWon);
+			if (!gd.player.isImmortal)
+			{
+				BloodCellDestroy(bloodCell);
+				TakeDamage(gd.player, gd.isGameOver);
+				PatientTakeDamage(gd.patient, gd.hasWon);
+			}
 		}
 	}
 }
