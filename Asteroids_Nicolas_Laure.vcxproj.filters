@@ -50,6 +50,9 @@
     <ClCompile Include="src\Objects\PowerUp.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManagement\AudioManager.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -116,6 +119,9 @@
     </ClInclude>
     <ClInclude Include="src\Objects\PowerUp.h">
       <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\AudioManager.h">
+      <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

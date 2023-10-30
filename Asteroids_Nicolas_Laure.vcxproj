@@ -163,6 +163,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\GameManagement\AsteroidsHandler.cpp" />
+    <ClCompile Include="src\GameManagement\AudioManager.cpp" />
     <ClCompile Include="src\GameManagement\CollisionManager.cpp" />
     <ClCompile Include="src\GameManagement\GameLoop.cpp" />
     <ClCompile Include="src\GameManagement\GamePlay.cpp" />
@@ -182,6 +183,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameManagement\AsteroidsHandler.h" />
+    <ClInclude Include="src\GameManagement\AudioManager.h" />
     <ClInclude Include="src\GameManagement\CollisionManager.h" />
     <ClInclude Include="src\GameManagement\GameData.h" />
     <ClInclude Include="src\GameManagement\GameLoop.h" />
