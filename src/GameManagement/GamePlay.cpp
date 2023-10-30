@@ -8,6 +8,7 @@
 #include "GameManagement/ScreenManager.h"
 #include "GameManagement/CollisionManager.h"
 #include "GameManagement/AsteroidsHandler.h"
+#include "GameManagement/AudioManager.h"
 #include "Objects/UI.h"
 
 using namespace std;
@@ -32,6 +33,9 @@ namespace asteroids
 		{
 			GameStart();
 			gd.justRestarted = false;
+
+			if (enteredNewScene)
+				PlayMusicStream(GetMusic(MusicIdentifier::GamePlayMusic));
 		}
 
 		if (gd.isGameOver || gd.hasWon)
@@ -78,6 +82,8 @@ namespace asteroids
 		AsteroidsUpdate(gd);
 
 		CheckCollisions(gd);
+
+		UpdateMusicStream(GetMusic(MusicIdentifier::GamePlayMusic));
 	}
 
 	void GameDraw()
