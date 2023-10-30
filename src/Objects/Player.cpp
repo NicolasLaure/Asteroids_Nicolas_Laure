@@ -12,8 +12,9 @@ namespace asteroids
 
 	void PlayerStart(Player& player)
 	{
+		player.size = 36;
 		player.size *= GetScreenScale();
-		player.colliderRadius = player.size / 2 * 0.75f;
+		player.colliderRadius = player.size / 2 * 0.7f;
 	}
 
 	void PlayerUpdate(Player& player)

@@ -176,6 +176,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     <ClCompile Include="src\Objects\Button.cpp" />
     <ClCompile Include="src\Objects\Patient.cpp" />
     <ClCompile Include="src\Objects\Player.cpp" />
+    <ClCompile Include="src\Objects\PowerUp.cpp" />
     <ClCompile Include="src\Objects\UI.cpp" />
     <ClCompile Include="src\Objects\WhiteBloodCells.cpp" />
   </ItemGroup>
@@ -196,6 +197,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     <ClInclude Include="src\Objects\Button.h" />
     <ClInclude Include="src\Objects\Patient.h" />
     <ClInclude Include="src\Objects\Player.h" />
+    <ClInclude Include="src\Objects\PowerUp.h" />
     <ClInclude Include="src\Objects\UI.h" />
     <ClInclude Include="src\Objects\WhiteBloodCells.h" />
   </ItemGroup>
