@@ -10,4 +10,7 @@ namespace asteroids
 		float height{};
 		float width{};
 	};
+
+	Vector2 GetRandomDirection();
+	Vector2 GetRandomPosition(float size);
 }

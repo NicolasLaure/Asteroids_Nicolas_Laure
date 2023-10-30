@@ -4,7 +4,6 @@ namespace asteroids
 {
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight);
 
-
 	void BloodCellStart(BloodCell& bloodCell)
 	{
 		bloodCell.isActive = false;
@@ -18,9 +17,6 @@ namespace asteroids
 
 	void BloodCellsSpawner(BloodCell bloodCells[], int bloodCellsQty)
 	{
-		float screenWidth = static_cast<float>(GetScreenWidth());
-		float screenHeight = static_cast<float>(GetScreenHeight());
-
 		if (timer > BLOODCELLS_SPAWN_RATE && activeBloodCells < bloodCellsQty / 4)
 		{
 			timer = 0;
@@ -29,51 +25,17 @@ namespace asteroids
 				if (!bloodCells[i].isActive)
 				{
 					bloodCells[i].isActive = true;
-					float posX;
-					float posY;
-					if (GetRandomValue(0, 1) == 0)
-					{
-						if (GetRandomValue(0, 1) == 0)
-						{
-							posX = 0 - bloodCells->currentSize;
-							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
-						}
-						else
-						{
-							posX = screenHeight + bloodCells->currentSize;
-							posY = static_cast<float>(GetRandomValue(0, static_cast<int>(screenHeight)));
-						}
-					}
-					else
-					{
-						if (GetRandomValue(0, 1) == 0)
-						{
-							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
-							posY = 0 - bloodCells->currentSize;
-						}
-						else
-						{
-							posX = static_cast<float>(GetRandomValue(0, static_cast<int>(screenWidth)));
-							posY = screenHeight + bloodCells->currentSize;
-						}
-					}
-					bloodCells[i].position = { posX, posY };
+					bloodCells[i].phase = 1;
 
-					float dirX;
-					float dirY;
-					do
-					{
-						dirX = static_cast<float>(GetRandomValue(-9, 9));
-					} while (dirX < 3 && dirX > -3);
-					do
-					{
-						dirY = static_cast<float>(GetRandomValue(-9, 9));
-					} while (dirY < 3 && dirY > -3);
-					dirX *= 0.1f;
-					dirY *= 0.1f;
+					bloodCells[i].normalSize = static_cast<float>(GetRandomValue(25, 70));
+					bloodCells[i].smallSize = bloodCells[i].normalSize / 1.5f;
+					bloodCells[i].miniSize = bloodCells[i].normalSize / 3.0f;
+					bloodCells[i].currentSize = bloodCells[i].normalSize;
+					bloodCells[i].speed = -bloodCells[i].speedMultiplier * bloodCells[i].currentSize + bloodCells[i].baseSpeed;
+					bloodCells[i].baseSpeed = bloodCells[i].speed;
 
-					bloodCells[i].dir = { dirX, dirY };
-					Vector2Normalize(bloodCells[i].dir);
+					bloodCells[i].position = GetRandomPosition(bloodCells[i].currentSize);
+					bloodCells[i].dir = GetRandomDirection();
 					break;
 				}
 			}
@@ -164,6 +126,28 @@ namespace asteroids
 					bloodCell.position.x = screenWidth - bloodCell.position.x;
 			}
 		}
+	}
+
+	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir)
+	{
+		bloodCell.isActive = true;
+		bloodCell.position = position;
+		bloodCell.dir = dir;
+
+		if (bloodCell.phase == 1)
+		{
+			bloodCell.phase = 2;
+			bloodCell.currentSize = bloodCell.smallSize;
+			bloodCell.speed = bloodCell.speedMultiplier * bloodCell.baseSpeed;
+		}
+		else if (bloodCell.phase == 2)
+		{
+			bloodCell.phase = 3;
+			bloodCell.currentSize = bloodCell.miniSize;
+			bloodCell.speed = bloodCell.secondPhaseSpeedMultiplier * bloodCell.baseSpeed;
+		}
+		else
+			BloodCellDestroy(bloodCell);
 	}
 
 	void BloodCellDestroy(BloodCell& bloodCell)

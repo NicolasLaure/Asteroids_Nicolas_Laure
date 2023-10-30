@@ -169,6 +169,7 @@ xcopy /s /e /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     <ClCompile Include="src\GameManagement\Menu.cpp" />
     <ClCompile Include="src\GameManagement\ScreenManager.cpp" />
     <ClCompile Include="src\GameManagement\TexturesManager.cpp" />
+    <ClCompile Include="src\GameManagement\Utilities.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Objects\BloodCell.cpp" />
     <ClCompile Include="src\Objects\Bullet.cpp" />

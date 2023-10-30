@@ -44,6 +44,9 @@
     <ClCompile Include="src\GameManagement\AsteroidsHandler.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManagement\Utilities.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">

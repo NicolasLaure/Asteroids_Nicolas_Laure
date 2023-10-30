@@ -11,13 +11,15 @@ namespace asteroids
 		Vector2 position;
 		Vector2 dir;
 		float speed{ 100 };
-		float baseSpeed{ 100 };
+		float baseSpeed{ 150 };
 
 		int phase{ 1 };
 		float currentSize{ 20 };
 		float normalSize{ 20 };
 		float smallSize{ 12.5f };
 		float miniSize{ 7.5f };
+		float speedMultiplier{ 1.3f };
+		float secondPhaseSpeedMultiplier{ 1.6f };
 	};
 
 	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty);

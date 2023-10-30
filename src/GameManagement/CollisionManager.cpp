@@ -4,166 +4,103 @@
 
 namespace asteroids
 {
+	void BulletBloodCellCollision(GameData& gd, BloodCell& bloodCell, Bullet& bullet);
+	void BulletWhiteCellCollision(GameData& gd, WhiteCell& whiteCell, Bullet& bullet);
+	void PlayerWhiteCellCollision(WhiteCell& whiteCell, Player& player, bool& isGameOver);
+
 	void CheckCollisions(GameData& gd)
 	{
 		for (int i = 0; i < gd.player.BULLETS_QTY; i++)
 		{
 			if (gd.player.bullets[i].isActive)
 			{
-				Vector2 bulletPosition = { gd.player.bullets[i].position.x + gd.player.bullets[i].size / 2, gd.player.bullets[i].position.y + gd.player.bullets[i].size / 2 };
 				for (int j = 0; j < gd.BLOOD_CELLS_QTY; j++)
 				{
 					if (gd.bloodCells[j].isActive)
-					{
-
-						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.bloodCells[j].position.x) - bulletPosition.x, 2) + pow(static_cast<double>(gd.bloodCells[j].position.y) - bulletPosition.y, 2)));
-
-						if (distanceBetweenCircles <= gd.player.bullets[i].size + gd.bloodCells[j].currentSize)
-						{
-							gd.player.bullets[i].isActive = false;
-							PatientTakeDamage(gd.patient, gd.hasWon);
-
-							if (gd.bloodCells[j].phase == 1)
-							{
-								gd.bloodCells[j].phase = 2;
-								gd.bloodCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
-								gd.bloodCells[j].currentSize = gd.bloodCells[j].smallSize;
-								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-								{
-									if (!gd.bloodCells[k].isActive)
-									{
-										gd.bloodCells[k].isActive = true;
-										gd.bloodCells[k].position = gd.bloodCells[j].position;
-										gd.bloodCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-										gd.bloodCells[k].currentSize = gd.bloodCells[j].currentSize;
-										gd.bloodCells[k].phase = 2;
-										break;
-									}
-								}
-							}
-							else if (gd.bloodCells[j].phase == 2)
-							{
-								gd.bloodCells[j].phase = 3;
-								gd.bloodCells[j].currentSize = gd.bloodCells[j].miniSize;
-								for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-								{
-									if (!gd.bloodCells[k].isActive)
-									{
-										gd.bloodCells[k].isActive = true;
-										gd.bloodCells[k].position = gd.bloodCells[j].position;
-										gd.bloodCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-										gd.bloodCells[k].currentSize = gd.bloodCells[j].currentSize;
-										gd.bloodCells[k].phase = 3;
-										break;
-									}
-								}
-							}
-							else
-								BloodCellDestroy(gd.bloodCells[j]);
-						}
-					}
+						BulletBloodCellCollision(gd, gd.bloodCells[j], gd.player.bullets[i]);
 				}
 				for (int j = 0; j < gd.WHITECELLS_QTY; j++)
 				{
 					if (gd.whiteCells[j].isActive)
-					{
-						float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.whiteCells[j].position.x) + gd.whiteCells[j].currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(gd.whiteCells[j].position.y) - bulletPosition.y, 2)));
-
-						if (distanceBetweenCircles <= gd.whiteCells[j].currentSize + gd.player.bullets[i].size)
-						{
-							gd.player.bullets[i].isActive = false;
-							Vector2 newDir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
-							Vector2 newDirInverted = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-
-							for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-							{
-								if (!gd.whiteCells[k].isActive)
-								{
-									gd.whiteCells[k].smallSize = gd.whiteCells[j].smallSize;
-									gd.whiteCells[k].miniSize = gd.whiteCells[j].miniSize;
-									gd.whiteCells[k].phase = gd.whiteCells[j].phase;
-									WhiteCellDivision(gd.whiteCells[j], gd.whiteCells[j].position, newDir);
-									WhiteCellDivision(gd.whiteCells[k], gd.whiteCells[j].position, newDirInverted);
-									/*gd.whiteCells[k].isActive = true;
-									gd.whiteCells[k].position = gd.whiteCells[j].position;
-									gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-									gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
-									gd.whiteCells[k].speed = gd.whiteCells[k].baseSpeed * (gd.whiteCells[k].baseSpeed / gd.whiteCells[k].currentSize);
-									gd.whiteCells[k].phase = 2;*/
-									break;
-								}
-							}
-							//if (gd.whiteCells[j].phase == 1)
-							//{
-							//	WhiteCellDivision(gd.whiteCells[j], gd.whiteCells[j].position, newDir);
-
-							//	/*gd.whiteCells[j].phase = 2;
-							//	gd.whiteCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
-							//	gd.whiteCells[j].currentSize = gd.whiteCells[j].smallSize;
-							//	gd.whiteCells[j].speed = gd.whiteCells[j].baseSpeed * (gd.whiteCells[j].baseSpeed / gd.whiteCells[j].currentSize);*/
-							//	for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-							//	{
-							//		if (!gd.whiteCells[k].isActive)
-							//		{
-							//			WhiteCellDivision(gd.whiteCells[k], gd.whiteCells[j].position, newDirInverted);
-							//			/*gd.whiteCells[k].isActive = true;
-							//			gd.whiteCells[k].position = gd.whiteCells[j].position;
-							//			gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-							//			gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
-							//			gd.whiteCells[k].speed = gd.whiteCells[k].baseSpeed * (gd.whiteCells[k].baseSpeed / gd.whiteCells[k].currentSize);
-							//			gd.whiteCells[k].phase = 2;*/
-							//			break;
-							//		}
-							//	}
-							//}
-							//else if (gd.whiteCells[j].phase == 2)
-							//{
-							//	WhiteCellDivision(gd.whiteCells[j], gd.whiteCells[j].position, newDir);
-
-							//	/*gd.whiteCells[j].phase = 3;
-							//	gd.whiteCells[j].dir = { gd.player.bullets[i].direction.y * -1, gd.player.bullets[i].direction.x };
-							//	gd.whiteCells[j].currentSize = gd.whiteCells[j].miniSize;
-							//	gd.whiteCells[j].speed = gd.whiteCells[j].baseSpeed * (gd.whiteCells[j].baseSpeed / gd.whiteCells[j].currentSize);*/
-							//	for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-							//	{
-							//		if (!gd.whiteCells[k].isActive)
-							//		{
-							//			WhiteCellDivision(gd.whiteCells[k], gd.whiteCells[j].position, newDirInverted);
-
-							//			/*gd.whiteCells[k].isActive = true;
-							//			gd.whiteCells[k].position = gd.whiteCells[j].position;
-							//			gd.whiteCells[k].dir = { gd.player.bullets[i].direction.y, gd.player.bullets[i].direction.x * -1 };
-							//			gd.whiteCells[k].currentSize = gd.whiteCells[j].currentSize;
-							//			gd.whiteCells[i].speed = -1.25f * gd.whiteCells[i].currentSize + gd.whiteCells[i].baseSpeed;
-
-							//			gd.whiteCells[k].phase = 3;*/
-							//			break;
-							//		}
-							//	}
-							//}
-							//else
-							//	gd.whiteCells[j].isActive = false;
-
-							break;
-						}
-					}
+						BulletWhiteCellCollision(gd, gd.whiteCells[j], gd.player.bullets[i]);
 				}
 			}
 		}
-
 		for (int i = 0; i < gd.WHITECELLS_QTY; i++)
 		{
 			if (gd.whiteCells[i].isActive)
 			{
+				PlayerWhiteCellCollision(gd.whiteCells[i], gd.player, gd.isGameOver);
+			}
+		}
+	}
 
-				float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(gd.whiteCells[i].position.x) + gd.whiteCells[i].currentSize / 2 - gd.player.position.x, 2) + pow(static_cast<double>(gd.whiteCells[i].position.y) - gd.player.position.y, 2)));
+	void BulletBloodCellCollision(GameData& gd, BloodCell& bloodCell, Bullet& bullet)
+	{
+		Vector2 bulletPosition = { bullet.position.x + bullet.size / 2, bullet.position.y + bullet.size / 2 };
 
-				if (distanceBetweenCircles <= gd.player.colliderRadius + gd.whiteCells[i].currentSize)
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(bloodCell.position.x) + bloodCell.currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(bloodCell.position.y) - bulletPosition.y, 2)));
+
+		if (distanceBetweenCircles <= bloodCell.currentSize + bullet.size)
+		{
+			bullet.isActive = false;
+			Vector2 newDir = { bullet.direction.y * -1, bullet.direction.x };
+			Vector2 newDirInverted = { bullet.direction.y, bullet.direction.x * -1 };
+
+			for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+			{
+				if (!gd.bloodCells[k].isActive)
 				{
-					gd.whiteCells[i].isActive = false;
-					TakeDamage(gd.player, gd.isGameOver);
+					gd.bloodCells[k].smallSize = bloodCell.smallSize;
+					gd.bloodCells[k].miniSize = bloodCell.miniSize;
+					gd.bloodCells[k].phase = bloodCell.phase;
+					gd.bloodCells[k].baseSpeed = bloodCell.baseSpeed;
+
+					BloodCellDivision(bloodCell, bloodCell.position, newDir);
+					BloodCellDivision(gd.bloodCells[k], bloodCell.position, newDirInverted);
+					break;
 				}
 			}
+		}
+	}
+
+	void BulletWhiteCellCollision(GameData& gd, WhiteCell& whiteCell, Bullet& bullet)
+	{
+		Vector2 bulletPosition = { bullet.position.x + bullet.size / 2, bullet.position.y + bullet.size / 2 };
+
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) + whiteCell.currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(whiteCell.position.y) - bulletPosition.y, 2)));
+
+		if (distanceBetweenCircles <= whiteCell.currentSize + bullet.size)
+		{
+			bullet.isActive = false;
+			Vector2 newDir = { bullet.direction.y * -1, bullet.direction.x };
+			Vector2 newDirInverted = { bullet.direction.y, bullet.direction.x * -1 };
+
+			for (int k = 0; k < gd.WHITECELLS_QTY; k++)
+			{
+				if (!gd.whiteCells[k].isActive)
+				{
+					gd.whiteCells[k].smallSize = whiteCell.smallSize;
+					gd.whiteCells[k].miniSize = whiteCell.miniSize;
+					gd.whiteCells[k].phase = whiteCell.phase;
+					gd.whiteCells[k].baseSpeed = whiteCell.baseSpeed;
+
+					WhiteCellDivision(whiteCell, whiteCell.position, newDir);
+					WhiteCellDivision(gd.whiteCells[k], whiteCell.position, newDirInverted);
+					break;
+				}
+			}
+		}
+	}
+
+	void PlayerWhiteCellCollision(WhiteCell& whiteCell, Player& player, bool& isGameOver)
+	{
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) + whiteCell.currentSize / 2 - player.position.x, 2) + pow(static_cast<double>(whiteCell.position.y) - player.position.y, 2)));
+
+		if (distanceBetweenCircles <= player.colliderRadius + whiteCell.currentSize)
+		{
+			whiteCell.isActive = false;
+			TakeDamage(player, isGameOver);
 		}
 	}
 }
