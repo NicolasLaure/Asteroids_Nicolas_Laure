@@ -1,5 +1,6 @@
 #include "GameManagement/Menu.h"
 
+#include "GameManagement/AudioManager.h"
 #include <iostream>
 
 namespace asteroids
@@ -22,6 +23,7 @@ namespace asteroids
 	{
 		Vector2 textSize = { 0,0 };
 
+		PlayMusicStream(GetMusic(MusicIdentifier::MenuMusic));
 		float windowLimitSpacing = 20;
 		textSize = MeasureTextEx(GetFontDefault(), menuData.creditsButton.text, static_cast<float>(menuData.creditsButton.fontSize), menuData.creditsButton.fontSize * 0.1f);
 		menuData.creditsButton.buttonRect = { {static_cast<float>(GetScreenWidth()) - MeasureText(menuData.credits, menuData.creditsSize) - 20, static_cast<float>(GetScreenHeight()) - menuData.creditsSize - 20}, textSize.y, textSize.x };
@@ -34,6 +36,7 @@ namespace asteroids
 	}
 	void MenuUpdate(Scenes& scene)
 	{
+		UpdateMusicStream(GetMusic(MusicIdentifier::MenuMusic));
 		CreditsButtonCollisionCheck(menuData.creditsButton);
 		for (Button& button : menuData.scenesButtons)
 		{

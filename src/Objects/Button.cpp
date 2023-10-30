@@ -1,5 +1,6 @@
 #include "Button.h"
 
+#include "GameManagement/AudioManager.h"
 namespace asteroids
 {
 
@@ -13,18 +14,30 @@ namespace asteroids
 			&& mousePos.y < button.buttonRect.position.y + button.buttonRect.height)
 		{
 			button.currentTextColor = GRAY;
-			if (IsMouseButtonDown(0))
+			if (IsMouseButtonPressed(0))
 			{
 				button.currentTextColor = DARKGRAY;
+				if (!IsSoundPlaying(GetSound(SoundIdentifier::ButtonClick)))
+					PlaySound(GetSound(SoundIdentifier::ButtonClick));
+				button.wasPressed = true;
 			}
 
 			if (IsMouseButtonReleased(0))
 			{
-				scene = button.sceneTo;
+				if (button.wasPressed)
+				{
+
+					if (!IsSoundPlaying(GetSound(SoundIdentifier::ButtonRelease)))
+						PlaySound(GetSound(SoundIdentifier::ButtonRelease));
+					scene = button.sceneTo;
+				}
 			}
 		}
 		else
+		{
 			button.currentTextColor = button.textColor;
+			button.wasPressed = false;
+		}
 	}
 
 	void CreditsButtonCollisionCheck(Button& button)
@@ -39,18 +52,29 @@ namespace asteroids
 			button.currentTextColor = GRAY;
 
 			//mouse down
-			if (IsMouseButtonDown(0))
+			if (IsMouseButtonPressed(0))
 			{
 				button.currentTextColor = DARKGRAY;
+				if (!IsSoundPlaying(GetSound(SoundIdentifier::ButtonClick)))
+					PlaySound(GetSound(SoundIdentifier::ButtonClick));
+				button.wasPressed = true;
 			}
 			//mouse release 
 			if (IsMouseButtonReleased(0))
 			{
-				OpenURL("https://nico-drake.itch.io/");
+				if (button.wasPressed)
+				{
+					OpenURL("https://nico-drake.itch.io/");
+					if (!IsSoundPlaying(GetSound(SoundIdentifier::ButtonRelease)))
+						PlaySound(GetSound(SoundIdentifier::ButtonRelease));
+				}
 			}
 		}
 		else
+		{
 			button.currentTextColor = button.textColor;
+			button.wasPressed = false;
+		}
 	}
 
 	void ResetButtonCollisionCheck(Button& button, bool& restartGame)

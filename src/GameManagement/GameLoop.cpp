@@ -7,9 +7,11 @@
 #include "GameManagement/Menu.h"
 #include "GameManagement/GamePlay.h"
 #include "GameManagement/TexturesManager.h"
+#include "GameManagement/AudioManager.h"
 #include "GameManagement/ScreenManager.h"
 
 using namespace std;
+
 namespace asteroids
 {
 	static SceneManager sceneManager;
@@ -21,6 +23,7 @@ namespace asteroids
 	{
 		Initialize();
 		GameLoop();
+		CloseAudioDevice();
 		CloseWindow();
 	}
 
@@ -28,10 +31,11 @@ namespace asteroids
 	{
 		InitWindow(1024, 768, "Asteroids");
 		OnScreenSizeChange();
-		
+		InitAudioDevice();
 		SetExitKey(NULL);
 		sceneManager.prevScene = Scenes::GameQuit;
 		SetTextures();
+		SetSounds();
 		SetRandomSeed(static_cast<unsigned int>(time(nullptr)));
 	}
 

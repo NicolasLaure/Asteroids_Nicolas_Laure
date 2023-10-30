@@ -15,6 +15,8 @@ namespace asteroids
 
 		float textHeightSpacerMultiplier = 2.25f;
 		float textPositionX = 15;
+
+		bool wasPressed{ false };
 	};
 
 	void CreditsButtonCollisionCheck(Button& button);

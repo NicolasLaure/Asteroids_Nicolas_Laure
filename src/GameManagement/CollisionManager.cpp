@@ -1,4 +1,4 @@
-#include "CollisionManager.h"
+#include "GameManagement/CollisionManager.h"
 
 #include "Objects/Patient.h"
 
