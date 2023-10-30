@@ -7,6 +7,7 @@ namespace asteroids
 	void BulletBloodCellCollision(GameData& gd, BloodCell& bloodCell, Bullet& bullet);
 	void BulletWhiteCellCollision(GameData& gd, WhiteCell& whiteCell, Bullet& bullet);
 	void PlayerWhiteCellCollision(WhiteCell& whiteCell, Player& player, bool& isGameOver);
+	void PlayerBloodCellCollision(GameData& gd, BloodCell& bloodCell);
 
 	void CheckCollisions(GameData& gd)
 	{
@@ -33,13 +34,20 @@ namespace asteroids
 				PlayerWhiteCellCollision(gd.whiteCells[i], gd.player, gd.isGameOver);
 			}
 		}
+		for (int i = 0; i < gd.BLOOD_CELLS_QTY; i++)
+		{
+			if (gd.bloodCells[i].isActive)
+			{
+				PlayerBloodCellCollision(gd, gd.bloodCells[i]);
+			}
+		}
 	}
 
 	void BulletBloodCellCollision(GameData& gd, BloodCell& bloodCell, Bullet& bullet)
 	{
 		Vector2 bulletPosition = { bullet.position.x + bullet.size / 2, bullet.position.y + bullet.size / 2 };
 
-		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(bloodCell.position.x) + bloodCell.currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(bloodCell.position.y) - bulletPosition.y, 2)));
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(bloodCell.position.x) - bulletPosition.x, 2) + pow(static_cast<double>(bloodCell.position.y) - bulletPosition.y, 2)));
 
 		if (distanceBetweenCircles <= bloodCell.currentSize + bullet.size)
 		{
@@ -61,6 +69,7 @@ namespace asteroids
 					break;
 				}
 			}
+			PatientTakeDamage(gd.patient, gd.hasWon);
 		}
 	}
 
@@ -68,7 +77,7 @@ namespace asteroids
 	{
 		Vector2 bulletPosition = { bullet.position.x + bullet.size / 2, bullet.position.y + bullet.size / 2 };
 
-		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) + whiteCell.currentSize / 2 - bulletPosition.x, 2) + pow(static_cast<double>(whiteCell.position.y) - bulletPosition.y, 2)));
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) - bulletPosition.x, 2) + pow(static_cast<double>(whiteCell.position.y) - bulletPosition.y, 2)));
 
 		if (distanceBetweenCircles <= whiteCell.currentSize + bullet.size)
 		{
@@ -95,12 +104,24 @@ namespace asteroids
 
 	void PlayerWhiteCellCollision(WhiteCell& whiteCell, Player& player, bool& isGameOver)
 	{
-		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) + whiteCell.currentSize / 2 - player.position.x, 2) + pow(static_cast<double>(whiteCell.position.y) - player.position.y, 2)));
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) - player.position.x, 2) + pow(static_cast<double>(whiteCell.position.y) - player.position.y, 2)));
 
 		if (distanceBetweenCircles <= player.colliderRadius + whiteCell.currentSize)
 		{
 			whiteCell.isActive = false;
 			TakeDamage(player, isGameOver);
+		}
+	}
+
+	void PlayerBloodCellCollision(GameData& gd, BloodCell& bloodCell)
+	{
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(bloodCell.position.x) - gd.player.position.x, 2) + pow(static_cast<double>(bloodCell.position.y) - gd.player.position.y, 2)));
+
+		if (distanceBetweenCircles <= gd.player.colliderRadius + bloodCell.currentSize)
+		{
+			bloodCell.isActive = false;
+			TakeDamage(gd.player, gd.isGameOver);
+			PatientTakeDamage(gd.patient, gd.hasWon);
 		}
 	}
 }
