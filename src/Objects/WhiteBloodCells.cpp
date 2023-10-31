@@ -1,6 +1,7 @@
 #include "Objects/WhiteBloodCells.h"
 
 #include "GameManagement/AudioManager.h"
+#include "GameManagement/TexturesManager.h"
 
 namespace asteroids
 {
@@ -53,12 +54,15 @@ namespace asteroids
 			whiteCell.position = Vector2Add(whiteCell.position, Vector2Scale(whiteCell.dir, whiteCell.speed * GetFrameTime()));
 			VirusScreenBoundsCollision(whiteCell, screenWidth, screenHeight);
 		}
+		whiteCell.angle += whiteCell.rotation * GetFrameTime();
 	}
+
+	float WHITE_CELL_TEXTURE_SIZE = 104;
 
 	void WhiteCellDraw(WhiteCell& whiteCell)
 	{
 		if (whiteCell.isActive)
-			DrawCircle(static_cast<int>(whiteCell.position.x), static_cast<int>(whiteCell.position.y), whiteCell.currentSize, WHITE);
+			DrawTexturePro(GetTexture(TextureIdentifier::WhiteCell), { 0,0, WHITE_CELL_TEXTURE_SIZE ,WHITE_CELL_TEXTURE_SIZE }, { whiteCell.position.x, whiteCell.position.y,whiteCell.currentSize * 2,whiteCell.currentSize * 2 }, { whiteCell.currentSize,whiteCell.currentSize }, whiteCell.angle, WHITE);
 	}
 
 	void WhiteCellColliderDraw(WhiteCell& whiteCell)

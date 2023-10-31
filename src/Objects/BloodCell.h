@@ -12,6 +12,8 @@ namespace asteroids
 		Vector2 dir;
 		float speed{ 100 };
 		float baseSpeed{ 150 };
+		float angle{ 0 };
+		float rotation{ 20 };
 
 		int phase{ 1 };
 		float currentSize{ 20 };

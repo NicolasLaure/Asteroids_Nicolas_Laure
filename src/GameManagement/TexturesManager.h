@@ -6,13 +6,17 @@ namespace asteroids
 	enum class TextureIdentifier
 	{
 		Default,
-		Player
+		Player,
+		WhiteCell,
+		BloodCell,
 	};
 
 	struct AllTextures
 	{
 		Texture defaultTexture;
 		Texture player;
+		Texture whiteCell;
+		Texture bloodCell;
 	};
 
 	void SetTextures();

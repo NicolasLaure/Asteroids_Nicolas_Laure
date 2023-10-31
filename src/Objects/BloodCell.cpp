@@ -1,6 +1,7 @@
 #include "Objects/BloodCell.h"
 
 #include "GameManagement/AudioManager.h"
+#include "GameManagement/TexturesManager.h"
 
 namespace asteroids
 {
@@ -55,12 +56,17 @@ namespace asteroids
 			bloodCell.position = Vector2Add(bloodCell.position, Vector2Scale(bloodCell.dir, bloodCell.speed * GetFrameTime()));
 			BloodCellCheckScreenBoundsCollision(bloodCell, screenWidth, screenHeight);
 		}
+
+		bloodCell.angle += bloodCell.rotation * GetFrameTime();
 	}
+
+
+	float BLOOD_CELL_TEXTURE_SIZE = 120;
 
 	void BloodCellDraw(BloodCell& bloodCell)
 	{
 		if (bloodCell.isActive)
-			DrawCircle(static_cast<int>(bloodCell.position.x), static_cast<int>(bloodCell.position.y), bloodCell.currentSize, RED);
+			DrawTexturePro(GetTexture(TextureIdentifier::BloodCell), { 0,0, BLOOD_CELL_TEXTURE_SIZE ,BLOOD_CELL_TEXTURE_SIZE }, { bloodCell.position.x, bloodCell.position.y,bloodCell.currentSize * 2,bloodCell.currentSize * 2 }, { bloodCell.currentSize,bloodCell.currentSize }, bloodCell.angle, WHITE);
 	}
 
 	void BloodCellColliderDraw(BloodCell& bloodCell)

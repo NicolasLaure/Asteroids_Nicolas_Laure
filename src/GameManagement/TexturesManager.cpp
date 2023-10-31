@@ -6,8 +6,10 @@ namespace asteroids
 
 	void SetTextures()
 	{
-		textures.player = LoadTexture("assets/sprites/ProtoNave.png");
 		textures.defaultTexture = LoadTexture("assets/sprites/DefaultSprite.png");
+		textures.player = LoadTexture("assets/sprites/ProtoNave.png");
+		textures.whiteCell = LoadTexture("assets/sprites/Globulo_Blanco.png");
+		textures.bloodCell = LoadTexture("assets/sprites/Globulo_Rojo.png");
 	}
 	Texture GetTexture(TextureIdentifier texture)
 	{
@@ -15,6 +17,12 @@ namespace asteroids
 		{
 		case asteroids::TextureIdentifier::Player:
 			return textures.player;
+			break;
+		case asteroids::TextureIdentifier::WhiteCell:
+			return textures.whiteCell;
+			break;
+		case asteroids::TextureIdentifier::BloodCell:
+			return textures.bloodCell;
 			break;
 		default:
 			return textures.defaultTexture;
