@@ -142,11 +142,10 @@ namespace asteroids
 		}
 	}
 
-	void WhiteCellDivision(WhiteCell& whiteCell, Vector2 position, Vector2 dir)
+	void WhiteCellShrink(WhiteCell& whiteCell, Vector2 position)
 	{
 		whiteCell.isActive = true;
 		whiteCell.position = position;
-		whiteCell.dir = dir;
 
 		if (whiteCell.phase == 1)
 		{

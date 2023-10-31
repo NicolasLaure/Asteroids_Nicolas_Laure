@@ -5,7 +5,7 @@
 namespace asteroids
 {
 	void BulletBloodCellCollision(GameData& gd, BloodCell& bloodCell, Bullet& bullet);
-	void BulletWhiteCellCollision(GameData& gd, WhiteCell& whiteCell, Bullet& bullet);
+	void BulletWhiteCellCollision(WhiteCell& whiteCell, Bullet& bullet);
 	void PlayerWhiteCellCollision(WhiteCell& whiteCell, Player& player, bool& isGameOver);
 	void PlayerBloodCellCollision(GameData& gd, BloodCell& bloodCell);
 
@@ -23,7 +23,7 @@ namespace asteroids
 				for (int j = 0; j < gd.WHITECELLS_QTY; j++)
 				{
 					if (gd.whiteCells[j].isActive)
-						BulletWhiteCellCollision(gd, gd.whiteCells[j], gd.player.bullets[i]);
+						BulletWhiteCellCollision(gd.whiteCells[j], gd.player.bullets[i]);
 				}
 			}
 		}
@@ -73,7 +73,7 @@ namespace asteroids
 		}
 	}
 
-	void BulletWhiteCellCollision(GameData& gd, WhiteCell& whiteCell, Bullet& bullet)
+	void BulletWhiteCellCollision(WhiteCell& whiteCell, Bullet& bullet)
 	{
 		Vector2 bulletPosition = { bullet.position.x + bullet.size / 2, bullet.position.y + bullet.size / 2 };
 
@@ -82,23 +82,7 @@ namespace asteroids
 		if (distanceBetweenCircles <= whiteCell.currentSize + bullet.size)
 		{
 			bullet.isActive = false;
-			Vector2 newDir = { bullet.direction.y * -1, bullet.direction.x };
-			Vector2 newDirInverted = { bullet.direction.y, bullet.direction.x * -1 };
-
-			for (int k = 0; k < gd.WHITECELLS_QTY; k++)
-			{
-				if (!gd.whiteCells[k].isActive)
-				{
-					gd.whiteCells[k].smallSize = whiteCell.smallSize;
-					gd.whiteCells[k].miniSize = whiteCell.miniSize;
-					gd.whiteCells[k].phase = whiteCell.phase;
-					gd.whiteCells[k].baseSpeed = whiteCell.baseSpeed;
-
-					WhiteCellDivision(whiteCell, whiteCell.position, newDir);
-					WhiteCellDivision(gd.whiteCells[k], whiteCell.position, newDirInverted);
-					break;
-				}
-			}
+			WhiteCellShrink(whiteCell, whiteCell.position);
 		}
 	}
 

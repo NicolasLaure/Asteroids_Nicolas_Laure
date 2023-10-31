@@ -32,6 +32,6 @@ namespace asteroids
 	void WhiteCellUpdate(WhiteCell& whiteCell, Vector2 playerPosition);
 	void WhiteCellDraw(WhiteCell& whiteCell);
 	void WhiteCellColliderDraw(WhiteCell& whiteCell);
-	void WhiteCellDivision(WhiteCell& whiteCell, Vector2 position, Vector2 dir);
+	void WhiteCellShrink(WhiteCell& whiteCell, Vector2 position);
 	void WhiteCellDestroy(WhiteCell& whiteCell);
 }
