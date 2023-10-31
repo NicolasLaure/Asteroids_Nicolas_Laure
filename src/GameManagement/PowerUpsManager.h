@@ -4,6 +4,7 @@
 namespace asteroids
 {
 	void SpawnPowerUp(Vector2 position, PowerUp powerUps[], int powerUpsQty);
+	void PowerUpsReset(PowerUp powerUps[], int powerUpsQty);
 
 	void DrawPowerUps(PowerUp powerUps[], int powerUpsQty);
 }

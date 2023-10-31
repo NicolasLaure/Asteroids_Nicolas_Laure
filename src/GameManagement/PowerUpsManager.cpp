@@ -13,6 +13,13 @@ namespace asteroids
 			}
 		}
 	}
+	void PowerUpsReset(PowerUp powerUps[], int powerUpsQty)
+	{
+		for (int i = 0; i < powerUpsQty; i++)
+		{
+			PowerUpReset(powerUps[i]);
+		}
+	}
 
 	void DrawPowerUps(PowerUp powerUps[], int powerUpsQty)
 	{

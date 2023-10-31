@@ -155,7 +155,7 @@ namespace asteroids
 			GameOverPanelDraw(gd.menuButton, gd.restartButton, gd.hasWon);
 		else
 			PausePanelDraw(gd.menuButton);
-		
+
 		EndDrawing();
 	}
 
@@ -168,6 +168,7 @@ namespace asteroids
 		gd.areRulesBeingShown = true;
 		gd.patient.patientHealth = 100;
 
+		PowerUpsReset(gd.powerUps, gd.POWERUPS_QTY);
 		AsteroidsStart(gd);
 		ResetPlayer(gd.player);
 	}
