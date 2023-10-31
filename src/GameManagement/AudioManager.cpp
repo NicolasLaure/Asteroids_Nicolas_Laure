@@ -15,10 +15,11 @@ namespace asteroids
 		audioFiles.buttonRelease = LoadSound("assets/audio/ui/click_003.ogg");
 		audioFiles.pausePopSound = LoadSound("assets/audio/ui/drop_001.ogg");
 
-		audioFiles.bloodCellExplosion = LoadSound("assets/audio/sfx/footstep_concrete_003.ogg");
+		audioFiles.bloodCellExplosion = LoadSound("assets/audio/sfx/footstep_concrete_002.ogg");
 		audioFiles.whiteCellExplosion = LoadSound("assets/audio/sfx/footstep_grass_003.ogg");
 		audioFiles.playerTakeDamage = LoadSound("assets/audio/sfx/impactBell_heavy_004.ogg");
 		audioFiles.playerDeath = LoadSound("assets/audio/sfx/error_003.ogg");
+		audioFiles.playerShoot = LoadSound("assets/audio/sfx/impactMetal_heavy_003.ogg");
 		audioFiles.healthUp = LoadSound("assets/audio/sfx/impactMining_001.ogg");
 	}
 	Music GetMusic(MusicIdentifier id)
@@ -32,28 +33,31 @@ namespace asteroids
 	{
 		switch (id)
 		{
-		case asteroids::SoundIdentifier::ButtonClick:
+		case SoundIdentifier::ButtonClick:
 			return audioFiles.buttonClick;
 			break;
-		case asteroids::SoundIdentifier::ButtonRelease:
+		case SoundIdentifier::ButtonRelease:
 			return audioFiles.buttonRelease;
 			break;
-		case asteroids::SoundIdentifier::PausePopSound:
+		case SoundIdentifier::PausePopSound:
 			return audioFiles.pausePopSound;
 			break;
-		case asteroids::SoundIdentifier::whiteCellExplosion:
+		case SoundIdentifier::whiteCellExplosion:
 			return audioFiles.whiteCellExplosion;
 			break;
-		case asteroids::SoundIdentifier::bloodCellExplosion:
+		case SoundIdentifier::bloodCellExplosion:
 			return audioFiles.bloodCellExplosion;
 			break;
-		case asteroids::SoundIdentifier::PlayerReceiveDamage:
+		case SoundIdentifier::PlayerReceiveDamage:
 			return audioFiles.playerTakeDamage;
 			break;
-		case asteroids::SoundIdentifier::PlayerDeath:
+		case SoundIdentifier::PlayerDeath:
 			return audioFiles.playerDeath;
 			break;
-		case asteroids::SoundIdentifier::HpUp:
+		case SoundIdentifier::PlayerShoot:
+			return audioFiles.playerShoot;
+			break;
+		case SoundIdentifier::HpUp:
 			return audioFiles.healthUp;
 			break;
 		default:

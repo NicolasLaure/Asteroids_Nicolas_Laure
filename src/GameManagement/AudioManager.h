@@ -17,6 +17,7 @@ namespace asteroids
 		bloodCellExplosion,
 		PlayerReceiveDamage,
 		PlayerDeath,
+		PlayerShoot,
 		HpUp
 	};
 
@@ -32,6 +33,7 @@ namespace asteroids
 		Sound whiteCellExplosion;
 		Sound bloodCellExplosion;
 		Sound playerTakeDamage;
+		Sound playerShoot;
 		Sound playerDeath;
 		Sound healthUp;
 	};

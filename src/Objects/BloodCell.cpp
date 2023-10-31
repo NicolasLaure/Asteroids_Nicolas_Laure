@@ -1,5 +1,7 @@
 #include "Objects/BloodCell.h"
 
+#include "GameManagement/AudioManager.h"
+
 namespace asteroids
 {
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight);
@@ -139,12 +141,15 @@ namespace asteroids
 			bloodCell.phase = 2;
 			bloodCell.currentSize = bloodCell.smallSize;
 			bloodCell.speed = bloodCell.speedMultiplier * bloodCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
 		}
 		else if (bloodCell.phase == 2)
 		{
 			bloodCell.phase = 3;
 			bloodCell.currentSize = bloodCell.miniSize;
 			bloodCell.speed = bloodCell.secondPhaseSpeedMultiplier * bloodCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
+
 		}
 		else
 			BloodCellDestroy(bloodCell);
@@ -152,6 +157,8 @@ namespace asteroids
 
 	void BloodCellDestroy(BloodCell& bloodCell)
 	{
+		PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
+
 		if (bloodCell.isActive)
 			bloodCell.isActive = false;
 

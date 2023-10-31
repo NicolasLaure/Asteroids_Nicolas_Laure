@@ -1,5 +1,7 @@
 #include "Objects/WhiteBloodCells.h"
 
+#include "GameManagement/AudioManager.h"
+
 namespace asteroids
 {
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight);
@@ -137,12 +139,14 @@ namespace asteroids
 			whiteCell.phase = 2;
 			whiteCell.currentSize = whiteCell.smallSize;
 			whiteCell.speed = whiteCell.speedMultiplier * whiteCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
 		}
 		else if (whiteCell.phase == 2)
 		{
 			whiteCell.phase = 3;
 			whiteCell.currentSize = whiteCell.miniSize;
 			whiteCell.speed = whiteCell.secondPhaseSpeedMultiplier * whiteCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
 		}
 		else
 			WhiteCellDestroy(whiteCell);
@@ -150,9 +154,12 @@ namespace asteroids
 
 	void WhiteCellDestroy(WhiteCell& whiteCell)
 	{
+		PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
+
 		if (whiteCell.isActive)
 			whiteCell.isActive = false;
 
 		activeWhiteCells--;
+
 	}
 }
