@@ -6,17 +6,25 @@
 
 namespace asteroids
 {
-	static const float BASE_SCREEN_WIDTH = 1280.0f;
-
 	static float immortalityTimer = 0;
 	static float shootTimer = 0;
+
+	static const float PLAYER_SPRITE_WIDTH = 88;
+	static const float PLAYER_TEXTURE_WIDTH = 352;
+	static const float PLAYER_TEXTURE_HEIGHT = 112;
+
+	static int frameCount = 1;
+
+	bool nextFrameReady = false;
+	float frameCoolDown = 0.1f;
+	float frameTimer = 0;
 
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight);
 	void Shoot(Player& player);
 
 	void PlayerStart(Player& player)
 	{
-		player.size = 36;
+		player.size = 50;
 		player.size *= GetScreenScale();
 		player.colliderRadius = player.size / 2 * 0.7f;
 		player.isImmortal = false;
@@ -31,12 +39,17 @@ namespace asteroids
 		player.position = Vector2Add(player.position, Vector2Scale(player.velocity, GetScreenScale() * GetFrameTime()));
 
 		if (IsMouseButtonDown(1))
+		{
 			player.velocity = Vector2Clamp(Vector2Add(player.velocity, Vector2Scale(player.dir, player.acceleration * GetFrameTime())),
 				{ -player.maxVelocity, -player.maxVelocity },
 				{ player.maxVelocity, player.maxVelocity });
+
+			player.isThrusting = true;
+		}
 		else
 		{
 			player.velocity = Vector2Add(player.velocity, Vector2Scale(Vector2Normalize(player.velocity), -1 * player.deceleration * GetFrameTime()));
+			player.isThrusting = false;
 		}
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
@@ -61,8 +74,17 @@ namespace asteroids
 			player.isImmortal = false;
 			immortalityTimer = 0;
 		}
-	}
 
+		if (!nextFrameReady)
+			frameTimer += GetFrameTime();
+
+		if (frameTimer > frameCoolDown)
+		{
+			nextFrameReady = true;
+			frameTimer = 0;
+		}
+	}
+	
 	void PlayerDraw(Player& player)
 	{
 		if (player.isImmortal)
@@ -70,7 +92,22 @@ namespace asteroids
 			if (static_cast<int>((immortalityTimer * 10)) % 2 == 0)
 				return;
 		}
-		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
+
+		float ratio = PLAYER_TEXTURE_HEIGHT / PLAYER_SPRITE_WIDTH;
+		if (!player.isThrusting)
+			DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_SPRITE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y, player.size, player.size * ratio }, { player.size / 2,player.size / 2.0f }, player.angle, WHITE);
+		else
+		{
+			DrawTexturePro(GetTexture(TextureIdentifier::Player), { PLAYER_SPRITE_WIDTH * frameCount,0, PLAYER_SPRITE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y, player.size, player.size * ratio }, { player.size / 2,player.size / 2.0f }, player.angle, WHITE);
+
+			if (nextFrameReady)
+			{
+				frameCount++;
+				if (frameCount > 3)
+					frameCount = 1;
+				nextFrameReady = false;
+			}
+		}
 	}
 
 	void PlayerDrawCollider(Player& player)

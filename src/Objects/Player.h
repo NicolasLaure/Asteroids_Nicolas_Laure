@@ -4,8 +4,7 @@
 
 namespace asteroids
 {
-	const float PLAYER_TEXTURE_WIDTH = 28;
-	const float PLAYER_TEXTURE_HEIGHT = 30;
+	
 	struct Player
 	{
 		int lives{ 3 };
@@ -20,12 +19,13 @@ namespace asteroids
 		bool isImmortal{ false };
 		float immortalityDuration{ 1.0f };
 		
+		bool isThrusting{ false };
 
 		float acceleration{ 500.0f };
 		float deceleration{ 100.0f };
 		float angle{};
 
-		float size{ 35 };
+		float size{};
 		float colliderRadius{};
 
 		float shootCoolDown{ 0.2f };
