@@ -3,9 +3,6 @@
 #include "GameManagement/AudioManager.h"
 #include "GameManagement/TexturesManager.h"
 
-
-#include <iostream>
-
 namespace asteroids
 {
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight);
@@ -57,7 +54,6 @@ namespace asteroids
 		{
 			float distanceToPlayer = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) - playerPosition.x, 2) + pow(static_cast<double>(whiteCell.position.y) - playerPosition.y, 2)));
 
-			std::cout << distanceToPlayer << std::endl;
 			if (distanceToPlayer < whiteCell.minDistanceToTrack)
 				whiteCell.canTrackPlayer = false;
 

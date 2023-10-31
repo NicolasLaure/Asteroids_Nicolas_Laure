@@ -60,7 +60,6 @@ namespace asteroids
 		bloodCell.angle += bloodCell.rotation * GetFrameTime();
 	}
 
-
 	static const float BLOOD_CELL_TEXTURE_SIZE = 120;
 
 	void BloodCellDraw(BloodCell& bloodCell)

@@ -8,7 +8,7 @@ namespace asteroids
 	void HudDraw(GameData& gd);
 
 	void RulesDraw();
-	void PausePanelDraw();
-	void GameOverPanelDraw();
+	void PausePanelDraw(Button& menuButton);
+	void GameOverPanelDraw(Button& menuButton, Button& restartButton);
 }
 

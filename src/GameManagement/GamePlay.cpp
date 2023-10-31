@@ -127,13 +127,14 @@ namespace asteroids
 		{
 			ButtonCollisionCheck(gd.menuButton, scene);
 			ResetButtonCollisionCheck(gd.restartButton, gd.justRestarted);
-			if (IsMouseButtonPressed(1))
+			/*if (IsMouseButtonPressed(1))
 			{
 				scene = Scenes::Menu;
-			}
+			}*/
 		}
 		else
 		{
+			ButtonCollisionCheck(gd.menuButton, scene);
 			if (IsMouseButtonPressed(2))
 			{
 				gd.isPaused = false;
@@ -159,11 +160,11 @@ namespace asteroids
 		}
 		else if (gd.isGameOver)
 		{
-			GameOverPanelDraw();
+			GameOverPanelDraw(gd.menuButton, gd.restartButton);
 		}
 		else
 		{
-			PausePanelDraw();
+			PausePanelDraw(gd.menuButton);
 		}
 		EndDrawing();
 	}
@@ -176,6 +177,7 @@ namespace asteroids
 		gd.isPaused = true;
 		gd.areRulesBeingShown = true;
 		gd.patient.patientHealth = 100;
+
 		AsteroidsStart(gd);
 		ResetPlayer(gd.player);
 	}

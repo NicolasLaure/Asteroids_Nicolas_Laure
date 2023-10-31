@@ -12,6 +12,8 @@ namespace asteroids
 		int fontSize = 70;
 		Color textColor = WHITE;
 		Color currentTextColor = WHITE;
+		Color bgColor = BLACK;
+		Color currentBgColor = BLACK;
 
 		float textHeightSpacerMultiplier = 2.25f;
 		float textPositionX = 15;
@@ -22,4 +24,5 @@ namespace asteroids
 	void CreditsButtonCollisionCheck(Button& button);
 	void ButtonCollisionCheck(Button& button, Scenes& scene);
 	void ResetButtonCollisionCheck(Button& button, bool& restartGame);
+	void ButtonDraw(Button& button, bool drawRectangle);
 };

@@ -54,8 +54,7 @@ namespace asteroids
 
 		for (Button& button : menuData.scenesButtons)
 		{
-			//DrawRectangle(button.buttonRect.position.x, button.buttonRect.position.y, button.buttonRect.width, button.buttonRect.height, BLACK);
-			DrawText(button.text, static_cast<int>(button.buttonRect.position.x), static_cast<int>(button.buttonRect.position.y), button.fontSize, button.currentTextColor);
+			ButtonDraw(button, false);
 		}
 		EndDrawing();
 	}
