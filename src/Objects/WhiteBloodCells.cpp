@@ -3,6 +3,9 @@
 #include "GameManagement/AudioManager.h"
 #include "GameManagement/TexturesManager.h"
 
+
+#include <iostream>
+
 namespace asteroids
 {
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight);
@@ -37,6 +40,7 @@ namespace asteroids
 
 					whiteCells[i].position = GetRandomPosition(whiteCells[i].currentSize);
 					whiteCells[i].dir = GetRandomDirection();
+					whiteCells[i].canTrackPlayer = true;
 					break;
 				}
 			}
@@ -45,19 +49,29 @@ namespace asteroids
 			timer += GetFrameTime();
 	}
 
-	void WhiteCellUpdate(WhiteCell& whiteCell)
+	void WhiteCellUpdate(WhiteCell& whiteCell, Vector2 playerPosition)
 	{
 		float screenWidth = static_cast<float>(GetScreenWidth());
 		float screenHeight = static_cast<float>(GetScreenHeight());
 		if (whiteCell.isActive)
 		{
+			float distanceToPlayer = static_cast<float>(sqrt(pow(static_cast<double>(whiteCell.position.x) - playerPosition.x, 2) + pow(static_cast<double>(whiteCell.position.y) - playerPosition.y, 2)));
+
+			std::cout << distanceToPlayer << std::endl;
+			if (distanceToPlayer < whiteCell.minDistanceToTrack)
+				whiteCell.canTrackPlayer = false;
+
+			if (whiteCell.canTrackPlayer)
+				whiteCell.dir = Vector2Normalize(Vector2Subtract(playerPosition, whiteCell.position));
+
+
 			whiteCell.position = Vector2Add(whiteCell.position, Vector2Scale(whiteCell.dir, whiteCell.speed * GetFrameTime()));
 			VirusScreenBoundsCollision(whiteCell, screenWidth, screenHeight);
 		}
 		whiteCell.angle += whiteCell.rotation * GetFrameTime();
 	}
 
-	float WHITE_CELL_TEXTURE_SIZE = 104;
+	static const float WHITE_CELL_TEXTURE_SIZE = 104;
 
 	void WhiteCellDraw(WhiteCell& whiteCell)
 	{

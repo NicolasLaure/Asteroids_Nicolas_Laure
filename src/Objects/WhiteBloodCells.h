@@ -12,7 +12,7 @@ namespace asteroids
 		Vector2 dir;
 		float speed{ 100 };
 		float baseSpeed{ 150 };
-		float angle{0};
+		float angle{ 0 };
 		float rotation{ 20 };
 
 		int phase{ 1 };
@@ -22,11 +22,14 @@ namespace asteroids
 		float miniSize{ 7.5f };
 		float speedMultiplier{ 1.3f };
 		float secondPhaseSpeedMultiplier{ 1.6f };
+
+		bool canTrackPlayer{ true };
+		int minDistanceToTrack{ 125 };
 	};
 
 	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty);
 	void WhiteCellStart(WhiteCell& whiteCell);
-	void WhiteCellUpdate(WhiteCell& whiteCell);
+	void WhiteCellUpdate(WhiteCell& whiteCell, Vector2 playerPosition);
 	void WhiteCellDraw(WhiteCell& whiteCell);
 	void WhiteCellColliderDraw(WhiteCell& whiteCell);
 	void WhiteCellDivision(WhiteCell& whiteCell, Vector2 position, Vector2 dir);
