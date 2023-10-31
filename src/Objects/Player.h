@@ -19,7 +19,7 @@ namespace asteroids
 
 		bool isImmortal{ false };
 		float immortalityDuration{ 1.0f };
-		float immortalityTimer;
+		
 
 		float acceleration{ 500.0f };
 		float deceleration{ 100.0f };
@@ -28,6 +28,9 @@ namespace asteroids
 		float size{ 35 };
 		float colliderRadius{};
 
+		float shootCoolDown{ 0.2f };
+		
+		bool canShoot{true};
 		static const int BULLETS_QTY = 50;
 		Bullet bullets[BULLETS_QTY] = {};
 	};

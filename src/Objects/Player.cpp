@@ -8,6 +8,9 @@ namespace asteroids
 {
 	static const float BASE_SCREEN_WIDTH = 1280.0f;
 
+	static float immortalityTimer = 0;
+	static float shootTimer = 0;
+
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight);
 	void Shoot(Player& player);
 
@@ -38,18 +41,25 @@ namespace asteroids
 
 		CheckScreenBoundsCollision(player, screenWidth, screenHeight);
 
-		if (IsMouseButtonPressed(0))
-		{
+		if (IsMouseButtonPressed(0) && player.canShoot)
 			Shoot(player);
+
+		if (!player.canShoot)
+			shootTimer += GetFrameTime();
+
+		if (shootTimer >= player.shootCoolDown)
+		{
+			player.canShoot = true;
+			shootTimer = 0;
 		}
 
 		if (player.isImmortal)
-			player.immortalityTimer += GetFrameTime();
+			immortalityTimer += GetFrameTime();
 
-		if (player.immortalityTimer >= player.immortalityDuration)
+		if (immortalityTimer >= player.immortalityDuration)
 		{
 			player.isImmortal = false;
-			player.immortalityTimer = 0;
+			immortalityTimer = 0;
 		}
 	}
 
@@ -57,7 +67,7 @@ namespace asteroids
 	{
 		if (player.isImmortal)
 		{
-			if (static_cast<int>((player.immortalityTimer * 10)) % 2 == 0)
+			if (static_cast<int>((immortalityTimer * 10)) % 2 == 0)
 				return;
 		}
 		DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
@@ -171,6 +181,8 @@ namespace asteroids
 				player.bullets[i].direction = player.dir;
 				player.bullets[i].angle = player.angle;
 				PlaySound(GetSound(SoundIdentifier::PlayerShoot));
+
+				player.canShoot = false;
 				break;
 			}
 		}
