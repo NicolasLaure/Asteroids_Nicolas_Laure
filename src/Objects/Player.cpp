@@ -81,6 +81,20 @@ namespace asteroids
 		player.velocity = { 0,0 };
 	}
 
+	void TakeDamage(Player& player, bool& isGameOver)
+	{
+		player.lives--;
+		if (player.lives <= 0)
+		{
+			PlaySound(GetSound(SoundIdentifier::PlayerDeath));
+			isGameOver = true;
+		}
+
+		PlaySound(GetSound(SoundIdentifier::PlayerReceiveDamage));
+
+		player.isImmortal = true;
+	}
+
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight)
 	{
 		if (player.position.x + player.velocity.x * GetFrameTime() > screenWidth)
@@ -157,19 +171,4 @@ namespace asteroids
 			}
 		}
 	}
-
-	void TakeDamage(Player& player, bool& isGameOver)
-	{
-		player.lives--;
-		if (player.lives <= 0)
-		{
-			PlaySound(GetSound(SoundIdentifier::PlayerDeath));
-			isGameOver = true;
-		}
-
-		PlaySound(GetSound(SoundIdentifier::PlayerReceiveDamage));
-
-		player.isImmortal = true;
-	}
-
 }

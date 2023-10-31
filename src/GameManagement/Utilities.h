@@ -11,6 +11,6 @@ namespace asteroids
 		float width{};
 	};
 
-	Vector2 GetRandomDirection();
 	Vector2 GetRandomPosition(float size);
+	Vector2 GetRandomDirection();
 }

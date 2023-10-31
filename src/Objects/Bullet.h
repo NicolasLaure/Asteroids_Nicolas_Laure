@@ -16,7 +16,6 @@ namespace asteroids
 		const float size = 10;
 	};
 
-
 	void BulletsStart(Bullet bullets[], int bulletsQty);
 	void BulletUpdate(Bullet& bullet);
 	void BulletDraw(Bullet& bullet);

@@ -27,8 +27,8 @@ namespace asteroids
 		int minDistanceToTrack{ 125 };
 	};
 
-	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty);
 	void WhiteCellStart(WhiteCell& whiteCell);
+	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty);
 	void WhiteCellUpdate(WhiteCell& whiteCell, Vector2 playerPosition);
 	void WhiteCellDraw(WhiteCell& whiteCell);
 	void WhiteCellColliderDraw(WhiteCell& whiteCell);

@@ -24,8 +24,8 @@ namespace asteroids
 		float secondPhaseSpeedMultiplier{ 1.6f };
 	};
 
-	void BloodCellsSpawner(BloodCell bloodCells[], int bloodCellsQty);
 	void BloodCellStart(BloodCell& bloodCell);
+	void BloodCellsSpawner(BloodCell bloodCells[], int bloodCellsQty);
 	void BloodCellUpdate(BloodCell& bloodCell);
 	void BloodCellDraw(BloodCell& bloodCell);
 	void BloodCellColliderDraw(BloodCell& bloodCell);

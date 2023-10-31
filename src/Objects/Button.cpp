@@ -136,6 +136,7 @@ namespace asteroids
 			button.wasPressed = false;
 		}
 	}
+
 	void ResetButtonCollisionCheck(Button& button, bool& restartGame)
 	{
 		Vector2 mousePos = GetMousePosition();

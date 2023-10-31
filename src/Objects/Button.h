@@ -21,8 +21,8 @@ namespace asteroids
 		bool wasPressed{ false };
 	};
 
-	void ItchPageButtonCollisionCheck(Button& button);
 	void ButtonCollisionCheck(Button& button, Scenes& scene);
+	void ItchPageButtonCollisionCheck(Button& button);
 	void CreditsButtonCollisionCheck(Button& button, bool& creditsScreen);
 	void ResetButtonCollisionCheck(Button& button, bool& restartGame);
 	void ButtonDraw(Button& button, bool drawRectangle);

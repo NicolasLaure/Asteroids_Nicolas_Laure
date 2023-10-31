@@ -74,6 +74,41 @@ namespace asteroids
 			DrawCircleLines(static_cast<int>(bloodCell.position.x), static_cast<int>(bloodCell.position.y), bloodCell.currentSize, GREEN);
 	}
 
+	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir)
+	{
+		bloodCell.isActive = true;
+		bloodCell.position = position;
+		bloodCell.dir = dir;
+
+		if (bloodCell.phase == 1)
+		{
+			bloodCell.phase = 2;
+			bloodCell.currentSize = bloodCell.smallSize;
+			bloodCell.speed = bloodCell.speedMultiplier * bloodCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
+		}
+		else if (bloodCell.phase == 2)
+		{
+			bloodCell.phase = 3;
+			bloodCell.currentSize = bloodCell.miniSize;
+			bloodCell.speed = bloodCell.secondPhaseSpeedMultiplier * bloodCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
+
+		}
+		else
+			BloodCellDestroy(bloodCell);
+	}
+
+	void BloodCellDestroy(BloodCell& bloodCell)
+	{
+		PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
+
+		if (bloodCell.isActive)
+			bloodCell.isActive = false;
+
+		activeBloodCells--;
+	}
+
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight)
 	{
 		if (bloodCell.position.x + bloodCell.dir.x * bloodCell.speed * GetFrameTime() > screenWidth)
@@ -133,40 +168,5 @@ namespace asteroids
 					bloodCell.position.x = screenWidth - bloodCell.position.x;
 			}
 		}
-	}
-
-	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir)
-	{
-		bloodCell.isActive = true;
-		bloodCell.position = position;
-		bloodCell.dir = dir;
-
-		if (bloodCell.phase == 1)
-		{
-			bloodCell.phase = 2;
-			bloodCell.currentSize = bloodCell.smallSize;
-			bloodCell.speed = bloodCell.speedMultiplier * bloodCell.baseSpeed;
-			PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
-		}
-		else if (bloodCell.phase == 2)
-		{
-			bloodCell.phase = 3;
-			bloodCell.currentSize = bloodCell.miniSize;
-			bloodCell.speed = bloodCell.secondPhaseSpeedMultiplier * bloodCell.baseSpeed;
-			PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
-
-		}
-		else
-			BloodCellDestroy(bloodCell);
-	}
-
-	void BloodCellDestroy(BloodCell& bloodCell)
-	{
-		PlaySound(GetSound(SoundIdentifier::bloodCellExplosion));
-
-		if (bloodCell.isActive)
-			bloodCell.isActive = false;
-
-		activeBloodCells--;
 	}
 }

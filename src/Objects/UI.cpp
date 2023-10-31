@@ -7,6 +7,10 @@ using namespace std;
 
 namespace asteroids
 {
+	static int titleWindowLimitSpacing = 60;
+	static int pressKeyWindowLimitSpacing = 120;
+	static int wordsSpacing = 40;
+
 	void HudDraw(GameData& gd)
 	{
 		string playerLivesText = "Lives: " + to_string(gd.player.lives);
@@ -14,33 +18,6 @@ namespace asteroids
 
 		string patientHealth = "Patient Health: " + to_string(gd.patient.patientHealth);
 		DrawText(patientHealth.c_str(), GetScreenWidth() - MeasureText(patientHealth.c_str(), 40), 0, 40, WHITE);
-	}
-
-	static int titleWindowLimitSpacing = 60;
-	static int pressKeyWindowLimitSpacing = 120;
-	static int wordsSpacing = 40;
-
-	void PausePanelDraw(Button& menuButton)
-	{
-		Color panelColor = { 60,60,60,255 };
-		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), panelColor);
-		const char* pauseTitle = "Game is Paused";
-		int titleSize = static_cast<int>(120 * GetScreenScale());
-
-		const char* resumeText = "Press Middle Click to go resume Game";
-		int resumeTextSize = static_cast <int>(60 * GetScreenScale());
-
-		int buttonsSpacing = 30;
-
-		menuButton.buttonRect.position = { static_cast<float>(GetScreenWidth()) / 2 - MeasureText(menuButton.text, menuButton.fontSize) / 2 , static_cast<float>(GetScreenHeight()) / 2 + buttonsSpacing };
-		menuButton.buttonRect.width = static_cast<float>(MeasureText(menuButton.text, menuButton.fontSize));
-		menuButton.buttonRect.height = static_cast<float>(menuButton.fontSize);
-		menuButton.bgColor = GRAY;
-
-		ButtonDraw(menuButton, true);
-
-		DrawText(pauseTitle, GetScreenWidth() / 2 - MeasureText(pauseTitle, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
-		DrawText(resumeText, GetScreenWidth() / 2 - MeasureText(resumeText, resumeTextSize) / 2, GetScreenHeight() / 2 - pressKeyWindowLimitSpacing, resumeTextSize, WHITE);
 	}
 
 	void RulesDraw()
@@ -66,6 +43,29 @@ namespace asteroids
 		DrawText(controlsTextRClick, GetScreenWidth() / 2 - MeasureText(controlsTextRClick, rulesSize) / 2, GetScreenHeight() / 2 + wordsSpacing * 3, rulesSize, WHITE);
 
 		DrawText(pressAnyKeyText, GetScreenWidth() / 2 - MeasureText(pressAnyKeyText, rulesSize) / 2, GetScreenHeight() - pressKeyWindowLimitSpacing, rulesSize, WHITE);
+	}
+
+	void PausePanelDraw(Button& menuButton)
+	{
+		Color panelColor = { 60,60,60,255 };
+		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), panelColor);
+		const char* pauseTitle = "Game is Paused";
+		int titleSize = static_cast<int>(120 * GetScreenScale());
+
+		const char* resumeText = "Press Middle Click to go resume Game";
+		int resumeTextSize = static_cast <int>(60 * GetScreenScale());
+
+		int buttonsSpacing = 30;
+
+		menuButton.buttonRect.position = { static_cast<float>(GetScreenWidth()) / 2 - MeasureText(menuButton.text, menuButton.fontSize) / 2 , static_cast<float>(GetScreenHeight()) / 2 + buttonsSpacing };
+		menuButton.buttonRect.width = static_cast<float>(MeasureText(menuButton.text, menuButton.fontSize));
+		menuButton.buttonRect.height = static_cast<float>(menuButton.fontSize);
+		menuButton.bgColor = GRAY;
+
+		ButtonDraw(menuButton, true);
+
+		DrawText(pauseTitle, GetScreenWidth() / 2 - MeasureText(pauseTitle, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
+		DrawText(resumeText, GetScreenWidth() / 2 - MeasureText(resumeText, resumeTextSize) / 2, GetScreenHeight() / 2 - pressKeyWindowLimitSpacing, resumeTextSize, WHITE);
 	}
 
 	void GameOverPanelDraw(Button& menuButton, Button& restartButton)

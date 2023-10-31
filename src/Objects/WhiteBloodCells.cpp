@@ -81,6 +81,40 @@ namespace asteroids
 			DrawCircleLines(static_cast<int>(whiteCell.position.x), static_cast<int>(whiteCell.position.y), whiteCell.currentSize, GREEN);
 	}
 
+	void WhiteCellShrink(WhiteCell& whiteCell, Vector2 position)
+	{
+		whiteCell.isActive = true;
+		whiteCell.position = position;
+
+		if (whiteCell.phase == 1)
+		{
+			whiteCell.phase = 2;
+			whiteCell.currentSize = whiteCell.smallSize;
+			whiteCell.speed = whiteCell.speedMultiplier * whiteCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
+		}
+		else if (whiteCell.phase == 2)
+		{
+			whiteCell.phase = 3;
+			whiteCell.currentSize = whiteCell.miniSize;
+			whiteCell.speed = whiteCell.secondPhaseSpeedMultiplier * whiteCell.baseSpeed;
+			PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
+		}
+		else
+			WhiteCellDestroy(whiteCell);
+	}
+
+	void WhiteCellDestroy(WhiteCell& whiteCell)
+	{
+		PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
+
+		if (whiteCell.isActive)
+			whiteCell.isActive = false;
+
+		activeWhiteCells--;
+
+	}
+
 	void VirusScreenBoundsCollision(WhiteCell& whiteCell, float screenWidth, float screenHeight)
 	{
 		if (whiteCell.position.x + whiteCell.dir.x * whiteCell.speed * GetFrameTime() > screenWidth)
@@ -140,39 +174,5 @@ namespace asteroids
 					whiteCell.position.x = screenWidth - whiteCell.position.x;
 			}
 		}
-	}
-
-	void WhiteCellShrink(WhiteCell& whiteCell, Vector2 position)
-	{
-		whiteCell.isActive = true;
-		whiteCell.position = position;
-
-		if (whiteCell.phase == 1)
-		{
-			whiteCell.phase = 2;
-			whiteCell.currentSize = whiteCell.smallSize;
-			whiteCell.speed = whiteCell.speedMultiplier * whiteCell.baseSpeed;
-			PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
-		}
-		else if (whiteCell.phase == 2)
-		{
-			whiteCell.phase = 3;
-			whiteCell.currentSize = whiteCell.miniSize;
-			whiteCell.speed = whiteCell.secondPhaseSpeedMultiplier * whiteCell.baseSpeed;
-			PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
-		}
-		else
-			WhiteCellDestroy(whiteCell);
-	}
-
-	void WhiteCellDestroy(WhiteCell& whiteCell)
-	{
-		PlaySound(GetSound(SoundIdentifier::whiteCellExplosion));
-
-		if (whiteCell.isActive)
-			whiteCell.isActive = false;
-
-		activeWhiteCells--;
-
 	}
 }

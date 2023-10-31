@@ -1,9 +1,11 @@
 #pragma once
 
-
-struct Patient
+namespace asteroids
 {
-	int patientHealth;
-};
+	struct Patient
+	{
+		int patientHealth;
+	};
 
-void PatientTakeDamage(Patient& patient, bool& isGameOver);
+	void PatientTakeDamage(Patient& patient, bool& isGameOver);
+}
