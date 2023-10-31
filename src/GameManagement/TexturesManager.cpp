@@ -11,6 +11,7 @@ namespace asteroids
 		textures.whiteCell = LoadTexture("assets/sprites/Globulo_Blanco.png");
 		textures.bloodCell = LoadTexture("assets/sprites/Globulo_Rojo.png");
 		textures.bullet = LoadTexture("assets/sprites/bullet.png");
+		textures.healthUp = LoadTexture("assets/sprites/HealthUp.png");
 	}
 	Texture GetTexture(TextureIdentifier texture)
 	{
@@ -27,6 +28,9 @@ namespace asteroids
 			break;
 		case TextureIdentifier::Bullet:
 			return textures.bullet;
+			break;
+		case TextureIdentifier::HealthUp:
+			return textures.healthUp;
 			break;
 		default:
 			return textures.defaultTexture;

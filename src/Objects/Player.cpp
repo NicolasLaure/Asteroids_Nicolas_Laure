@@ -95,6 +95,10 @@ namespace asteroids
 		player.isImmortal = true;
 	}
 
+	void PlayerHealthUp(Player& player)
+	{
+		player.lives++;
+	}
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight)
 	{
 		if (player.position.x + player.velocity.x * GetFrameTime() > screenWidth)
@@ -171,4 +175,5 @@ namespace asteroids
 			}
 		}
 	}
+
 }

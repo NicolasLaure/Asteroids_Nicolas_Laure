@@ -29,6 +29,6 @@ namespace asteroids
 	void BloodCellUpdate(BloodCell& bloodCell);
 	void BloodCellDraw(BloodCell& bloodCell);
 	void BloodCellColliderDraw(BloodCell& bloodCell);
-	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir);
+	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir, bool& spawnPowerUp);
 	void BloodCellDestroy(BloodCell& bloodCell);
 }

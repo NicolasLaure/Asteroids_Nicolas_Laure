@@ -7,6 +7,7 @@
 #include "GameManagement/CollisionManager.h"
 #include "GameManagement/AsteroidsHandler.h"
 #include "GameManagement/AudioManager.h"
+#include "GameManagement/PowerUpsManager.h"
 #include "Objects/UI.h"
 
 namespace asteroids
@@ -95,6 +96,8 @@ namespace asteroids
 				BulletDraw(bullet);
 		}
 		PlayerDraw(gd.player);
+
+		DrawPowerUps(gd.powerUps, gd.POWERUPS_QTY);
 
 #ifdef _DEBUG
 		PlayerDrawCollider(gd.player);

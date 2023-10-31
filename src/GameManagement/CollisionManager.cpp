@@ -1,6 +1,7 @@
 #include "GameManagement/CollisionManager.h"
 
 #include "Objects/Patient.h"
+#include "GameManagement/PowerUpsManager.h"
 
 namespace asteroids
 {
@@ -8,6 +9,7 @@ namespace asteroids
 	void BulletWhiteCellCollision(WhiteCell& whiteCell, Bullet& bullet);
 	void PlayerWhiteCellCollision(WhiteCell& whiteCell, Player& player, bool& isGameOver);
 	void PlayerBloodCellCollision(GameData& gd, BloodCell& bloodCell);
+	void PlayerPowerUpCollision(Player& player, PowerUp& powerUp);
 
 	void CheckCollisions(GameData& gd)
 	{
@@ -27,6 +29,7 @@ namespace asteroids
 				}
 			}
 		}
+		
 		for (int i = 0; i < gd.WHITECELLS_QTY; i++)
 		{
 			if (gd.whiteCells[i].isActive)
@@ -34,12 +37,19 @@ namespace asteroids
 				PlayerWhiteCellCollision(gd.whiteCells[i], gd.player, gd.isGameOver);
 			}
 		}
+		
 		for (int i = 0; i < gd.BLOOD_CELLS_QTY; i++)
 		{
 			if (gd.bloodCells[i].isActive)
 			{
 				PlayerBloodCellCollision(gd, gd.bloodCells[i]);
 			}
+		}
+		
+		for (int i = 0; i < gd.POWERUPS_QTY; i++)
+		{
+			if (gd.powerUps[i].isActive)
+				PlayerPowerUpCollision(gd.player, gd.powerUps[i]);
 		}
 	}
 
@@ -48,6 +58,8 @@ namespace asteroids
 		Vector2 bulletPosition = { bullet.position.x + bullet.size / 2, bullet.position.y + bullet.size / 2 };
 
 		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(bloodCell.position.x) - bulletPosition.x, 2) + pow(static_cast<double>(bloodCell.position.y) - bulletPosition.y, 2)));
+
+		bool spawnPowerUp = false;
 
 		if (distanceBetweenCircles <= bloodCell.currentSize + bullet.size)
 		{
@@ -64,13 +76,23 @@ namespace asteroids
 					gd.bloodCells[k].phase = bloodCell.phase;
 					gd.bloodCells[k].baseSpeed = bloodCell.baseSpeed;
 
-					BloodCellDivision(bloodCell, bloodCell.position, newDir);
-					BloodCellDivision(gd.bloodCells[k], bloodCell.position, newDirInverted);
+					BloodCellDivision(bloodCell, bloodCell.position, newDir, spawnPowerUp);
+					if (spawnPowerUp)
+					{
+						SpawnPowerUp(bloodCell.position, gd.powerUps, gd.POWERUPS_QTY);
+					}
+					spawnPowerUp = false;
+					BloodCellDivision(gd.bloodCells[k], bloodCell.position, newDirInverted, spawnPowerUp);
+					if (spawnPowerUp)
+					{
+						SpawnPowerUp(gd.bloodCells[k].position, gd.powerUps, gd.POWERUPS_QTY);
+					}
 					break;
 				}
 			}
 			PatientTakeDamage(gd.patient, gd.hasWon);
 		}
+
 	}
 
 	void BulletWhiteCellCollision(WhiteCell& whiteCell, Bullet& bullet)
@@ -112,6 +134,17 @@ namespace asteroids
 				TakeDamage(gd.player, gd.isGameOver);
 				PatientTakeDamage(gd.patient, gd.hasWon);
 			}
+		}
+	}
+
+	void PlayerPowerUpCollision(Player& player, PowerUp& powerUp)
+	{
+		float distanceBetweenCircles = static_cast<float>(sqrt(pow(static_cast<double>(powerUp.position.x) - player.position.x, 2) + pow(static_cast<double>(powerUp.position.y) - player.position.y, 2)));
+
+		if (distanceBetweenCircles < player.colliderRadius + powerUp.size)
+		{
+			PlayerHealthUp(player);
+			PowerUpDestroy(powerUp);
 		}
 	}
 }

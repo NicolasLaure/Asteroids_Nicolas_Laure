@@ -74,7 +74,7 @@ namespace asteroids
 			DrawCircleLines(static_cast<int>(bloodCell.position.x), static_cast<int>(bloodCell.position.y), bloodCell.currentSize, GREEN);
 	}
 
-	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir)
+	void BloodCellDivision(BloodCell& bloodCell, Vector2 position, Vector2 dir, bool& spawnPowerUp)
 	{
 		bloodCell.isActive = true;
 		bloodCell.position = position;
@@ -96,7 +96,10 @@ namespace asteroids
 
 		}
 		else
+		{
 			BloodCellDestroy(bloodCell);
+			spawnPowerUp = GetRandomValue(1, 10) == 1;
+		}
 	}
 
 	void BloodCellDestroy(BloodCell& bloodCell)

@@ -53,6 +53,9 @@
     <ClCompile Include="src\GameManagement\AudioManager.cpp">
       <Filter>GameManagement</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameManagement\PowerUpsManager.cpp">
+      <Filter>GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameManagement">
@@ -121,6 +124,9 @@
       <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\GameManagement\AudioManager.h">
+      <Filter>GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameManagement\PowerUpsManager.h">
       <Filter>GameManagement</Filter>
     </ClInclude>
   </ItemGroup>

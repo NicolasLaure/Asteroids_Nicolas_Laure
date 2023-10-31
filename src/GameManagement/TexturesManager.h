@@ -9,7 +9,8 @@ namespace asteroids
 		Player,
 		WhiteCell,
 		BloodCell,
-		Bullet
+		Bullet,
+		HealthUp
 	};
 
 	struct AllTextures
@@ -19,6 +20,7 @@ namespace asteroids
 		Texture whiteCell;
 		Texture bloodCell;
 		Texture bullet;
+		Texture healthUp;
 	};
 
 	void SetTextures();

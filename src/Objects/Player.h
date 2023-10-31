@@ -14,11 +14,11 @@ namespace asteroids
 		Vector2 dir{};
 		Vector2 velocity{};
 
-		float maxVelocity{1500.0f};
-		float friction{20.0f};
+		float maxVelocity{ 1500.0f };
+		float friction{ 20.0f };
 
 		bool isImmortal{ false };
-		float immortalityDuration{1.0f};
+		float immortalityDuration{ 1.0f };
 		float immortalityTimer;
 
 		float acceleration{ 500.0f };
@@ -42,4 +42,6 @@ namespace asteroids
 	void ResetPlayer(Player& player);
 
 	void TakeDamage(Player& player, bool& isGameOver);
+	void PlayerHealthUp(Player& player);
+
 }
