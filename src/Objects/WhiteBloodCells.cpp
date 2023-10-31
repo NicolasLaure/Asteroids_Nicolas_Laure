@@ -131,7 +131,7 @@ namespace asteroids
 					whiteCell.position.y = screenHeight - whiteCell.position.y;
 			}
 		}
-		else if (whiteCell.position.x + whiteCell.dir.x * whiteCell.speed * GetFrameTime() < 0)
+		else if (whiteCell.position.x + whiteCell.currentSize + whiteCell.dir.x * whiteCell.speed * GetFrameTime() < 0)
 		{
 			whiteCell.position.x = screenWidth;
 			if (whiteCell.dir.y > 0)
@@ -160,7 +160,7 @@ namespace asteroids
 					whiteCell.position.x = screenWidth - whiteCell.position.x;
 			}
 		}
-		else if (whiteCell.position.y + whiteCell.dir.y * whiteCell.speed * GetFrameTime() < 0)
+		else if (whiteCell.position.y + whiteCell.currentSize + whiteCell.dir.y * whiteCell.speed * GetFrameTime() < 0)
 		{
 			whiteCell.position.y = screenHeight;
 			if (whiteCell.dir.x > 0)

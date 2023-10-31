@@ -128,7 +128,7 @@ namespace asteroids
 					bloodCell.position.y = screenHeight - bloodCell.position.y;
 			}
 		}
-		else if (bloodCell.position.x + bloodCell.dir.x * bloodCell.speed * GetFrameTime() < 0)
+		else if (bloodCell.position.x + bloodCell.currentSize + bloodCell.dir.x * bloodCell.speed * GetFrameTime() < 0)
 		{
 			bloodCell.position.x = screenWidth;
 			if (bloodCell.dir.y > 0)
@@ -157,7 +157,7 @@ namespace asteroids
 					bloodCell.position.x = screenWidth - bloodCell.position.x;
 			}
 		}
-		else if (bloodCell.position.y + bloodCell.dir.y * bloodCell.speed * GetFrameTime() < 0)
+		else if (bloodCell.position.y + bloodCell.currentSize + bloodCell.dir.y * bloodCell.speed * GetFrameTime() < 0)
 		{
 			bloodCell.position.y = screenHeight;
 			if (bloodCell.dir.x > 0)
