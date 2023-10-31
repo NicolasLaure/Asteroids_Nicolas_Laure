@@ -68,9 +68,12 @@ namespace asteroids
 		DrawText(resumeText, GetScreenWidth() / 2 - MeasureText(resumeText, resumeTextSize) / 2, GetScreenHeight() / 2 - pressKeyWindowLimitSpacing, resumeTextSize, WHITE);
 	}
 
-	void GameOverPanelDraw(Button& menuButton, Button& restartButton)
+	void GameOverPanelDraw(Button& menuButton, Button& restartButton, bool hasWon)
 	{
-		const char* gameOverTitle = "Game Over";
+		const char* title = "Game Over";
+		if (hasWon)
+			title = "YOU WIN!";
+
 		int titleSize = static_cast<int>(130 * GetScreenScale());
 
 		int buttonsSpacing = 50;
@@ -89,6 +92,6 @@ namespace asteroids
 
 		ButtonDraw(restartButton, true);
 
-		DrawText(gameOverTitle, GetScreenWidth() / 2 - MeasureText(gameOverTitle, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
+		DrawText(title, GetScreenWidth() / 2 - MeasureText(title, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
 	}
 }

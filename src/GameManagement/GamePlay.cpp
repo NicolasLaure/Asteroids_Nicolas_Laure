@@ -150,17 +150,12 @@ namespace asteroids
 		DrawRectangle(GetScreenWidth() / 2, GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight(), panelColor);
 
 		if (gd.areRulesBeingShown)
-		{
 			RulesDraw();
-		}
-		else if (gd.isGameOver)
-		{
-			GameOverPanelDraw(gd.menuButton, gd.restartButton);
-		}
+		else if (gd.isGameOver || gd.hasWon)
+			GameOverPanelDraw(gd.menuButton, gd.restartButton, gd.hasWon);
 		else
-		{
 			PausePanelDraw(gd.menuButton);
-		}
+		
 		EndDrawing();
 	}
 
