@@ -1,7 +1,5 @@
 #include "GameManagement/Gameplay.h"
 
-#include <string>
-
 #include "Objects/Button.h"
 #include "GameManagement/Utilities.h"
 #include "GameManagement/GameData.h"
@@ -10,8 +8,6 @@
 #include "GameManagement/AsteroidsHandler.h"
 #include "GameManagement/AudioManager.h"
 #include "Objects/UI.h"
-
-using namespace std;
 
 namespace asteroids
 {
@@ -89,8 +85,8 @@ namespace asteroids
 	void GameDraw()
 	{
 		BeginDrawing();
-		ClearBackground(BLACK);
-
+		Color bgColor = { 99,11,11,255 };
+		ClearBackground(bgColor);
 
 		AsteroidsDraw(gd);
 		for (Bullet& bullet : gd.player.bullets)
