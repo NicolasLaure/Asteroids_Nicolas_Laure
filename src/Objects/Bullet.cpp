@@ -1,6 +1,7 @@
 #include "Objects/Bullet.h"
 
 #include "GameManagement/ScreenManager.h"
+#include "GameManagement/TexturesManager.h"
 
 void asteroids::BulletsStart(Bullet bullets[], int bulletsQty)
 {
@@ -8,8 +9,8 @@ void asteroids::BulletsStart(Bullet bullets[], int bulletsQty)
 	{
 		bullets[i].isActive = false;
 		bullets[i].angle = 0;
-		bullets[i].direction = {0,0};
-		bullets[i].position = {0,0};
+		bullets[i].direction = { 0,0 };
+		bullets[i].position = { 0,0 };
 	}
 }
 
@@ -21,10 +22,11 @@ void asteroids::BulletUpdate(Bullet& bullet)
 		bullet.isActive = false;
 }
 
+static const float BULLET_TEXTURE_SIZE = 80;
+
 void asteroids::BulletDraw(Bullet& bullet)
 {
-	DrawCircle(static_cast<int>(bullet.position.x), static_cast<int>(bullet.position.y), bullet.size, DARKGREEN);
-		//DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_TEXTURE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y,player.size,player.size }, { player.size / 2,player.size / 2 }, player.angle, WHITE);
+	DrawTexturePro(GetTexture(TextureIdentifier::Bullet), { 0,0, BULLET_TEXTURE_SIZE,BULLET_TEXTURE_SIZE }, { bullet.position.x, bullet.position.y, bullet.size * 2,bullet.size * 2 }, { bullet.size, bullet.size }, bullet.angle, WHITE);
 }
 
 void asteroids::BulletColliderDraw(Bullet& bullet)

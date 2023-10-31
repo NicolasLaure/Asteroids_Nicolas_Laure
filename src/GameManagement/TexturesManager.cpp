@@ -10,19 +10,23 @@ namespace asteroids
 		textures.player = LoadTexture("assets/sprites/ProtoNave.png");
 		textures.whiteCell = LoadTexture("assets/sprites/Globulo_Blanco.png");
 		textures.bloodCell = LoadTexture("assets/sprites/Globulo_Rojo.png");
+		textures.bullet = LoadTexture("assets/sprites/bullet.png");
 	}
 	Texture GetTexture(TextureIdentifier texture)
 	{
 		switch (texture)
 		{
-		case asteroids::TextureIdentifier::Player:
+		case TextureIdentifier::Player:
 			return textures.player;
 			break;
-		case asteroids::TextureIdentifier::WhiteCell:
+		case TextureIdentifier::WhiteCell:
 			return textures.whiteCell;
 			break;
-		case asteroids::TextureIdentifier::BloodCell:
+		case TextureIdentifier::BloodCell:
 			return textures.bloodCell;
+			break;
+		case TextureIdentifier::Bullet:
+			return textures.bullet;
 			break;
 		default:
 			return textures.defaultTexture;

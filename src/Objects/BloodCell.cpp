@@ -61,7 +61,7 @@ namespace asteroids
 	}
 
 
-	float BLOOD_CELL_TEXTURE_SIZE = 120;
+	static const float BLOOD_CELL_TEXTURE_SIZE = 120;
 
 	void BloodCellDraw(BloodCell& bloodCell)
 	{

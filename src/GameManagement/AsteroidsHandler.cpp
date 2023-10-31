@@ -25,7 +25,7 @@ namespace asteroids
 		}
 		for (int i = 0; i < gd.WHITECELLS_QTY; i++)
 		{
-			WhiteCellUpdate(gd.whiteCells[i]);
+			WhiteCellUpdate(gd.whiteCells[i], gd.player.position);
 		}
 	}
 	void AsteroidsDraw(GameData& gd)
