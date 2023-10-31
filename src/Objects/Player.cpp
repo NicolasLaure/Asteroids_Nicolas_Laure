@@ -152,6 +152,7 @@ namespace asteroids
 				player.bullets[i].position = player.position;
 				player.bullets[i].direction = player.dir;
 				player.bullets[i].angle = player.angle;
+				PlaySound(GetSound(SoundIdentifier::PlayerShoot));
 				break;
 			}
 		}
@@ -161,7 +162,10 @@ namespace asteroids
 	{
 		player.lives--;
 		if (player.lives <= 0)
+		{
+			PlaySound(GetSound(SoundIdentifier::PlayerDeath));
 			isGameOver = true;
+		}
 
 		PlaySound(GetSound(SoundIdentifier::PlayerReceiveDamage));
 
