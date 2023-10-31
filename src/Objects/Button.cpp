@@ -47,7 +47,7 @@ namespace asteroids
 		}
 	}
 
-	void CreditsButtonCollisionCheck(Button& button)
+	void ItchPageButtonCollisionCheck(Button& button)
 	{
 		Vector2 mousePos = GetMousePosition();
 
@@ -89,6 +89,53 @@ namespace asteroids
 		}
 	}
 
+	void CreditsButtonCollisionCheck(Button& button, bool& creditsScreen)
+	{
+		Vector2 mousePos = GetMousePosition();
+
+		if (mousePos.x > button.buttonRect.position.x
+			&& mousePos.x <  button.buttonRect.position.x + button.buttonRect.width
+			&& mousePos.y > button.buttonRect.position.y
+			&& mousePos.y < button.buttonRect.position.y + button.buttonRect.height)
+		{
+			button.currentTextColor = GRAY;
+			button.currentBgColor = DARKGRAY;
+
+			if (IsMouseButtonPressed(0))
+			{
+				button.wasPressed = true;
+				if (!IsSoundPlaying(GetSound(SoundIdentifier::ButtonClick)))
+					PlaySound(GetSound(SoundIdentifier::ButtonClick));
+			}
+
+			if (IsMouseButtonDown(0) && button.wasPressed)
+			{
+				button.currentTextColor = DARKGRAY;
+				button.currentBgColor = PRESSED_BUTTON_DARKGRAY;
+			}
+
+			//mouse release 
+			if (IsMouseButtonReleased(0))
+			{
+				if (button.wasPressed)
+				{
+					if (!creditsScreen)
+						creditsScreen = true;
+					else
+						creditsScreen = false;
+
+					if (!IsSoundPlaying(GetSound(SoundIdentifier::ButtonRelease)))
+						PlaySound(GetSound(SoundIdentifier::ButtonRelease));
+				}
+			}
+		}
+		else
+		{
+			button.currentBgColor = button.bgColor;
+			button.currentTextColor = button.textColor;
+			button.wasPressed = false;
+		}
+	}
 	void ResetButtonCollisionCheck(Button& button, bool& restartGame)
 	{
 		Vector2 mousePos = GetMousePosition();

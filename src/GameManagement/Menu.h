@@ -5,7 +5,7 @@
 namespace asteroids
 {
 	void MenuScene(bool isNewScene, Scenes& actualScene);
-	
+
 	struct MenuData
 	{
 		const char* title = "Asteroids";
@@ -15,13 +15,18 @@ namespace asteroids
 		const char* credits = "Created By Nico Laure";
 		int creditsSize = 30;
 
-		static const int buttonsQty = 2;
+		static const int buttonsQty = 3;
 		Button scenesButtons[buttonsQty] = {
 			{{0,0}, Scenes::Game, "Play"},
+			{{0,0}, Scenes::Menu,"Credits"},
 			{{0,0}, Scenes::GameQuit,"Exit Game"}
+
 		};
 
-		Button creditsButton = { {0,0}, Scenes::Menu, credits };
+		Button itchPageButton = { {0,0}, Scenes::Menu, credits };
+
+		bool showCreditsScreen = false;
+		Button closeCredits = { {0,0}, Scenes::Menu,"Close Credits" };
 	};
 
 };

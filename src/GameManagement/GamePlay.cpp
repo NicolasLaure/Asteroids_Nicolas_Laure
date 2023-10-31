@@ -127,10 +127,6 @@ namespace asteroids
 		{
 			ButtonCollisionCheck(gd.menuButton, scene);
 			ResetButtonCollisionCheck(gd.restartButton, gd.justRestarted);
-			/*if (IsMouseButtonPressed(1))
-			{
-				scene = Scenes::Menu;
-			}*/
 		}
 		else
 		{
