@@ -5,18 +5,21 @@
 
 namespace asteroids
 {
+	static const float BLOODCELLS_SPAWN_RATE = 3.0f;
+	static float timer;
+	int activeBloodCells = 0;
+
 	void BloodCellCheckScreenBoundsCollision(BloodCell& bloodCell, float screenWidth, float screenHeight);
 
 	void BloodCellStart(BloodCell& bloodCell)
 	{
 		bloodCell.isActive = false;
+		activeBloodCells = 0;
+		bloodCell.baseSpeed = 150;
 		bloodCell.normalSize = 60;
 		bloodCell.currentSize = bloodCell.normalSize;
+		timer = 0;
 	}
-
-	static const float BLOODCELLS_SPAWN_RATE = 3.0f;
-	static float timer;
-	int activeBloodCells = 0;
 
 	void BloodCellsSpawner(BloodCell bloodCells[], int bloodCellsQty)
 	{
@@ -34,7 +37,8 @@ namespace asteroids
 					bloodCells[i].smallSize = bloodCells[i].normalSize / 1.5f;
 					bloodCells[i].miniSize = bloodCells[i].normalSize / 3.0f;
 					bloodCells[i].currentSize = bloodCells[i].normalSize;
-					bloodCells[i].speed = -bloodCells[i].speedMultiplier * bloodCells[i].currentSize + bloodCells[i].baseSpeed;
+					bloodCells[i].baseSpeed = 150;
+					bloodCells[i].speed = (-bloodCells[i].speedMultiplier) * bloodCells[i].currentSize + bloodCells[i].baseSpeed;
 					bloodCells[i].baseSpeed = bloodCells[i].speed;
 
 					bloodCells[i].position = GetRandomPosition(bloodCells[i].currentSize);

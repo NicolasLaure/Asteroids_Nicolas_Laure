@@ -53,12 +53,10 @@ namespace asteroids
 
 	void GameStart()
 	{
+		PlayerStart(gd.player);
 		ResetGameStats();
 
-		PlayerStart(gd.player);
-
 		BulletsStart(gd.player.bullets, gd.player.BULLETS_QTY);
-		AsteroidsStart(gd);
 	}
 
 	void GameUpdate()

@@ -15,6 +15,10 @@ namespace asteroids
 	{
 		whiteCell.isActive = false;
 		whiteCell.canTrackPlayer = true;
+		whiteCell.phase = 1;
+		whiteCell.baseSpeed = 150;
+		activeWhiteCells = 0;
+		whiteCell.dir = { 0,0 };
 		timer = 0;
 	}
 
@@ -34,11 +38,11 @@ namespace asteroids
 					whiteCells[i].smallSize = whiteCells[i].normalSize / 1.5f;
 					whiteCells[i].miniSize = whiteCells[i].normalSize / 3.0f;
 					whiteCells[i].currentSize = whiteCells[i].normalSize;
-					whiteCells[i].speed = -whiteCells[i].speedMultiplier * whiteCells[i].currentSize + whiteCells[i].baseSpeed;
+					whiteCells[i].baseSpeed = 150;
+					whiteCells[i].speed = (-whiteCells[i].speedMultiplier) * whiteCells[i].currentSize + whiteCells[i].baseSpeed;
 					whiteCells[i].baseSpeed = whiteCells[i].speed;
 
 					whiteCells[i].position = GetRandomPosition(whiteCells[i].currentSize);
-					whiteCells[i].dir = GetRandomDirection();
 					whiteCells[i].canTrackPlayer = true;
 					break;
 				}
@@ -75,8 +79,8 @@ namespace asteroids
 	{
 		if (whiteCell.isActive)
 			DrawTexturePro(GetTexture(TextureIdentifier::WhiteCell), { 0,0, WHITE_CELL_TEXTURE_SIZE ,WHITE_CELL_TEXTURE_SIZE },
-				                      { whiteCell.position.x, whiteCell.position.y,whiteCell.currentSize * 2,whiteCell.currentSize * 2 },
-				                      { whiteCell.currentSize,whiteCell.currentSize }, whiteCell.angle, WHITE);
+				{ whiteCell.position.x, whiteCell.position.y,whiteCell.currentSize * 2,whiteCell.currentSize * 2 },
+				{ whiteCell.currentSize,whiteCell.currentSize }, whiteCell.angle, WHITE);
 	}
 
 	void WhiteCellColliderDraw(WhiteCell& whiteCell)
