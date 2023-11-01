@@ -8,7 +8,7 @@ namespace asteroids
 
 	struct MenuData
 	{
-		const char* title = "Asteroids";
+		const char* title = "LifeBlood";
 		int titleSize = 80;
 		int titleLimitSpacing = 70;
 

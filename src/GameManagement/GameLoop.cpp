@@ -29,7 +29,7 @@ namespace asteroids
 
 	void Initialize()
 	{
-		InitWindow(1024, 768, "Asteroids");
+		InitWindow(1024, 768, "LifeBlood");
 		OnScreenSizeChange();
 		InitAudioDevice();
 		SetExitKey(NULL);
