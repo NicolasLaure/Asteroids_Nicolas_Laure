@@ -1,6 +1,7 @@
 #include "Objects/UI.h"
 
 #include "GameManagement/ScreenManager.h"
+#include "GameManagement/TexturesManager.h"
 #include "Objects/Button.h"
 #include <string>
 using namespace std;
@@ -93,5 +94,13 @@ namespace asteroids
 		ButtonDraw(restartButton, true);
 
 		DrawText(title, GetScreenWidth() / 2 - MeasureText(title, titleSize) / 2, titleWindowLimitSpacing, titleSize, WHITE);
+	}
+
+	void DrawCrossHair()
+	{
+		const float CROSSHAIR_SPRITE_SIZE = 64;
+		const float CROSSHAIR_SIZE = 30;
+		Vector2 mousePos = GetMousePosition();
+		DrawTexturePro(GetTexture(TextureIdentifier::CrossHair), { 0,0,CROSSHAIR_SPRITE_SIZE ,CROSSHAIR_SPRITE_SIZE }, { mousePos.x, mousePos.y,CROSSHAIR_SIZE ,CROSSHAIR_SIZE }, { CROSSHAIR_SIZE / 2, CROSSHAIR_SIZE / 2},0,WHITE);
 	}
 }

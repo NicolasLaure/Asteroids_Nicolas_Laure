@@ -39,11 +39,13 @@ namespace asteroids
 			gd.isPaused = true;
 		if (!gd.isPaused)
 		{
+			HideCursor();
 			GameUpdate();
 			GameDraw();
 		}
 		else
 		{
+			ShowCursor();
 			PauseUpdate(scene);
 			PauseDraw();
 		}
@@ -85,6 +87,7 @@ namespace asteroids
 
 	void GameDraw()
 	{
+
 		BeginDrawing();
 		Color bgColor = { 99,11,11,255 };
 		ClearBackground(bgColor);
@@ -109,6 +112,9 @@ namespace asteroids
 		}
 #endif // _DEBUG
 		HudDraw(gd);
+
+		DrawCrossHair();
+
 		EndDrawing();
 	}
 

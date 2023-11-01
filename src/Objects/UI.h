@@ -10,5 +10,6 @@ namespace asteroids
 	void RulesDraw();
 	void PausePanelDraw(Button& menuButton);
 	void GameOverPanelDraw(Button& menuButton, Button& restartButton, bool hasWon);
+	void DrawCrossHair();
 }
 

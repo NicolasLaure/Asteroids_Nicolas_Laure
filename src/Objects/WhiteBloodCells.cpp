@@ -14,6 +14,8 @@ namespace asteroids
 	void WhiteCellStart(WhiteCell& whiteCell)
 	{
 		whiteCell.isActive = false;
+		whiteCell.canTrackPlayer = true;
+		timer = 0;
 	}
 
 	void WhiteCellsSpawner(WhiteCell whiteCells[], int whiteCellsQty)

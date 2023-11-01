@@ -146,6 +146,7 @@ namespace asteroids
 	{
 		player.lives++;
 	}
+
 	void CheckScreenBoundsCollision(Player& player, float screenWidth, float screenHeight)
 	{
 		if (player.position.x + player.velocity.x * GetFrameTime() > screenWidth)

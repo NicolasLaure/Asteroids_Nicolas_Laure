@@ -10,7 +10,8 @@ namespace asteroids
 		WhiteCell,
 		BloodCell,
 		Bullet,
-		HealthUp
+		HealthUp,
+		CrossHair
 	};
 
 	struct AllTextures
@@ -21,6 +22,7 @@ namespace asteroids
 		Texture bloodCell;
 		Texture bullet;
 		Texture healthUp;
+		Texture crossHair;
 	};
 
 	void SetTextures();
