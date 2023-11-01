@@ -65,7 +65,9 @@ namespace asteroids
 	void BloodCellDraw(BloodCell& bloodCell)
 	{
 		if (bloodCell.isActive)
-			DrawTexturePro(GetTexture(TextureIdentifier::BloodCell), { 0,0, BLOOD_CELL_TEXTURE_SIZE ,BLOOD_CELL_TEXTURE_SIZE }, { bloodCell.position.x, bloodCell.position.y,bloodCell.currentSize * 2,bloodCell.currentSize * 2 }, { bloodCell.currentSize,bloodCell.currentSize }, bloodCell.angle, WHITE);
+			DrawTexturePro(GetTexture(TextureIdentifier::BloodCell), { 0,0, BLOOD_CELL_TEXTURE_SIZE ,BLOOD_CELL_TEXTURE_SIZE },
+				           { bloodCell.position.x, bloodCell.position.y,bloodCell.currentSize * 2,bloodCell.currentSize * 2 }, 
+				           { bloodCell.currentSize,bloodCell.currentSize }, bloodCell.angle, WHITE);
 	}
 
 	void BloodCellColliderDraw(BloodCell& bloodCell)

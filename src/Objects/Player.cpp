@@ -84,7 +84,7 @@ namespace asteroids
 			frameTimer = 0;
 		}
 	}
-	
+
 	void PlayerDraw(Player& player)
 	{
 		if (player.isImmortal)
@@ -95,10 +95,16 @@ namespace asteroids
 
 		float ratio = PLAYER_TEXTURE_HEIGHT / PLAYER_SPRITE_WIDTH;
 		if (!player.isThrusting)
-			DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_SPRITE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y, player.size, player.size * ratio }, { player.size / 2,player.size / 2.0f }, player.angle, WHITE);
+		{
+			DrawTexturePro(GetTexture(TextureIdentifier::Player), { 0,0, PLAYER_SPRITE_WIDTH,PLAYER_TEXTURE_HEIGHT },
+				{ player.position.x, player.position.y, player.size, player.size * ratio },
+				{ player.size / 2,player.size / 2.0f }, player.angle, WHITE);
+		}
 		else
 		{
-			DrawTexturePro(GetTexture(TextureIdentifier::Player), { PLAYER_SPRITE_WIDTH * frameCount,0, PLAYER_SPRITE_WIDTH,PLAYER_TEXTURE_HEIGHT }, { player.position.x, player.position.y, player.size, player.size * ratio }, { player.size / 2,player.size / 2.0f }, player.angle, WHITE);
+			DrawTexturePro(GetTexture(TextureIdentifier::Player), { PLAYER_SPRITE_WIDTH * frameCount,0, PLAYER_SPRITE_WIDTH,PLAYER_TEXTURE_HEIGHT },
+				{ player.position.x, player.position.y, player.size, player.size * ratio },
+				{ player.size / 2,player.size / 2.0f }, player.angle, WHITE);
 
 			if (nextFrameReady)
 			{

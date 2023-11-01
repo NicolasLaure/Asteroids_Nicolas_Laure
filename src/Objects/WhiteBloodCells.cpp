@@ -74,7 +74,9 @@ namespace asteroids
 	void WhiteCellDraw(WhiteCell& whiteCell)
 	{
 		if (whiteCell.isActive)
-			DrawTexturePro(GetTexture(TextureIdentifier::WhiteCell), { 0,0, WHITE_CELL_TEXTURE_SIZE ,WHITE_CELL_TEXTURE_SIZE }, { whiteCell.position.x, whiteCell.position.y,whiteCell.currentSize * 2,whiteCell.currentSize * 2 }, { whiteCell.currentSize,whiteCell.currentSize }, whiteCell.angle, WHITE);
+			DrawTexturePro(GetTexture(TextureIdentifier::WhiteCell), { 0,0, WHITE_CELL_TEXTURE_SIZE ,WHITE_CELL_TEXTURE_SIZE },
+				                      { whiteCell.position.x, whiteCell.position.y,whiteCell.currentSize * 2,whiteCell.currentSize * 2 },
+				                      { whiteCell.currentSize,whiteCell.currentSize }, whiteCell.angle, WHITE);
 	}
 
 	void WhiteCellColliderDraw(WhiteCell& whiteCell)
